@@ -1,16 +1,22 @@
 import React, {useCallback, useEffect} from 'react';
 import {ScrollView, Alert, ActivityIndicator, StyleSheet, StatusBar, FlatList} from 'react-native';
-import {View, Text, TouchableOpacity} from 'react-native-ui-lib';
+import {View, Text} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
 import axios, { CancelTokenSource } from 'axios';
 import {useServices} from '../../services';
 import {useStores} from '../../stores';
-import { CompanyItem } from '../../components/company-item';
+import { useRoute } from '@react-navigation/native';
+import { CompanyDetails } from '../../components/company-details';
 
-export const FeedIndex: React.FC = observer(({}) => {
+export const FeedDetails: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
   const {company, ui} = useStores();
+  const route = useRoute();
+
+  const { companyId } = route.params;
+
+  console.log(companyId);
 
   const start = useCallback(() : {cancelTokenSource : CancelTokenSource} => {
     const cancelTokenSource = axios.CancelToken.source();
@@ -38,25 +44,10 @@ export const FeedIndex: React.FC = observer(({}) => {
     }
   }, []);
 
-  const renderItem = ({item}: {item: any}) => {
-    return(
-      <CompanyItem data={item} />
-    );
-  };
 
   return (
-    <View flex bg-bgColor>
-      <If
-        _={company.loading}
-        _then={() => <ActivityIndicator />}
-        _else={
-          <FlatList
-            data={company.value}
-            renderItem={renderItem}
-            keyExtractor={item => item.id}
-          />
-      }
-      />
+    <View flex>
+      <CompanyDetails data={{companyId: companyId}} />
     </View>
   );
 });

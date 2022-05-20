@@ -11,15 +11,17 @@ import {Settings} from './settings';
 import {Example} from './screen-sample';
 import {genRootNavigator, genStackNavigator, genTabNavigator} from '../services/navigation/help';
 import {screenDefaultOptions, tabBarDefaultOptions} from '../services/navigation/options';
+import { FeedDetails } from './feed/details';
 
 // Describe your screens here
 export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'Story' | 'Notification';
 export type Modal = 'ExampleModal';
-export type Screen = 'Example' | 'Settings' | 'FeedIndex' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification';
+export type Screen = 'Example' | 'Settings' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification';
 
 export type ModalProps = {
   ExampleModal: undefined;
 };
+
 export type ScreenProps = {
   Main: undefined;
   Example: ExampleScreenProps;
@@ -29,6 +31,9 @@ export type ScreenProps = {
   Search: undefined;
   Story: undefined;
   Notification: undefined;
+  FeedDetails: {
+    companyId: string;
+  };
 } & ModalProps;
 
 // Screens
@@ -50,15 +55,23 @@ const screens: ScreenLayouts = {
     }),
   },
   FeedIndex: {
-    name: 'Feed Index',
+    name: 'FeedIndex',
     component: FeedIndex,
     options: () => ({
       title: 'Feed',
       ...screenDefaultOptions(),
     }),
   },
+  FeedDetails: {
+    name: 'FeedDetails',
+    component: FeedDetails,
+    options: () => ({
+      title: 'Feed Detail',
+      ...screenDefaultOptions(),
+    }),
+  },
   NewStory: {
-    name: 'New Story',
+    name: 'NewStory',
     component: NewStory,
     options: () => ({
       title: 'New Story',
@@ -101,7 +114,7 @@ const screens: ScreenLayouts = {
 
 const SettingsStack = () => genStackNavigator([screens.Settings]);
 const ExampleModalStack = () => genStackNavigator([screens.Example]);
-const FeedStack = () => genStackNavigator([screens.FeedIndex]);
+const FeedStack = () => genStackNavigator([screens.FeedIndex, screens.FeedDetails]);
 const ChatStack = () => genStackNavigator([screens.ChatHome]);
 const SearchStack = () => genStackNavigator([screens.Search]);
 const StoryStack = () => genStackNavigator([screens.NewStory]);
@@ -110,7 +123,7 @@ const NotificationStack = () => genStackNavigator([screens.Notification, screens
 // Tabs
 const tabs: TabScreenLayouts = {
   Feed: {
-    name: 'Feed',
+    name: 'FeedNavigator',
     component: FeedStack,
     options: () => ({
       title: 'Feed',
@@ -118,7 +131,7 @@ const tabs: TabScreenLayouts = {
     }),
   },
   Chat: {
-    name: 'Chat',
+    name: 'ChatNavigator',
     component: ChatStack,
     options: () => ({
       title: 'Chat',
@@ -126,7 +139,7 @@ const tabs: TabScreenLayouts = {
     }),
   },
   Search: {
-    name: 'Search',
+    name: 'SearchNavigator',
     component: SearchStack,
     options: () => ({
       title: 'Search',
@@ -134,7 +147,7 @@ const tabs: TabScreenLayouts = {
     }),
   },
   Story: {
-    name: 'Story',
+    name: 'StoryNavigator',
     component: StoryStack,
     options: () => ({
       title: 'Story',
@@ -142,7 +155,7 @@ const tabs: TabScreenLayouts = {
     }),
   },
   Notification: {
-    name: 'Notification',
+    name: 'NotificationNavigator',
     component: NotificationStack,
     options: () => ({
       title: 'Notification',
