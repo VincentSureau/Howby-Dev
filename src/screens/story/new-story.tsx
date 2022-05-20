@@ -12,6 +12,7 @@ import {Reanimated2} from '../../components/reanimated2';
 import {randomNum} from '../../utils/help';
 import {BButton} from '../../components/button';
 import { Camera } from 'expo-camera';
+import { useIsFocused } from '@react-navigation/native';
 
 export const NewStory: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -20,9 +21,10 @@ export const NewStory: React.FC = observer(({}) => {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Platform.OS === "web" ? Camera.Constants.Type.front : Camera.Constants.Type.back);
 
+  const isFocused = useIsFocused();
+  
   const start = useCallback(async () => {
-    const { status } = await Camera.requestCameraPermissionsAsync();
-    setHasPermission(status === 'granted');
+    requestPermission();
   }, []);
 
   useEffect(() => {
@@ -47,17 +49,19 @@ export const NewStory: React.FC = observer(({}) => {
 
   return (
     <View flex bg-bgColor style={styles.container}>
-      <Camera style={styles.camera} type={type}>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            style={styles.button}
-            onPress={() => {
-              setType(type === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back);
-            }}>
-            <Text style={styles.text}> Flip </Text>
-          </TouchableOpacity>
-        </View>
-      </Camera>
+      { isFocused &&  
+        <Camera style={styles.camera} type={type}>
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                setType(type === Camera.Constants.Type.back ? Camera.Constants.Type.front : Camera.Constants.Type.back);
+              }}>
+              <Text style={styles.text}> Flip </Text>
+            </TouchableOpacity>
+          </View>
+        </Camera>
+      }
     </View>
   );
 });
