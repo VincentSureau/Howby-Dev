@@ -25,7 +25,7 @@ type CurrentAppearance = {
   system: boolean;
 };
 
-type Language = 'en' | 'ru';
+type Language = 'en' | 'ru' | 'fr';
 
 // SERVICES
 type AppType = 'one_screen' | 'three_tabs';

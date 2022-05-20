@@ -3,7 +3,7 @@ import {ScrollView, Alert, ActivityIndicator, StyleSheet, StatusBar, FlatList} f
 import {View, Text} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
-
+import axios, { CancelTokenSource } from 'axios';
 import {useServices} from '../../services';
 import {useStores} from '../../stores';
 
@@ -11,20 +11,30 @@ export const FeedIndex: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
   const {company, ui} = useStores();
 
-  const start = useCallback(async () => {
-    try {
-      await api.company.get();
-    } catch (e) {
-      Alert.alert('Error', 'There was a problem fetching data :(');
-    }
+  const start = useCallback(() : CancelTokenSource => {
+    const cancelTokenSource = axios.CancelToken.source();
 
-    return () => {
-      api.company.cancel();
-    }
+    api.company
+      .get({cancelToken: cancelTokenSource.token})
+      .catch(error => {
+        if (!axios.isCancel(error)) {
+          Alert.alert('Error', 'There was a problem fetching data :(');
+        }
+      })
+    ;
+
+    return {
+      cancelTokenSource,
+    };
+
   }, [api.company]);
 
   useEffect(() => {
-    start();
+    const { cancelTokenSource } = start();
+
+    return () => {
+      cancelTokenSource.cancel();
+    }
   }, []);
 
   const Item = ({data}) => {
