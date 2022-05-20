@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useState} from 'react';
-import {ScrollView, Alert, ActivityIndicator, TouchableOpacity, StyleSheet} from 'react-native';
+import {ScrollView, Alert, ActivityIndicator, TouchableOpacity, StyleSheet, Platform} from 'react-native';
 import {View, Text} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
@@ -18,21 +18,28 @@ export const NewStory: React.FC = observer(({}) => {
   const {counter, ui} = useStores();
 
   const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
+  const [type, setType] = useState(Platform.OS === "web" ? Camera.Constants.Type.front : Camera.Constants.Type.back);
 
   const start = useCallback(async () => {
-    const available = await Camera.getAvailableCameraTypesAsync();
-    console.log(available);
     const { status } = await Camera.requestCameraPermissionsAsync();
     setHasPermission(status === 'granted');
-  }, [api.counter]);
+  }, []);
 
   useEffect(() => {
     start();
   }, []);
 
+  const requestPermission = async () => {
+    const { status } = await Camera.requestCameraPermissionsAsync();
+    setHasPermission(status === 'granted');
+  }
+
   if (hasPermission === null) {
-    return <View />;
+    return <BButton
+      marginV-s1
+      label={t.do('Autoriser caméra')}
+      onPress={() => requestPermission()}
+    />;
   }
   if (hasPermission === false) {
     return <Text>No access to camera</Text>;
