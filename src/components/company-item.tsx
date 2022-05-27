@@ -17,7 +17,7 @@ export const CompanyItem: React.FC<CompanyItemProps> = ({data}: CompanyItemProps
           <View>
             <Image
               source={{
-                uri: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&",
+                uri: data.featuredImage?.contentUrl || "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&",
               }}
               style={styles.img}
             />

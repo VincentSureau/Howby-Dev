@@ -12,11 +12,13 @@ import {Example} from './screen-sample';
 import {genRootNavigator, genStackNavigator, genTabNavigator} from '../services/navigation/help';
 import {screenDefaultOptions, tabBarDefaultOptions} from '../services/navigation/options';
 import { FeedDetails } from './feed/details';
+import { Login } from './security/login';
+import { Register } from './security/register';
 
 // Describe your screens here
 export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'Story' | 'Notification';
 export type Modal = 'ExampleModal';
-export type Screen = 'Example' | 'Settings' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification';
+export type Screen = 'Example' | 'Settings' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification' | 'Login' | 'Register';
 
 export type ModalProps = {
   ExampleModal: undefined;
@@ -110,11 +112,27 @@ const screens: ScreenLayouts = {
       ...screenDefaultOptions(),
     }),
   },
+  Login: {
+    name: 'Login',
+    component: Login,
+    options: () => ({
+      title: 'Login',
+      ...screenDefaultOptions(),
+    }),
+  },
+  Register: {
+    name: 'Register',
+    component: Register,
+    options: () => ({
+      title: 'Register',
+      ...screenDefaultOptions(),
+    }),
+  },
 };
 
 const SettingsStack = () => genStackNavigator([screens.Settings]);
 const ExampleModalStack = () => genStackNavigator([screens.Example]);
-const FeedStack = () => genStackNavigator([screens.FeedIndex, screens.FeedDetails]);
+const FeedStack = () => genStackNavigator([screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails]);
 const ChatStack = () => genStackNavigator([screens.ChatHome]);
 const SearchStack = () => genStackNavigator([screens.Search]);
 const StoryStack = () => genStackNavigator([screens.NewStory]);

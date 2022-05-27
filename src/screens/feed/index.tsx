@@ -10,7 +10,7 @@ import { CompanyItem } from '../../components/company-item';
 
 export const FeedIndex: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
-  const {company, ui} = useStores();
+  const {company} = useStores();
 
   const start = useCallback(() : {cancelTokenSource : CancelTokenSource} => {
     const cancelTokenSource = axios.CancelToken.source();
