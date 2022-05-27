@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef} from 'react';
 import {ScrollView, Alert, ActivityIndicator, StyleSheet} from 'react-native';
-import {View, Text, Button} from 'react-native-ui-lib';
+import {View, Text, Button, Carousel} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
 
@@ -40,6 +40,8 @@ export const Register: React.FC = observer(({}) => {
     console.log(values) // Retrieves values after submit
   }
 
+  const carousel = React.createRef<typeof Carousel>();
+
   return (
     <View flex bg-bgColor>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
@@ -49,47 +51,55 @@ export const Register: React.FC = observer(({}) => {
               connect={registrationForm}
               onValidSubmit={handleSubmit}
             >
-              <FormizStep as={View} name="step1">
-                <TextField
-                  label="firstname"
-                  placeholder="Votre prénom"
-                  required={true}
-                  name="firstname"
-
-                  // validations={[
-                  //   {
-                  //     rule: isEmail(),
-                  //     message: 'This is not a valid email',
-                  //   },
-                  //   {
-                  //     rule: isRequired(),
-                  //     message: 'Please enter your firstname',
-                  //   }
-                  // ]}
-                />
-                <TextField
-                  label="lastname"
-                  placeholder="Votre nom"
-                  required={true}
-                  name="lastname"
-                />
-              </FormizStep>
-              <FormizStep as={View} name="step2">
-                <TextField
-                  label="email"
-                  placeholder="Votre email"
-                  required={true}
-                  name="email"
-                />
-              </FormizStep>
-              <FormizStep as={View} name="step3">
-                <TextField
-                    label="birthday"
-                    placeholder="Votre date de naissance"
+              <Carousel
+                autoplay={false}
+                loop={false}
+                pagingEnabled={false}
+                showCounter={false}
+                ref={carousel}
+              >  
+                <FormizStep as={View} name="step1">
+                  <TextField
+                    label="firstname"
+                    placeholder="Votre prénom"
                     required={true}
-                    name="birthday"
-                />
-              </FormizStep>
+                    name="firstname"
+
+                    // validations={[
+                    //   {
+                    //     rule: isEmail(),
+                    //     message: 'This is not a valid email',
+                    //   },
+                    //   {
+                    //     rule: isRequired(),
+                    //     message: 'Please enter your firstname',
+                    //   }
+                    // ]}
+                  />
+                  <TextField
+                    label="lastname"
+                    placeholder="Votre nom"
+                    required={true}
+                    name="lastname"
+                  />
+                </FormizStep>
+                <FormizStep as={View} name="step2">
+                  <TextField
+                    label="email"
+                    placeholder="Votre email"
+                    required={true}
+                    name="email"
+                  />
+                </FormizStep>
+                <FormizStep as={View} name="step3">
+                  <TextField
+                      label="birthday"
+                      placeholder="Votre date de naissance"
+                      required={true}
+                      name="birthday"
+                  />
+                </FormizStep>
+              </Carousel>
 
             </Formiz>
 
@@ -99,7 +109,11 @@ export const Register: React.FC = observer(({}) => {
                   <Button
                     style={style.button}
                     success
-                    onPress={registrationForm.prevStep}>
+                    onPress={() => {
+                      registrationForm.prevStep();
+                      carousel.current?.goToPage(registrationForm.currentStep?.index - 1);
+                    }
+                    }>
                     <Text>Previous</Text>
                   </Button>
                 )}
@@ -107,7 +121,7 @@ export const Register: React.FC = observer(({}) => {
               <Text>
                 Step{' '}
                 {registrationForm.currentStep && registrationForm.currentStep.index + 1}{' '}
-                of {registrationForm.steps.length}
+                of {registrationForm.steps?.length}
               </Text>
               <View>
                 {registrationForm.isLastStep ? (
@@ -124,7 +138,13 @@ export const Register: React.FC = observer(({}) => {
                   <Button
                     success
                     style={style.button}
-                    onPress={() => registrationForm.submitStep()}
+                    onPress={() => {
+                      registrationForm.submitStep();
+                      if(registrationForm.isStepValid) {
+                        console.log(carousel);
+                        carousel.current.goToNextPage();
+                      }
+                    }}
                     disabled={
                       !registrationForm.isStepValid && registrationForm.isStepSubmitted
                     }>
