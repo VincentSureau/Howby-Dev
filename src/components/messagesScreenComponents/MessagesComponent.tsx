@@ -15,7 +15,7 @@ const MessagesComponent = ({ navigation }) => {
     setMessages(MESSAGES);
   }, []);
 
-  const capitalize = (str) => {
+  const capitalize = (str: string) => {
     return str.charAt(0).toUpperCase() + str.slice(1)
   }
 

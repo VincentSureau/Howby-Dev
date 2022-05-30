@@ -41,7 +41,7 @@ export const ChatHome: React.FC = observer(({}) => {
       <HeaderComponent />
       <SliderComponent />
       <TeamComponent />
-      <MessagesComponent />  
+      <MessagesComponent navigation={undefined} />  
     </View>
       </ScrollView>
     </View>
