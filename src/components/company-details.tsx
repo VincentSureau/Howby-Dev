@@ -5,10 +5,10 @@ import { useServices } from '../services';
 import { Icon } from './icon';
 
 type CompanyDetailsProps = {
-  data: any;
+  company: any;
 };
 
-export const CompanyDetails: React.FC<CompanyDetailsProps> = ({data}: CompanyDetailsProps) => {
+export const CompanyDetails: React.FC<CompanyDetailsProps> = ({company}: CompanyDetailsProps) => {
   const {nav, t, api} = useServices();
 
   return (
@@ -21,13 +21,13 @@ export const CompanyDetails: React.FC<CompanyDetailsProps> = ({data}: CompanyDet
         <View>
           <Image
             source={{
-              uri: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&",
+              uri: company.featuredImage?.contentUrl || "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&",
             }}
             style={styles.img}
           />
         </View>
         <View style={{ marginLeft: 10 }}>
-          <Text style={styles.companyName}>item.name</Text>
+          <Text style={styles.companyName}>{company.name}</Text>
           <Text>Prénom des utilisateurs présents</Text>
         </View>
       </View>

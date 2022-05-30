@@ -1,34 +1,28 @@
 import React, {useCallback, useEffect} from 'react';
 import {ScrollView, Alert, ActivityIndicator, StyleSheet, StatusBar, FlatList} from 'react-native';
-import {View, Text} from 'react-native-ui-lib';
+import {View, Text, TouchableOpacity} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
 import axios, { CancelTokenSource } from 'axios';
 import {useServices} from '../../services';
 import {useStores} from '../../stores';
-import { useRoute } from '@react-navigation/native';
-import { CompanyDetails } from '../../components/company-details';
+import { CompanyItem } from '../../components/company-item';
 
-export const FeedDetails: React.FC = observer(({}) => {
+export const FeedIndex: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
-  const {companySingle} = useStores();
-  const route = useRoute();
-
-  const { companyId } = route.params;
-
-  // console.log(companyId);
+  const {company} = useStores();
 
   const start = useCallback(() : {cancelTokenSource : CancelTokenSource} => {
     const cancelTokenSource = axios.CancelToken.source();
 
-    api.company
-      .getOne({cancelToken: cancelTokenSource.token, id: companyId})
-      .catch(error => {
-        if (!axios.isCancel(error)) {
-          Alert.alert('Error', 'There was a problem fetching data :(');
-        }
-      })
-    ;
+    // api.company
+    //   .get({cancelToken: cancelTokenSource.token})
+    //   .catch(error => {
+    //     if (!axios.isCancel(error)) {
+    //       Alert.alert('Error', 'There was a problem fetching data :(');
+    //     }
+    //   })
+    // ;
 
     return {
       cancelTokenSource,
@@ -44,12 +38,24 @@ export const FeedDetails: React.FC = observer(({}) => {
     }
   }, []);
 
+  const renderItem = ({item}: {item: any}) => {
+    return(
+      <CompanyItem data={item} />
+    );
+  };
+
   return (
     <View flex bg-bgColor>
       <If
-        _={companySingle.loading}
+        _={company.loading}
         _then={() => <ActivityIndicator />}
-        _else={<CompanyDetails company={companySingle.value} />}
+        _else={
+          <FlatList
+            data={company.value}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+      }
       />
     </View>
   );

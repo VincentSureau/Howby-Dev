@@ -1,4 +1,10 @@
 export const en = {
+  login : {
+    title: 'Connexion',
+  },
+  registration : {
+    title: 'Inscription',
+  },
   home: {
     title: 'Home',
   },
