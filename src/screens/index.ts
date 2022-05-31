@@ -14,11 +14,12 @@ import {screenDefaultOptions, tabBarDefaultOptions} from '../services/navigation
 import { FeedDetails } from './feed/details';
 import { Login } from './security/login';
 import { Register } from './security/register';
+import { HomeOffline } from './security/home-offline';
 
 // Describe your screens here
 export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'Story' | 'Notification';
 export type Modal = 'ExampleModal';
-export type Screen = 'Example' | 'Settings' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification' | 'Login' | 'Register';
+export type Screen = 'Example' | 'Settings' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline';
 
 export type ModalProps = {
   ExampleModal: undefined;
@@ -29,6 +30,7 @@ export type ScreenProps = {
   Example: ExampleScreenProps;
   Settings: undefined;
   Feed: undefined;
+  FeedIndex: undefined;
   Chat: undefined;
   Search: undefined;
   Story: undefined;
@@ -36,10 +38,13 @@ export type ScreenProps = {
   FeedDetails: {
     companyId: string;
   };
+  Login: undefined;
+  Register: undefined;
+  HomeOffline: undefined;
 } & ModalProps;
 
 // Screens
-const screens: ScreenLayouts = {
+const loggedScreen = {
   Example: {
     name: 'Example',
     component: Example,
@@ -112,6 +117,9 @@ const screens: ScreenLayouts = {
       ...screenDefaultOptions(),
     }),
   },
+};
+
+const offlineScreens = {
   Login: {
     name: 'Login',
     component: Login,
@@ -128,11 +136,23 @@ const screens: ScreenLayouts = {
       ...screenDefaultOptions(),
     }),
   },
+  HomeOffline: {
+    name: 'HomeOffline',
+    component: HomeOffline,
+    options: () => ({
+      title: 'Home Offline',
+      ...screenDefaultOptions(),
+    }),
+  }
+}
+const screens: ScreenLayouts = {
+  ...loggedScreen,
+  ...offlineScreens,
 };
 
 const SettingsStack = () => genStackNavigator([screens.Settings]);
 const ExampleModalStack = () => genStackNavigator([screens.Example]);
-const FeedStack = () => genStackNavigator([screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails]);
+const FeedStack = () => genStackNavigator([screens.HomeOffline, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails]);
 const ChatStack = () => genStackNavigator([screens.ChatHome]);
 const SearchStack = () => genStackNavigator([screens.Search]);
 const StoryStack = () => genStackNavigator([screens.NewStory]);

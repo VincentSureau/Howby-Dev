@@ -112,16 +112,16 @@ export const Register: React.FC = observer(({}) => {
                     onPress={() => {
                       registrationForm.prevStep();
                       carousel.current?.goToPage(registrationForm.currentStep?.index - 1);
-                    }
-                    }>
+                    }}
+                  >
                     <Text>Previous</Text>
                   </Button>
                 )}
               </View>
               <Text>
-                Step{' '}
+                Etape{' '}
                 {registrationForm.currentStep && registrationForm.currentStep.index + 1}{' '}
-                of {registrationForm.steps?.length}
+                sur {registrationForm.steps?.length}
               </Text>
               <View>
                 {registrationForm.isLastStep ? (
@@ -142,7 +142,7 @@ export const Register: React.FC = observer(({}) => {
                       registrationForm.submitStep();
                       if(registrationForm.isStepValid) {
                         console.log(carousel);
-                        carousel.current.goToNextPage();
+                        carousel?.current?.goToNextPage();
                       }
                     }}
                     disabled={

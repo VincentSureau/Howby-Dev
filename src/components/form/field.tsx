@@ -22,7 +22,6 @@ export const TextField: React.FC<FieldProps> = (props: FieldProps) => {
     return (
       <>
         <Incubator.TextField
-            
             label={label + (required && ' *')}
             value={value || ''}
             onChangeText={setValue}
