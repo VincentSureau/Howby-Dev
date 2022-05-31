@@ -40,6 +40,7 @@ export const configureDesignSystem = (): void => {
 
   Typography.loadTypographies({
     section: {fontSize: 26, fontWeight: '600'},
+    subtitle: {fontSize: 26, fontWeight: '400', fontFamily: 'brushsci'}
   });
 };
 

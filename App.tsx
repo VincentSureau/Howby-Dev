@@ -8,6 +8,7 @@ import {AppNavigator} from './src/app';
 import {configureDesignSystem} from './src/utils/designSystem';
 import {hydrateStores, StoresProvider} from './src/stores';
 import {initServices, ServicesProvider} from './src/services';
+import * as Font from 'expo-font';
 
 LogBox.ignoreLogs(['Require']);
 
@@ -16,7 +17,9 @@ export default (): JSX.Element => {
 
   const startApp = useCallback(async () => {
     await SplashScreen.preventAutoHideAsync();
-
+    await Font.loadAsync({
+      'brushsci': require('./assets/fonts/BRUSHSCI.TTF'),
+    })
     await hydrateStores();
     await initServices();
     configureDesignSystem();

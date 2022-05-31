@@ -46,6 +46,7 @@ export const fr = {
   },
   homeOffline: {
     title: 'Home Offline',
+    subtitle: 'Créez, Gérez, Partez',
     button: {
       login: 'Connexion',
       register: 'Créez votre compte',

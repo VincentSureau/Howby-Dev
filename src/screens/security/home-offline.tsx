@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 
 import {ScrollView, Alert, ActivityIndicator} from 'react-native';
-import {View, Text, Button, Colors} from 'react-native-ui-lib';
+import {View, Text, Button, Colors, Image} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
 
@@ -31,7 +31,11 @@ export const HomeOffline: React.FC = observer(({}) => {
 
   return (
     <View flex bg-bgColor2 centerV>
-      <View>
+      <View centerH flex centerV>
+        <Image cover height={250} source={{uri: require('../../../assets/logo/logo-full.png')}} />
+        <Text text40 color={Colors.secondary} subtitle>{t.do('homeOffline.subtitle')}</Text>
+      </View>
+      <View centerV marginV-50 marginH-10>
           <Button
             backgroundColor={Colors.primary}
             size={Button.sizes.large}
@@ -51,7 +55,7 @@ export const HomeOffline: React.FC = observer(({}) => {
             style={{marginBottom: ButtonSpace, height: 45}}
             onPress={() => nav.push('Register')}
           />
-          <Button 
+          {/* <Button 
             backgroundColor="#FB3C62"
             color="#FFFFFF"
             labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
@@ -59,7 +63,7 @@ export const HomeOffline: React.FC = observer(({}) => {
             borderRadius={7}
             style={{height: 45, marginBottom: ButtonSpace}}
             onPress={() => nav.push('FeedIndex')}
-          />
+          /> */}
       </View>
       <View centerH>
         <Text>{t.do('homeOffline.footer.subtitle')}</Text>
