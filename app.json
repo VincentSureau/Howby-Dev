@@ -14,7 +14,10 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*",
+      "assets/fonts/[name].[ext]"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.howby.howby"

@@ -1,6 +1,6 @@
 import {DarkTheme, DefaultTheme, Theme} from '@react-navigation/native';
 import {Appearance} from 'react-native';
-import {Colors, Typography} from 'react-native-ui-lib';
+import {Colors, Typography, Assets} from 'react-native-ui-lib';
 import {stores} from '../stores';
 
 const colors: DesignSystemColors = {
@@ -43,6 +43,12 @@ export const configureDesignSystem = (): void => {
     subtitle: {fontSize: 26, fontWeight: '400', fontFamily: 'brushsci'}
   });
 };
+
+export const loadAssets = async(): PVoid => {
+  Assets.loadAssetsGroup('images.logos', {
+    logoFull: require('../../assets/logo/logo-full.png')
+  });
+}
 
 export const getThemeStatusBarStyle = (ca?: CurrentAppearance): StatusBarStyle => {
   const {ui} = stores;

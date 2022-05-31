@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 
-import {ScrollView, Alert, ActivityIndicator} from 'react-native';
-import {View, Text, Button, Colors, Image} from 'react-native-ui-lib';
+import {ScrollView, Alert, ActivityIndicator, Platform} from 'react-native';
+import {View, Text, Button, Colors, Image, Assets} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
 
@@ -29,10 +29,12 @@ export const HomeOffline: React.FC = observer(({}) => {
     start();
   }, []);
 
+  const logoFull = Platform.OS === 'web' ? {uri: Assets.images.logos.logoFull}: Assets.images.logos.logoFull;
+
   return (
     <View flex bg-bgColor2 centerV>
       <View centerH flex centerV>
-        <Image cover height={250} source={{uri: require('../../../assets/logo/logo-full.png')}} />
+        <Image style={{height: 200, width: 300}} source={logoFull} />
         <Text text40 color={Colors.secondary} subtitle>{t.do('homeOffline.subtitle')}</Text>
       </View>
       <View centerV marginV-50 marginH-10>

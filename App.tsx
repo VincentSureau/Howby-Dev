@@ -5,7 +5,7 @@ import {LogBox} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 
 import {AppNavigator} from './src/app';
-import {configureDesignSystem} from './src/utils/designSystem';
+import {configureDesignSystem, loadAssets} from './src/utils/designSystem';
 import {hydrateStores, StoresProvider} from './src/stores';
 import {initServices, ServicesProvider} from './src/services';
 import * as Font from 'expo-font';
@@ -17,15 +17,23 @@ export default (): JSX.Element => {
 
   const startApp = useCallback(async () => {
     await SplashScreen.preventAutoHideAsync();
-    await Font.loadAsync({
-      'brushsci': require('./assets/fonts/BRUSHSCI.TTF'),
-    })
     await hydrateStores();
     await initServices();
     configureDesignSystem();
+    await loadAssets();
 
-    setReady(true);
-    await SplashScreen.hideAsync();
+    try {
+      // Load fonts
+      await Font.loadAsync({
+        'brushsci': require('./assets/fonts/BRUSHSCI.ttf'),
+      })
+    } catch (e) {
+      // We might want to provide this error information to an error reporting service
+      console.warn(e);
+    } finally {
+      setReady(true);
+      await SplashScreen.hideAsync();
+    }    
   }, []);
 
   useEffect(() => {
