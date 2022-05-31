@@ -1,7 +1,7 @@
 import React, {useCallback, useEffect} from 'react';
 
 import {ScrollView, Alert, ActivityIndicator} from 'react-native';
-import {View, Text, Button} from 'react-native-ui-lib';
+import {View, Text, Button, Colors} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
 
@@ -30,37 +30,40 @@ export const HomeOffline: React.FC = observer(({}) => {
   }, []);
 
   return (
-    <View flex bg-bgColor>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View>
-            <Button
-              backgroundColor="#FB3C62"
-              label="Connexion"
-              labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-              borderRadius={7}
-              style={{height: 45, marginBottom: ButtonSpace}}
-              onPress={() => nav.push('Login')}
-            />
-            <Button 
-              backgroundColor="#FB3C62"
-              color="#FFFFFF"
-              labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-              label="Inscription"
-              borderRadius={7}
-              style={{height: 45, marginBottom: ButtonSpace}}
-              onPress={() => nav.push('Register')}
-            />
-            <Button 
-              backgroundColor="#FB3C62"
-              color="#FFFFFF"
-              labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-              label="Allez au feed"
-              borderRadius={7}
-              style={{height: 45, marginBottom: ButtonSpace}}
-              onPress={() => nav.push('FeedIndex')}
-            />
-        </View>
-      </ScrollView>
+    <View flex bg-bgColor2 centerV>
+      <View>
+          <Button
+            backgroundColor={Colors.primary}
+            size={Button.sizes.large}
+            label={t.do('homeOffline.button.login')}
+            labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
+            borderRadius={7}
+            style={{marginBottom: ButtonSpace, height: 65}}
+            onPress={() => nav.push('Login')}
+          />
+          <Button 
+            backgroundColor={Colors.accent}
+            size={Button.sizes.medium}
+            color="#FFFFFF"
+            labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
+            label={t.do('homeOffline.button.register')}
+            borderRadius={7}
+            style={{marginBottom: ButtonSpace, height: 45}}
+            onPress={() => nav.push('Register')}
+          />
+          <Button 
+            backgroundColor="#FB3C62"
+            color="#FFFFFF"
+            labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
+            label="Allez au feed"
+            borderRadius={7}
+            style={{height: 45, marginBottom: ButtonSpace}}
+            onPress={() => nav.push('FeedIndex')}
+          />
+      </View>
+      <View centerH>
+        <Text>{t.do('homeOffline.footer.subtitle')}</Text>
+      </View>
     </View>
   );
 });

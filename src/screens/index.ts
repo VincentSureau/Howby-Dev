@@ -126,6 +126,7 @@ const offlineScreens = {
     options: () => ({
       title: 'Login',
       ...screenDefaultOptions(),
+      // headerShown: false,
     }),
   },
   Register: {
@@ -142,6 +143,7 @@ const offlineScreens = {
     options: () => ({
       title: 'Home Offline',
       ...screenDefaultOptions(),
+      headerShown: false,
     }),
   }
 }

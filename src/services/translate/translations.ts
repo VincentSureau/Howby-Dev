@@ -44,6 +44,16 @@ export const fr = {
   chat: {
     title: 'Chat',
   },
+  homeOffline: {
+    title: 'Home Offline',
+    button: {
+      login: 'Connexion',
+      register: 'Créez votre compte',
+    },
+    footer: {
+      subtitle: 'Vivez vos Howby autrement'
+    }
+  }
 };
 
 export const ru = {
