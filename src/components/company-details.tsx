@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   container: {
     
     flex: 1,
-    margin: "1rem",
+    margin: 10,
   },
   inline: {
     flexDirection: "row",
@@ -69,8 +69,8 @@ const styles = StyleSheet.create({
   },
 
   img: {
-    width: "50px",
-    height: "50px",
+    width: 50,
+    height: 50,
   },
 
   companyName: {
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   },
   post:{
     backgroundColor: 'gray',
-    height: '300px',
+    height: 300,
     textAlign:'center',
     justifyContent: 'center'
   }

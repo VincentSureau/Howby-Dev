@@ -11,9 +11,17 @@ import {useStores} from '../../stores';
 import {Section} from '../../components/section';
 import { BButton } from '../../components/button';
 
+
+//Profile Components
+
+import HeaderProfileComponent from '../../components/profilScreenComponents/HeaderProfileComponent';
+import ImageProfileComponent from '../../components/profilScreenComponents/ImageProfileComponent';
+import TeamProfileComponent from '../../components/profilScreenComponents/TeamProfileComponent';
+
 const ButtonSpace = 20;
 
 export const HomeOffline: React.FC = observer(({}) => {
+
   const {nav, t, api} = useServices();
   const {counter, ui} = useStores();
 
@@ -32,7 +40,36 @@ export const HomeOffline: React.FC = observer(({}) => {
   const logoFull = Platform.OS === 'web' ? {uri: Assets.images.logos.logoFull}: Assets.images.logos.logoFull;
 
   return (
-    <View flex bg-bgColor2 centerV>
+    <>
+    <View>
+    <HeaderProfileComponent />
+    <ImageProfileComponent />
+    <TeamProfileComponent />
+    </View>    
+
+    </>
+  );
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ <View flex bg-bgColor2 centerV>
       <View centerH flex centerV>
         <Image style={{height: 200, width: 300}} source={logoFull} />
         <Text text40 color={Colors.secondary} subtitle>{t.do('homeOffline.subtitle')}</Text>
@@ -65,11 +102,13 @@ export const HomeOffline: React.FC = observer(({}) => {
             borderRadius={7}
             style={{height: 45, marginBottom: ButtonSpace}}
             onPress={() => nav.push('FeedIndex')}
-          /> */}
-      </View>
-      <View centerH>
-        <Text>{t.do('homeOffline.footer.subtitle')}</Text>
-      </View>
-    </View>
-  );
-});
+          /> */
+          
+          /*
+          </View>
+          <View centerH>
+            <Text>{t.do('homeOffline.footer.subtitle')}</Text>
+          </View>
+        </View>
+        
+*/

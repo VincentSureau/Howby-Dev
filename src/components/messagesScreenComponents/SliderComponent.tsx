@@ -10,16 +10,16 @@ const SliderComponent = () => {
           style={{
             color: "#a56210",
             letterSpacing: 1,
-            marginLeft: "1rem",
-            marginTop: ".5rem",
-            marginBottom: ".5rem",
+            marginLeft: 10,
+            marginTop: 5,
+            marginBottom: .5,
           }}
         >
           Sorties et Groupes
         </Text>
       </View>
       <View>
-        <ScrollView horizontal persitentScrollbar={true}>
+        <ScrollView horizontal>
           {IMAGES.map((img, index) => (
             <View key={index}>
               <Image source={{ uri: img.image }} style={styles.imgStyle} />
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: 5,
-    top: "70%",
+    top: 70,
     left: 5,
     textAlign: "center",
     backgroundColor: "#60605f",

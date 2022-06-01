@@ -22,14 +22,14 @@ export const CompanyItem: React.FC<CompanyItemProps> = ({data}: CompanyItemProps
               style={styles.img}
             />
           </View>
-          <View style={{ marginTop: "1rem" }}>
+          <View style={{ marginTop: 10 }}>
             <Text
               style={styles.title}
             >
               {`${data.name}`}
             </Text>
             {data.description ? 
-              <Text style={{ marginLeft: "1rem" }}>
+              <Text style={{ marginLeft: 10 }}>
                   {`${data.description?.slice(0,50)}`}
               </Text>
               : null
@@ -82,15 +82,15 @@ const styles = StyleSheet.create({
   title:{
     fontSize: 17,
     marginTop: -15,
-    marginLeft: "1rem",
-    marginBottom: '.2rem'
+    marginLeft: 10,
+    marginBottom: '2px'
   },
   bottomComponents: {
-    marginTop: ".5rem",
+    marginTop: 5,
     flexDirection: "row",
     justifyContent: "space-between",
-    marginBottom: "1rem",
-    paddingBottom: ".5rem",
+    marginBottom: 10,
+    paddingBottom: 5,
     borderBottomColor: "gray",
     borderBottomWidth: 2,
     textAlignVertical: 'center'

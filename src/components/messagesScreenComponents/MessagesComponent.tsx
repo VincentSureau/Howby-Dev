@@ -26,24 +26,24 @@ const MessagesComponent = ({ navigation }) => {
         <Text style={styles.title}>Discussions</Text>
       </View>
       
-      <View style={{ margin: "1rem" }}>
+      <View style={{ margin: 10 }}>
         {MESSAGES.map((msg, index) => (
           <View key={index}>
             <View
               style={{ flexDirection: "row", justifyContent: "space-between" }}
             >
-              <View style={{ flexDirection: "row", marginBottom: "10px" }}>
+              <View style={{ flexDirection: "row", marginBottom: 10 }}>
                 <Text style={styles.vuStyle}>Vu .</Text>
                 <Image
                   source={require("../../../assets/icons/person-circle.svg")}
-                  style={{ width: 30, height: 30, marginLeft: "5px" }}
+                  style={{ width: 30, height: 30, marginLeft: 5 }}
                 />
 
                 <Text
                   style={{
-                    marginRight: "5px",
-                    marginLeft: "5px",
-                    marginTop: "10px",
+                    marginRight: 5,
+                    marginLeft: 5,
+                    marginTop: 5,
                   }}
                 >
                   
@@ -57,7 +57,7 @@ const MessagesComponent = ({ navigation }) => {
               </View>
             </View>
             <View>
-            <Text style={{ marginBottom: "10px", color: "gray" }}>
+            <Text style={{ marginBottom: 10, color: "gray" }}>
               {msg.Comment.length > 50
                 ? msg.Comment.slice(0, 50).toLowerCase() +  '...'
                 : msg.Comment.toLowerCase()}
@@ -75,15 +75,15 @@ const styles = StyleSheet.create({
 title: {
 flexDirection: "row",
 justifyContent: "space-between",
-margin: "1rem",
+margin: 10,
 color: "#a56210",
 fontSize: 14,
 letterSpacing: 1,
-fontWeight: "500",
+fontWeight: '500',
 },
 
 vuStyle: {
-padding: "5px",
+padding: 5,
 borderRadius: 50,
 borderWidth: 1,
 borderColor: "red",

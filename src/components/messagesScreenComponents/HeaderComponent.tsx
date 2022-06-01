@@ -41,12 +41,12 @@ import {
   };
   const styles = StyleSheet.create({
     container: {
-      margin: "1rem",
+      margin: 10,
     },
     headerIcons:{
       width: 25,
       height: 25,
-      marginLeft: '1rem'
+      marginLeft: 10
       
     }
   });
