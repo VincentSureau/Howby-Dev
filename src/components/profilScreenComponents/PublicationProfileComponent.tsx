@@ -2,6 +2,7 @@ import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
 import React from 'react';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 
+
 let imageHeight = Dimensions.get('window').height;
 let imageWidth = Dimensions.get('window').width;
 
@@ -45,12 +46,13 @@ const publicationImages = [
 ];
 
 const PublicationProfileComponent = (props) => {
+    
   return (
     <>
     <Text style = {{marginTop: 10, borderBottomWidth: 1, borderBottomColor: "gray"}}>VOS PUBLICATIONS</Text>
       <View style = {{flexDirection: "row", flexWrap: "wrap", marginTop: 10}}>                  
         {publicationImages.map((img, index) => (
-          <TouchableOpacity key={index}>
+          <TouchableOpacity key={index} onPress={() => props.navigation.navigate('FullScreenPublicationComponent',{url: img.imageUrl})}>
             <Image
               source={{uri: img.imageUrl}}
               style={{height: imageHeight / 3, width: imageWidth /  3 - 6, margin: 2 }}
