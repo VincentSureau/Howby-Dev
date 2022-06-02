@@ -17,6 +17,7 @@ import { BButton } from '../../components/button';
 import HeaderProfileComponent from '../../components/profilScreenComponents/HeaderProfileComponent';
 import ImageProfileComponent from '../../components/profilScreenComponents/ImageProfileComponent';
 import TeamProfileComponent from '../../components/profilScreenComponents/TeamProfileComponent';
+import PublicationProfileComponent from '../../components/profilScreenComponents/PublicationProfileComponent';
 
 const ButtonSpace = 20;
 
@@ -41,11 +42,14 @@ export const HomeOffline: React.FC = observer(({}) => {
 
   return (
     <>
+    <ScrollView>
     <View>
     <HeaderProfileComponent />
     <ImageProfileComponent />
     <TeamProfileComponent />
-    </View>    
+    <PublicationProfileComponent />
+    </View>
+    </ScrollView>
 
     </>
   );
