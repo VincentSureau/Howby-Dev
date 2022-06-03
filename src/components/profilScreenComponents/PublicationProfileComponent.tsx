@@ -1,6 +1,7 @@
 import {View, Text, Image, StyleSheet, Dimensions} from 'react-native';
 import React from 'react';
 import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
+import { useServices } from '../../services';
 
 
 let imageHeight = Dimensions.get('window').height;
@@ -45,14 +46,28 @@ const publicationImages = [
   },
 ];
 
-const PublicationProfileComponent = (props) => {
+interface  PublicationProfilePropsType {
+  setShowDialog: (boolean: boolean) => void;
+  setDialogUrl: (source : {uri: string}) => void;
+}
+
+const PublicationProfileComponent = ({setShowDialog, setDialogUrl} : PublicationProfilePropsType) => {
+
+  const {nav, t, api} = useServices();
     
   return (
     <>
     <Text style = {{marginTop: 10, borderBottomWidth: 1, borderBottomColor: "gray"}}>VOS PUBLICATIONS</Text>
       <View style = {{flexDirection: "row", flexWrap: "wrap", marginTop: 10}}>                  
         {publicationImages.map((img, index) => (
-          <TouchableOpacity key={index} onPress={() => props.navigation.navigate('FullScreenPublicationComponent',{url: img.imageUrl})}>
+          <TouchableOpacity 
+            key={index}
+            // onPress={() => props.navigation.navigate('FullScreenPublicationComponent',{url: img.imageUrl})}
+            onPress={() => {
+              setShowDialog(true);
+              setDialogUrl({uri: img.imageUrl});
+            }}
+          >
             <Image
               source={{uri: img.imageUrl}}
               style={{height: imageHeight / 3, width: imageWidth /  3 - 6, margin: 2 }}

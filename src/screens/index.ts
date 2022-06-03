@@ -15,11 +15,12 @@ import { FeedDetails } from './feed/details';
 import { Login } from './security/login';
 import { Register } from './security/register';
 import { HomeOffline } from './security/home-offline';
+import { UserProfile } from './feed/user-profile';
 
 // Describe your screens here
 export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'Story' | 'Notification';
 export type Modal = 'ExampleModal';
-export type Screen = 'Example' | 'Settings' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline';
+export type Screen = 'Example' | 'Settings' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile';
 
 export type ModalProps = {
   ExampleModal: undefined;
@@ -41,6 +42,7 @@ export type ScreenProps = {
   Login: undefined;
   Register: undefined;
   HomeOffline: undefined;
+  UserProfile: undefined;
 } & ModalProps;
 
 // Screens
@@ -117,6 +119,14 @@ const loggedScreen = {
       ...screenDefaultOptions(),
     }),
   },
+  UserProfile: {
+    name: 'UserProfile',
+    component: UserProfile,
+    options: () => ({
+      title: 'User Profile',
+      ...screenDefaultOptions(),
+    }),
+  },
 };
 
 const offlineScreens = {
@@ -154,7 +164,7 @@ const screens: ScreenLayouts = {
 
 const SettingsStack = () => genStackNavigator([screens.Settings]);
 const ExampleModalStack = () => genStackNavigator([screens.Example]);
-const FeedStack = () => genStackNavigator([screens.HomeOffline, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails]);
+const FeedStack = () => genStackNavigator([screens.HomeOffline, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails, screens.UserProfile]);
 const ChatStack = () => genStackNavigator([screens.ChatHome]);
 const SearchStack = () => genStackNavigator([screens.Search]);
 const StoryStack = () => genStackNavigator([screens.NewStory]);
