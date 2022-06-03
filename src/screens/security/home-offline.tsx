@@ -11,15 +11,6 @@ import {useStores} from '../../stores';
 import {Section} from '../../components/section';
 import { BButton } from '../../components/button';
 
-
-//Profile Components
-
-import HeaderProfileComponent from '../../components/profilScreenComponents/HeaderProfileComponent';
-import ImageProfileComponent from '../../components/profilScreenComponents/ImageProfileComponent';
-import TeamProfileComponent from '../../components/profilScreenComponents/TeamProfileComponent';
-import PublicationProfileComponent from '../../components/profilScreenComponents/PublicationProfileComponent';
-import FullScreenPublicationComponent from '../../components/profilScreenComponents/FullScreenPublicationComponent';
-
 const ButtonSpace = 20;
 
 export const HomeOffline: React.FC = observer(({}) => {

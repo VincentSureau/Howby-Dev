@@ -1,14 +1,33 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, StyleSheet, Platform } from 'react-native'
+import React, { ReactElement } from 'react'
+import Svg, { ClipPath, Defs, Polygon, Rect, Text } from 'react-native-svg'
+import { Image } from 'react-native-ui-lib'
+import { LinearGradient } from 'expo-linear-gradient';
 
+const img = Platform.OS === 'web' ? {uri: "https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg"}: "https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg";
 
-
-const IMGURL = "https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg"
 
 const ImageProfileComponent = () => {
   return (
-    <View>
-      <Image source = {{uri:IMGURL}} style={styles.img} />
+    <View style={{height: 300}}>
+        <Image 
+          height={300}
+          style={{height: 300}}
+          source={img}
+          customOverlayContent={
+            <View style={styles.container}>
+              <LinearGradient
+                colors={['rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,1)', 'rgba(255,255,255,1)' ]}
+                start={{x: 0.05, y: 0.1}}
+                end={{x: 0.3, y: 0.6}}
+                style={styles.linearGradient}
+              >
+                <Text>Julien</Text>
+                <Text>Pizzo</Text>
+              </LinearGradient>
+            </View>
+          }
+        />
     </View>
   )
 }
@@ -17,6 +36,20 @@ export default ImageProfileComponent;
 
 
 const styles = StyleSheet.create ({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  linearGradient: {
+    height: '100%',
+    width: '100%',
+    flex: 1,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    paddingBottom: 20,
+    paddingRight: 20,
+  },
   img: {
     width: "100%",
     height: 300
