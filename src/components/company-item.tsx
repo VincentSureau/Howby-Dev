@@ -76,14 +76,14 @@ const styles = StyleSheet.create({
     flex: 1
   },
   img: {
-    width: "50px",
-    height: "50px",
+    width: 50,
+    height: 50,
   },
   title:{
     fontSize: 17,
     marginTop: -15,
     marginLeft: 10,
-    marginBottom: '2px'
+    marginBottom: 2
   },
   bottomComponents: {
     marginTop: 5,
