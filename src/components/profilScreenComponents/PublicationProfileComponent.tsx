@@ -56,27 +56,27 @@ const PublicationProfileComponent = ({setShowDialog, setDialogUrl} : Publication
   const {nav, t, api} = useServices();
     
   return (
-    <>
-    <Text style = {{marginTop: 10, borderBottomWidth: 1, borderBottomColor: "gray"}}>VOS PUBLICATIONS</Text>
+    <View>
+      <Text style = {{marginTop: 10, borderBottomWidth: 1, borderBottomColor: "gray"}}>VOS PUBLICATIONS</Text>
       <View style = {{flexDirection: "row", flexWrap: "wrap", marginTop: 10}}>                  
         {publicationImages.map((img, index) => (
-          <TouchableOpacity 
-            key={index}
-            // onPress={() => props.navigation.navigate('FullScreenPublicationComponent',{url: img.imageUrl})}
-            onPress={() => {
-              setShowDialog(true);
-              setDialogUrl({uri: img.imageUrl});
-            }}
-          >
-            <Image
-              source={{uri: img.imageUrl}}
-              style={{height: imageHeight / 3, width: imageWidth /  3 - 6, margin: 2 }}
-            />
-          </TouchableOpacity>
-        ))
-    }
+            <TouchableOpacity 
+              key={index}
+              // onPress={() => props.navigation.navigate('FullScreenPublicationComponent',{url: img.imageUrl})}
+              onPress={() => {
+                setShowDialog(true);
+                setDialogUrl({uri: img.imageUrl});
+              }}
+            >
+              <Image
+                source={{uri: img.imageUrl}}
+                style={{height: imageHeight / 3, width: imageWidth /  3 - 6, margin: 2 }}
+              />
+            </TouchableOpacity>
+          ))
+        }
       </View>
-    </>
+    </View>
   );
 };
 
