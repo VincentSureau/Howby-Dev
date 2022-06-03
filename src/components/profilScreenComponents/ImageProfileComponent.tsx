@@ -1,5 +1,27 @@
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
+import Svg, {
+  Circle,
+  Ellipse,
+  G,
+  TSpan,
+  TextPath,
+  Path,
+  Polygon,
+  Polyline,
+  Line,
+  Rect,
+  Use,
+  Image,
+  Symbol,
+  Defs,
+  LinearGradient,
+  RadialGradient,
+  Stop,
+  ClipPath,
+  Pattern,
+  Mask
+} from "react-native-svg";
 
 
 
@@ -8,7 +30,14 @@ const IMGURL = "https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2E
 const ImageProfileComponent = () => {
   return (
     <View>
-      <Image source = {{uri:IMGURL}} style={styles.img} />
+      <Svg>
+        <Defs>
+          <ClipPath id ="clip">
+
+          </ClipPath>
+        </Defs>
+        <Image width = "150" height = "150" source = {{uri: IMGURL}}/>
+      </Svg>
     </View>
   )
 }
