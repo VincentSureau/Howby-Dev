@@ -15,9 +15,10 @@ const ImageProfileComponent = () => {
           customOverlayContent={
             <View style={styles.container}>
               <LinearGradient
-                colors={['rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,1)', 'rgba(255,255,255,1)' ]}
-                start={{x: 0.05, y: 0.1}}
-                end={{x: 0.3, y: 0.6}}
+                colors={['rgba(255,255,255,0)', 'rgba(255,255,255,0.8)', 'rgba(255,255,255,1)' ]}
+                start={{x: .2, y: 0}}
+                end={{x: 1, y: 1}}
+                locations={[0.5, 0.6, 1]}
                 style={styles.linearGradient}
               >
                 <Text>Julien</Text>
