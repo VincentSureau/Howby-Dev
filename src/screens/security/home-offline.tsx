@@ -14,6 +14,7 @@ import {SearchBar} from 'react-native-screens';
 import HeaderComponent from '../../components/userFeedComponents/HeaderComponent';
 import MessageSectionComponent from '../../components/userFeedComponents/MessageSectionComponent';
 import PostSectionComponent from '../../components/userFeedComponents/PostSectionComponent';
+import BottomSectionComponent from '../../components/userFeedComponents/BottomSectionComponent';
 
 const ButtonSpace = 20;
 
@@ -37,9 +38,15 @@ export const HomeOffline: React.FC = observer(({}) => {
 
   return (
     <View style={styles.container}>
-      <HeaderComponent />
+       <ScrollView contentInsetAdjustmentBehavior="automatic">
+       <HeaderComponent />
       <MessageSectionComponent />
       <PostSectionComponent />
+      <BottomSectionComponent />
+      
+
+      </ScrollView>
+
     
     </View>
   );
@@ -49,16 +56,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 10,
-  },
-
-
-  img: {
-    width: 50,
-    height: 50,
-  },
-
-  companyName: {
-    fontWeight: 'bold',
   },
 
 });
