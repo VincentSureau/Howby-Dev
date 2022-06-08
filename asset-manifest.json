@@ -1,11 +1,11 @@
 {
   "files": {
-    "app.js": "/Howby-Dev/static/js/app.af89493b.chunk.js",
-    "app.js.map": "/Howby-Dev/static/js/app.af89493b.chunk.js.map",
+    "app.js": "/Howby-Dev/static/js/app.b81f8521.chunk.js",
+    "app.js.map": "/Howby-Dev/static/js/app.b81f8521.chunk.js.map",
     "runtime~app.js": "/Howby-Dev/static/js/runtime~app.2c143a4b.js",
     "runtime~app.js.map": "/Howby-Dev/static/js/runtime~app.2c143a4b.js.map",
-    "static/js/2.e849dc95.chunk.js": "/Howby-Dev/static/js/2.e849dc95.chunk.js",
-    "static/js/2.e849dc95.chunk.js.map": "/Howby-Dev/static/js/2.e849dc95.chunk.js.map",
+    "static/js/2.4dbb74ba.chunk.js": "/Howby-Dev/static/js/2.4dbb74ba.chunk.js",
+    "static/js/2.4dbb74ba.chunk.js.map": "/Howby-Dev/static/js/2.4dbb74ba.chunk.js.map",
     "fonts/AntDesign.ttf": "/Howby-Dev/./fonts/AntDesign.ttf",
     "fonts/Entypo.ttf": "/Howby-Dev/./fonts/Entypo.ttf",
     "fonts/Feather.ttf": "/Howby-Dev/./fonts/Feather.ttf",
@@ -24,14 +24,14 @@
     "index.html": "/Howby-Dev/index.html",
     "manifest.json": "/Howby-Dev/manifest.json",
     "serve.json": "/Howby-Dev/serve.json",
-    "static/js/2.e849dc95.chunk.js.LICENSE.txt": "/Howby-Dev/static/js/2.e849dc95.chunk.js.LICENSE.txt",
+    "static/js/2.4dbb74ba.chunk.js.LICENSE.txt": "/Howby-Dev/static/js/2.4dbb74ba.chunk.js.LICENSE.txt",
     "static/media/TransparentSwatch.png": "/Howby-Dev/static/media/TransparentSwatch.3689fd00.png",
     "static/media/gradientOverlay.png": "/Howby-Dev/static/media/gradientOverlay.7d102364.png",
     "static/media/logo-full.png": "/Howby-Dev/static/media/logo-full.ca03bb92.png"
   },
   "entrypoints": [
     "static/js/runtime~app.2c143a4b.js",
-    "static/js/2.e849dc95.chunk.js",
-    "static/js/app.af89493b.chunk.js"
+    "static/js/2.4dbb74ba.chunk.js",
+    "static/js/app.b81f8521.chunk.js"
   ]
 }
