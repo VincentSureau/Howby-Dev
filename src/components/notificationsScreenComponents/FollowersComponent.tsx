@@ -3,6 +3,7 @@ import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
+
 const FollowersComponent = () => {
   return (
     <>
@@ -68,6 +69,17 @@ const FollowersComponent = () => {
             </View>
           </View>
         </View>
+
+
+
+
+        <View>
+        <TouchableOpacity style={styles.inline}>
+            <Icon name="person-circle" size={30} />
+            <Text style={styles.username}>Prénom Nom</Text>
+          </TouchableOpacity> 
+          <Text style={styles.messageText}>Vous a identifié dans une publication</Text>
+        </View>
       </View>
     </>
   );
@@ -130,5 +142,16 @@ const styles = StyleSheet.create({
     height: 130,
     marginRight: 15,
   },
+  card: {
+      backgroundColor: 'pink',
+      flexDirection: 'row'
+  },
+  cover:{
+      marginTop: 5,
+      marginBottom: 5,
+      marginLeft: 5,
+      width: 70,
+      height: 130
+  }
 });
 export default FollowersComponent;

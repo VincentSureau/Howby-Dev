@@ -33,9 +33,11 @@ export const Notification: React.FC = observer(({}) => {
 
   return (
     <View style = {styles.container} >
+      <ScrollView>
       <HeadingComponent />
       <InvitationsComponent />
       <FollowersComponent />
+      </ScrollView>
 
     </View>
   );
