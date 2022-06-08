@@ -107,22 +107,30 @@ const PostCard: React.FC<PostCardProps> = ({post}: PostCardProps) => {
           )}
           <View row right>
             <Button
+              marginL-10
               text90
               link
               iconSource={() => (
                 <Icon name={post.isLiked ? 'heart': 'heart-outline'} />
               )}
-              label="like"
+              // label="like"
             />
             <Button
+              marginL-10
               text90
               link
               iconSource={() => (
                 <Icon name='chatbox-outline' />
               )}
-              label="comment"
+              // label="comment"
             />
-            <Button text90 link iconSource={() => <Icon name="share-outline" />} label="Share"/>
+            <Button 
+              marginL-10
+              text90 
+              link 
+              iconSource={() => <Icon name="share-outline" />} 
+              //label="Share"
+            />
           </View>
         </View>
       </View>
