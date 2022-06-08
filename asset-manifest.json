@@ -1,7 +1,7 @@
 {
   "files": {
-    "app.js": "/Howby-Dev/static/js/app.b81f8521.chunk.js",
-    "app.js.map": "/Howby-Dev/static/js/app.b81f8521.chunk.js.map",
+    "app.js": "/Howby-Dev/static/js/app.90b11d55.chunk.js",
+    "app.js.map": "/Howby-Dev/static/js/app.90b11d55.chunk.js.map",
     "runtime~app.js": "/Howby-Dev/static/js/runtime~app.2c143a4b.js",
     "runtime~app.js.map": "/Howby-Dev/static/js/runtime~app.2c143a4b.js.map",
     "static/js/2.4dbb74ba.chunk.js": "/Howby-Dev/static/js/2.4dbb74ba.chunk.js",
@@ -32,6 +32,6 @@
   "entrypoints": [
     "static/js/runtime~app.2c143a4b.js",
     "static/js/2.4dbb74ba.chunk.js",
-    "static/js/app.b81f8521.chunk.js"
+    "static/js/app.90b11d55.chunk.js"
   ]
 }
