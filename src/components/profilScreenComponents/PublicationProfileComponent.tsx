@@ -164,6 +164,7 @@ const PublicationCard = ({item}: {item: any}) => {
         style={{
           height: randomBool ? 150 : 280,
           alignSelf: 'stretch',
+          borderRadius: 20
         }}
         resizeMode="cover"
       />
