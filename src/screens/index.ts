@@ -16,11 +16,12 @@ import { Login } from './security/login';
 import { Register } from './security/register';
 import { HomeOffline } from './security/home-offline';
 import { UserProfile } from './feed/user-profile';
+import { UserFeed } from './feed/user-feed';
 
 // Describe your screens here
 export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'Story' | 'Notification';
 export type Modal = 'ExampleModal';
-export type Screen = 'Example' | 'Settings' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile';
+export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile';
 
 export type ModalProps = {
   ExampleModal: undefined;
@@ -43,6 +44,7 @@ export type ScreenProps = {
   Register: undefined;
   HomeOffline: undefined;
   UserProfile: undefined;
+  UserFeed: undefined;
 } & ModalProps;
 
 // Screens
@@ -127,6 +129,14 @@ const loggedScreen = {
       ...screenDefaultOptions(),
     }),
   },
+  UserFeed: {
+    name: 'UserFeed',
+    component: UserFeed,
+    options: () => ({
+      title: 'User Feed',
+      ...screenDefaultOptions(),
+    }),
+  },
 };
 
 const offlineScreens = {
@@ -164,7 +174,7 @@ const screens: ScreenLayouts = {
 
 const SettingsStack = () => genStackNavigator([screens.Settings]);
 const ExampleModalStack = () => genStackNavigator([screens.Example]);
-const FeedStack = () => genStackNavigator([screens.HomeOffline, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails, screens.UserProfile]);
+const FeedStack = () => genStackNavigator([screens.HomeOffline, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails, screens.UserProfile, screens.UserFeed]);
 const ChatStack = () => genStackNavigator([screens.ChatHome]);
 const SearchStack = () => genStackNavigator([screens.Search]);
 const StoryStack = () => genStackNavigator([screens.NewStory]);

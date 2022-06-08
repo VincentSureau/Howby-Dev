@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, StatusBar, Image, Pressable } from 'react-native';
 import {View, Text, TouchableOpacity, Card, Button} from 'react-native-ui-lib';
-import { useServices } from '../services';
-import { Icon } from './icon';
+import { useServices } from '../../services';
+import { Icon } from '../icon';
 
 type CompanyItemProps = {
   data: any;

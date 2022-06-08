@@ -7,7 +7,7 @@ import axios, { CancelTokenSource } from 'axios';
 import {useServices} from '../../services';
 import {useStores} from '../../stores';
 import { CompanyItem } from '../../components/company-item';
-import { CompanyCard } from '../../components/company-card';
+import { CompanyCard } from '../../components/company/company-card';
 
 export const FeedIndex: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();

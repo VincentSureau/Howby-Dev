@@ -7,7 +7,7 @@ import axios, { CancelTokenSource } from 'axios';
 import {useServices} from '../../services';
 import {useStores} from '../../stores';
 import { useRoute } from '@react-navigation/native';
-import { CompanyDetails } from '../../components/company-details';
+import { CompanyDetails } from '../../components/company/company-details';
 
 export const FeedDetails: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
