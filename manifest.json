@@ -3,19 +3,19 @@
   "description": "Production-ready starter for Expo (React Native) App! Powered by cli-rn, React Navigation (v6), RN UI lib, Mobx, Reanimated 2, Dark Mode, Localization, and much more.",
   "display": "standalone",
   "lang": "en",
-  "name": "Expo Starter",
-  "short_name": "Expo Starter",
+  "name": "Howby",
+  "short_name": "Howby",
   "start_url": "/?utm_source=web_app_manifest",
   "orientation": "portrait",
   "related_applications": [
     {
       "platform": "itunes",
-      "id": "io.batyr.expo-starter"
+      "id": "com.howby.howby"
     },
     {
       "platform": "play",
-      "url": "http://play.google.com/store/apps/details?id=io.batyr.expostarter",
-      "id": "io.batyr.expostarter"
+      "url": "http://play.google.com/store/apps/details?id=com.howby.howby",
+      "id": "com.howby.howby"
     }
   ],
   "prefer_related_applications": true,
