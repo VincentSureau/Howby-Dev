@@ -13,6 +13,7 @@ import {randomNum} from '../utils/help';
 import {BButton} from '../components/button';
 import HeadingComponent from '../components/notificationsScreenComponents/HeadingComponent';
 import InvitationsComponent from '../components/notificationsScreenComponents/InvitationsComponent';
+import FollowersComponent from '../components/notificationsScreenComponents/FollowersComponent';
 
 export const Notification: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -34,6 +35,7 @@ export const Notification: React.FC = observer(({}) => {
     <View style = {styles.container} >
       <HeadingComponent />
       <InvitationsComponent />
+      <FollowersComponent />
 
     </View>
   );
