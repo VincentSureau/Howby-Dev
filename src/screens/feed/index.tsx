@@ -7,6 +7,7 @@ import axios, { CancelTokenSource } from 'axios';
 import {useServices} from '../../services';
 import {useStores} from '../../stores';
 import { CompanyItem } from '../../components/company-item';
+import { CompanyCard } from '../../components/company-card';
 
 export const FeedIndex: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -40,12 +41,12 @@ export const FeedIndex: React.FC = observer(({}) => {
 
   const renderItem = ({item}: {item: any}) => {
     return(
-      <CompanyItem data={item} />
+      <CompanyCard data={item} />
     );
   };
 
   return (
-    <View flex bg-bgColor>
+    <View flex bg-bgColor paddingH-s2>
       <If
         _={company.loading}
         _then={() => <ActivityIndicator />}
