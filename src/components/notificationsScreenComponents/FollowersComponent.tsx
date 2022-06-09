@@ -8,7 +8,10 @@ const cardImage = {
   uri: 'https://images.unsplash.com/photo-1519046904884-53103b34b206?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80',
 };
 
+
+
 const FollowersComponent = () => {
+  
   return (
     <>
       <View>
@@ -65,10 +68,12 @@ const FollowersComponent = () => {
             />
           </Card>
         </View>
+           
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <View style={{flexDirection: 'row'}}>
+            
             <TouchableOpacity>
-              <Text>Accepter</Text>
+              <Text style = {{marginRight: 5}}>Accepter</Text>
             </TouchableOpacity>
             <TouchableOpacity>
               <Text>Refuser</Text>
