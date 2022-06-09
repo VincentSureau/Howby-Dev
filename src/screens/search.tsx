@@ -8,6 +8,8 @@ import {useServices} from '../services';
 import {useStores} from '../stores';
 
 import HeaderSectionComponent from '../components/searchScreenComponents/HeaderSectionComponent';
+import SliderSectionComponent from '../components/searchScreenComponents/SliderSectionComponent';
+
 
 export const Search: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -29,6 +31,7 @@ export const Search: React.FC = observer(({}) => {
     <View flex bg-bgColor>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <HeaderSectionComponent />
+        <SliderSectionComponent />
       </ScrollView>
     </View>
   );
