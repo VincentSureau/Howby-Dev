@@ -1,5 +1,5 @@
 import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Card} from 'react-native-ui-lib';
@@ -9,9 +9,9 @@ const cardImage = {
 };
 
 
-
 const FollowersComponent = () => {
   
+const [cls, setCls] = useState("green");
   return (
     <>
       <View>
@@ -72,12 +72,18 @@ const FollowersComponent = () => {
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <View style={{flexDirection: 'row'}}>
             
-            <Pressable children={({pressed}) =>(
-              <Text style = {{color: pressed ? '#FF9E00' : '#222'}}>
-                Accepter
-              </Text>
-
-            )}/>
+              
+          <style>{`
+        .red {color: red}
+        .green {color: green}
+      `}</style>
+      <button
+        className={cls}
+        onClick={() => setCls((cls) => (cls === "red" ? "green" : "red"))}
+      >
+        Button
+      </button>
+           
 
               <Text style = {{marginRight: 5}}>Accepter</Text>
             
