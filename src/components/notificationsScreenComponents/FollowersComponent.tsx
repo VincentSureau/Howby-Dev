@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, Image} from 'react-native';
+import {View, Text, StyleSheet, Image, Pressable} from 'react-native';
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -72,9 +72,15 @@ const FollowersComponent = () => {
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <View style={{flexDirection: 'row'}}>
             
-            <TouchableOpacity>
+            <Pressable children={({pressed}) =>(
+              <Text style = {{color: pressed ? '#FF9E00' : '#222'}}>
+                Accepter
+              </Text>
+
+            )}/>
+
               <Text style = {{marginRight: 5}}>Accepter</Text>
-            </TouchableOpacity>
+            
             <TouchableOpacity>
               <Text>Refuser</Text>
             </TouchableOpacity>
