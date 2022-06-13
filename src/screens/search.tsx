@@ -9,6 +9,7 @@ import {useStores} from '../stores';
 
 import HeaderSectionComponent from '../components/searchScreenComponents/HeaderSectionComponent';
 import SliderSectionComponent from '../components/searchScreenComponents/SliderSectionComponent';
+import SearchSectionComponent from '../components/searchScreenComponents/SearchSectionComponent';
 
 
 export const Search: React.FC = observer(({}) => {
@@ -32,6 +33,7 @@ export const Search: React.FC = observer(({}) => {
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <HeaderSectionComponent />
         <SliderSectionComponent />
+        <SearchSectionComponent />
       </ScrollView>
     </View>
   );
