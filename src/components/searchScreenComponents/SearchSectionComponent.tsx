@@ -6,39 +6,38 @@ const SearchSectionComponent = () => {
   return (
     <>
       <View style={styles.container}>
-        <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
-          <TouchableOpacity>
-            <Text style={styles.text}>Recherche</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity>
-            <Ionicons name="search-outline" size={20} />
-          </TouchableOpacity>
-          <View>
-            <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}>
-              <Text style={styles.text}>Mon Panier</Text>
-              <Ionicons name="cart-outline" size={20} />
-            </TouchableOpacity>
-          </View>
-        </View>
-
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <View style={{marginTop: 15}}>
-            <Text style={{marginTop: 30, color: '#8F6C22', fontSize: 16}}>DERNIERE MINUTE</Text>
-            <View>
-              <TouchableOpacity style={{flexDirection: 'row', alignItems: 'flex-end'}}>
-                <Text style={{marginTop: 30, marginRight: 50, color: '#8F6C22', fontSize: 16}}>
-                  LIMITED EVENT
-                </Text>
-                <Ionicons name="glasses-outline" size={20} />
-              </TouchableOpacity>
-            </View>
+          <View>
+            <TouchableOpacity style = {{backgroundColor: 'gray', paddingTop: 10, paddingBottom: 10, paddingLeft: 5, paddingRight: 60, borderRadius: 5, marginBottom: 20 }}>
+            <Text style = {styles.text}>Recherche</Text>
+            <Ionicons name = 'search-outline' size = {20} style = {{position: 'absolute', bottom: 0, right: 5}}/>
+            </TouchableOpacity>
+            <TouchableOpacity style = {{backgroundColor: 'gray', paddingTop: 10, paddingBottom: 10, paddingLeft: 5, paddingRight: 40, borderRadius: 5, marginBottom: 20 }}>
+
+            <Text style ={{textTransform: 'uppercase', fontSize: 18, color: 'brown'}}>Derniere</Text>
+            <Text style ={{textTransform: 'uppercase', fontSize: 18, color: 'brown'}}>Minute</Text>
+            <Ionicons name = 'return-down-back-outline' size = {20} style = {{position: 'absolute', bottom: 0, right: 5}} />
+            </TouchableOpacity>
+
+            <Text>Limited Event</Text>
           </View>
-          <View></View>
-          <View style={{marginTop: 15}}>
-            <Text>Nouvelle organisation</Text>
-            <Text style={{marginTop: 30}}>Organisations en cours</Text>
-            <Text style={{marginTop: 30}}>Favoris</Text>
+
+          <View>
+            <TouchableOpacity style = {{backgroundColor: 'gray', paddingTop: 10, paddingBottom: 10, paddingLeft: 25, paddingRight: 50, borderRadius: 5, marginBottom: 20 }}>
+            <Text style = {styles.text}>Mon Panier</Text>
+            <Ionicons name = 'cart-outline' size= {20}  style = {{position: 'absolute', bottom: 0, right: 5}}/>
+            </TouchableOpacity>
+            <TouchableOpacity  style = {{backgroundColor: 'gray', paddingTop: 10, paddingBottom: 10, paddingLeft: 25, paddingRight: 50, borderRadius: 5, marginBottom: 20 }}>
+            <Text style ={{textAlign: 'center', fontWeight: 'bold', fontSize: 16}}>Nouvelle</Text>
+            <Text  style ={{textAlign: 'center', fontWeight: 'bold', fontSize: 16}}>Organisation</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style = {{backgroundColor: 'gray', paddingTop: 10, paddingBottom: 10, paddingLeft: 25, paddingRight: 50, borderRadius: 5, marginBottom: 20}}>
+                <Text style ={{textAlign: 'center', fontWeight: 'bold', fontSize: 16}}>Organisation</Text>
+                <Text style ={{textAlign: 'center', fontWeight: 'bold', fontSize: 16}}>en cours</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style = {{backgroundColor: 'gray', paddingTop: 10, paddingBottom: 10, paddingLeft: 25, paddingRight: 50, borderRadius: 5, marginBottom: 20}}>
+            <Text  style ={{textAlign: 'center', fontWeight: 'bold', fontSize: 16}}>Favoris</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </View>
@@ -53,9 +52,10 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   text: {
+    fontSize: 16,
     fontWeight: 'bold',
-    color: '#020084',
-    marginRight: 10,
+    color: '#001C33',
+   
   },
 });
 export default SearchSectionComponent;

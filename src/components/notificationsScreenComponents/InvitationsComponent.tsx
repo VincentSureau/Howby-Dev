@@ -19,6 +19,7 @@ const InvitationsComponent = () => {
           <View style={{flexDirection: 'row'}}>
             <Text style={styles.invitationNumber}>6</Text>
             <View>
+              
               <Text style={styles.InvitationsText}>Invitations</Text>
               <Text style={styles.InvitationsText}>Acceptées</Text>
             </View>
