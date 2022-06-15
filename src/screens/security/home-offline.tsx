@@ -10,6 +10,8 @@ import {useStores} from '../../stores';
 
 import {Section} from '../../components/section';
 import { BButton } from '../../components/button';
+import ReturnForwardComponent from '../../components/teamComponents/ReturnForwardComponent';
+import CircleComponent from '../../components/CircleComponent';
 
 const ButtonSpace = 20;
 
@@ -33,63 +35,10 @@ export const HomeOffline: React.FC = observer(({}) => {
   const logoFull = Platform.OS === 'web' ? {uri: Assets.images.logos.logoFull}: Assets.images.logos.logoFull;
 
   return (
-    <View flex bg-bgColor2 centerV>
-      <View centerH flex centerV>
-        <Image style={{height: 200, width: 300}} source={logoFull} />
-        <Text text40 color={Colors.secondary} subtitle>{t.do('homeOffline.subtitle')}</Text>
-      </View>
-      <View centerV marginV-50 marginH-10>
-          <Button
-            backgroundColor={Colors.primary}
-            size={Button.sizes.large}
-            label={t.do('homeOffline.button.login')}
-            labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-            borderRadius={7}
-            style={{marginBottom: ButtonSpace, height: 65}}
-            onPress={() => nav.push('Login')}
-          />
-          <Button 
-            backgroundColor={Colors.accent}
-            size={Button.sizes.medium}
-            color="#FFFFFF"
-            labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-            label={t.do('homeOffline.button.register')}
-            borderRadius={7}
-            style={{marginBottom: ButtonSpace, height: 45}}
-            onPress={() => nav.push('Register')}
-          />
-          <Button 
-            backgroundColor="#FB3C62"
-            color="#FFFFFF"
-            labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-            label="Allez au Profile"
-            borderRadius={7}
-            style={{height: 45, marginBottom: ButtonSpace}}
-            onPress={() => nav.push('UserProfile')}
-          />
-          <Button 
-            backgroundColor="#FB3C62"
-            color="#FFFFFF"
-            labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-            label="Allez au feed Company"
-            borderRadius={7}
-            style={{height: 45, marginBottom: ButtonSpace}}
-            onPress={() => nav.push('FeedIndex')}
-          />
-          <Button 
-            backgroundColor="#FB3C62"
-            color="#FFFFFF"
-            labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-            label="Allez au feed user"
-            borderRadius={7}
-            style={{height: 45, marginBottom: ButtonSpace}}
-            onPress={() => nav.push('UserFeed')}
-          />
-        </View>
-        <View centerH>
-          <Text>{t.do('homeOffline.footer.subtitle')}</Text>
-        </View>
-    </View>
+    <>
+   <ReturnForwardComponent />
+   <CircleComponent />
+   </>
   );
 });
 

@@ -2,15 +2,8 @@ import {View, Text, Touchable, StyleSheet} from 'react-native';
 import React from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { useServices } from '../../services';
 
-type CompanyItemProps = {
-  data: any;
-};
-
-
-export const TeamProfileComponent: React.FC<CompanyItemProps> = () => {
-  const {nav, t, api} = useServices();
+const TeamProfileComponent = () => {
   return (
     <>
       <View style={styles.inlineContent}>
@@ -27,7 +20,7 @@ export const TeamProfileComponent: React.FC<CompanyItemProps> = () => {
       </View>
 
       <View >
-        <TouchableOpacity  style = {styles.inlineContent} onPress={() => nav.push('MyTeams')}>
+        <TouchableOpacity>
         <View style = {styles.circle_blue}>
           <Text>Famille</Text>
           <Text style = {{textAlign: "center"}}>12</Text>
@@ -103,4 +96,4 @@ const styles = StyleSheet.create({
   
 });
 
-
+export default TeamProfileComponent;

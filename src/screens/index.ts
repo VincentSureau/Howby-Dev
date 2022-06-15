@@ -17,12 +17,11 @@ import { Register } from './security/register';
 import { HomeOffline } from './security/home-offline';
 import { UserProfile } from './feed/user-profile';
 import { UserFeed } from './feed/user-feed';
-import MyTeams from './teams/MyTeams';
 
 // Describe your screens here
 export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'Story' | 'Notification';
 export type Modal = 'ExampleModal';
-export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile' | 'MyTeams';
+export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile';
 
 export type ModalProps = {
   ExampleModal: undefined;
@@ -46,8 +45,6 @@ export type ScreenProps = {
   HomeOffline: undefined;
   UserProfile: undefined;
   UserFeed: undefined;
-  MyTeams: undefined;
-  
 } & ModalProps;
 
 // Screens
@@ -137,14 +134,6 @@ const loggedScreen = {
     component: UserFeed,
     options: () => ({
       title: 'User Feed',
-      ...screenDefaultOptions(),
-    }),
-  },
-  MyTeams: {
-    name: 'MyTeams',
-    component: MyTeams,
-    options: () => ({
-      title: 'My Teams',
       ...screenDefaultOptions(),
     }),
   },

@@ -6,6 +6,7 @@ export const MESSAGES = [
           user: USERS[0].user,
           profile_picture: USERS[0].image,
           Comment: "C'est pour quand la revanche !? "
+          
       }, 
       {
         hasBeenSeen: false,
