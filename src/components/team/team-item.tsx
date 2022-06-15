@@ -25,8 +25,8 @@ const TeamItem: React.FC<TeamItemProps> = ({team, onPress}: TeamItemProps) => {
   return (
     <Container>
         <View style={{borderColor: team.color || 'blue', ...styles.circle}}>
-            <Text>{team.name}</Text>
-            <Text style = {{textAlign: "center"}}>{team.members}</Text>
+            <Text style={styles.text}>{team.name}</Text>
+            <Text style={styles.text}>{team.members}</Text>
         </View>
     </Container>
   );
@@ -43,5 +43,8 @@ const styles = {
         fontSize: 50,
         alignItems: 'center',
         justifyContent: 'center',
-      },
+    },
+    text: {
+        textAlign: 'center',
+    }
 };
