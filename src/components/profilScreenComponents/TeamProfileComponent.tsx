@@ -19,22 +19,24 @@ const TeamProfileComponent = () => {
         </TouchableOpacity>
       </View>
 
-      <View style = {styles.inlineContent}>
-        <TouchableOpacity style = {styles.circle_blue}>
+      <View >
+        <TouchableOpacity  style = {styles.inlineContent}>
+        <View style = {styles.circle_blue}>
           <Text>Famille</Text>
           <Text style = {{textAlign: "center"}}>12</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style = {styles.circle_brown}>
+        </View>
+        <View style = {styles.circle_brown}>
           <Text >Amis Proche</Text>
           <Text style = {{textAlign: "center"}}>4</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style = {styles.circle_green}>
+        </View>
+        <View style = {styles.circle_green}>
           <Text>Amis</Text>
           <Text style = {{textAlign: "center"}}>16</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style = {styles.circle_red} >
+        </View>
+        <View style = {styles.circle_red} >
           <Text>Collègue</Text>
           <Text style = {{textAlign: "center"}}>26</Text>
+        </View>
         </TouchableOpacity>
       </View>
     </>
