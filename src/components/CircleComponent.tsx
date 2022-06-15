@@ -1,32 +1,33 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import React from 'react'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { View, Text } from 'react-native-ui-lib'
 
 const CircleComponent = () => {
   return (
-    <View style = {{flexDirection: 'row', justifyContent: 'space-around'}}>
+    <View flex row style = {{flexDirection: 'row', justifyContent: 'space-around'}}>
       <TouchableOpacity>
-      <View style = {styles.circle_blue}>
-          <Text>Famille</Text>
-          <Text style = {{textAlign: "center"}}>12</Text>
+        <View style = {styles.circle_blue}>
+            <Text>Famille</Text>
+            <Text style = {{textAlign: "center"}}>12</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity>
-      <View style = {styles.circle_blue}>
-          <Text style = {{textAlign: "center"}}>Amis proches</Text>
-          <Text style = {{textAlign: "center"}}>4</Text>
+        <View style = {styles.circle_blue}>
+            <Text style = {{textAlign: "center"}}>Amis proches</Text>
+            <Text style = {{textAlign: "center"}}>4</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity>
-      <View style = {styles.circle_blue}>
-          <Text>Amis</Text>
-          <Text style = {{textAlign: "center"}}>12</Text>
+        <View style = {styles.circle_blue}>
+            <Text>Amis</Text>
+            <Text style = {{textAlign: "center"}}>12</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity>
-      <View style = {styles.circle_blue}>
-          <Text>Collègues</Text>
-          <Text style = {{textAlign: "center"}}>26</Text>
+        <View style = {styles.circle_blue}>
+            <Text>Collègues</Text>
+            <Text style = {{textAlign: "center"}}>26</Text>
         </View>
       </TouchableOpacity>
     </View>

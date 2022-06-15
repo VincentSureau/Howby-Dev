@@ -1,17 +1,16 @@
-import { View, Text } from 'react-native'
+import { Text } from 'react-native'
 import React from 'react'
 import HeaderProfileComponent from '../../components/profilScreenComponents/HeaderProfileComponent'
 import ImageProfileComponent from '../../components/profilScreenComponents/ImageProfileComponent'
+import { View } from 'react-native-ui-lib'
 
-const ProfilScreen = () => {
+const Profile = () => {
   return (
-      <>
-    <HeaderProfileComponent />
-    <ImageProfileComponent />
-
-    </>
-
+    <View flex bg-bgColor2>
+      <HeaderProfileComponent />
+      <ImageProfileComponent />
+    </View>    
   )
 }
 
-export default ProfilScreen
+export default Profile

@@ -17,11 +17,12 @@ import { Register } from './security/register';
 import { HomeOffline } from './security/home-offline';
 import { UserProfile } from './feed/user-profile';
 import { UserFeed } from './feed/user-feed';
+import { Teams } from './profil/teams';
 
 // Describe your screens here
 export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'Story' | 'Notification';
 export type Modal = 'ExampleModal';
-export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile';
+export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile' | 'Teams';
 
 export type ModalProps = {
   ExampleModal: undefined;
@@ -45,6 +46,7 @@ export type ScreenProps = {
   HomeOffline: undefined;
   UserProfile: undefined;
   UserFeed: undefined;
+  Teams: undefined;
 } & ModalProps;
 
 // Screens
@@ -137,6 +139,14 @@ const loggedScreen = {
       ...screenDefaultOptions(),
     }),
   },
+  Teams: {
+    name: 'Teams',
+    component: Teams,
+    options: () => ({
+      title: 'User Teams',
+      ...screenDefaultOptions(),
+    }),
+  },
 };
 
 const offlineScreens = {
@@ -172,9 +182,9 @@ const screens: ScreenLayouts = {
   ...offlineScreens,
 };
 
-const SettingsStack = () => genStackNavigator([screens.Settings]);
+const SettingsStack = () => genStackNavigator([screens.Settings, screens.Teams]);
 const ExampleModalStack = () => genStackNavigator([screens.Example]);
-const FeedStack = () => genStackNavigator([screens.HomeOffline, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails, screens.UserProfile, screens.UserFeed]);
+const FeedStack = () => genStackNavigator([screens.HomeOffline, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails, screens.UserProfile, screens.UserFeed, screens.Teams]);
 const ChatStack = () => genStackNavigator([screens.ChatHome]);
 const SearchStack = () => genStackNavigator([screens.Search]);
 const StoryStack = () => genStackNavigator([screens.NewStory]);

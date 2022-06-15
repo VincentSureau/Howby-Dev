@@ -1,45 +1,70 @@
-import {View, Text, Touchable, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import React from 'react';
-import {TouchableOpacity} from 'react-native-gesture-handler';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Text, TouchableOpacity, View } from 'react-native-ui-lib';
+import { useServices } from '../../services';
 
 const TeamProfileComponent = () => {
+  const {nav, t, api} = useServices();
+
+  const goToTeamsSettings = () => {
+    nav.push('Teams')
+  }
+
   return (
-    <>
+    <View>
       <View style={styles.inlineContent}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={goToTeamsSettings}
+        >
           <Text>Memories</Text>
         </TouchableOpacity>
         <TouchableOpacity style={{flexDirection: 'row'}}>
           <Ionicons name="trophy-outline" size={20} />
           <Text> Trophées</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={goToTeamsSettings}
+        >
           <Text>Historique</Text>
         </TouchableOpacity>
       </View>
 
-      <View >
-        <TouchableOpacity>
-        <View style = {styles.circle_blue}>
-          <Text>Famille</Text>
-          <Text style = {{textAlign: "center"}}>12</Text>
-        </View>
-        <View style = {styles.circle_brown}>
-          <Text >Amis Proche</Text>
-          <Text style = {{textAlign: "center"}}>4</Text>
-        </View>
-        <View style = {styles.circle_green}>
-          <Text>Amis</Text>
-          <Text style = {{textAlign: "center"}}>16</Text>
-        </View>
-        <View style = {styles.circle_red} >
-          <Text>Collègue</Text>
-          <Text style = {{textAlign: "center"}}>26</Text>
-        </View>
+      <View flex row style={{justifyContent: 'space-around'}}>
+        <TouchableOpacity
+          onPress={goToTeamsSettings}
+        >
+          <View style = {styles.circle_blue}>
+            <Text>Famille</Text>
+            <Text style = {{textAlign: "center"}}>12</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={goToTeamsSettings}
+        >
+          <View style = {styles.circle_brown}>
+            <Text >Amis Proche</Text>
+            <Text style = {{textAlign: "center"}}>4</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={goToTeamsSettings}
+        >
+          <View style = {styles.circle_green}>
+            <Text>Amis</Text>
+            <Text style = {{textAlign: "center"}}>16</Text>
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={goToTeamsSettings}
+        >
+          <View style = {styles.circle_red} >
+            <Text>Collègue</Text>
+            <Text style = {{textAlign: "center"}}>26</Text>
+          </View>
         </TouchableOpacity>
       </View>
-    </>
+    </View>
   );
 };
 

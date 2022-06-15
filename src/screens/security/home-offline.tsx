@@ -35,32 +35,7 @@ export const HomeOffline: React.FC = observer(({}) => {
   const logoFull = Platform.OS === 'web' ? {uri: Assets.images.logos.logoFull}: Assets.images.logos.logoFull;
 
   return (
-    <>
-   <ReturnForwardComponent />
-   <CircleComponent />
-   </>
-  );
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
- <View flex bg-bgColor2 centerV>
+    <View flex bg-bgColor2 centerV>
       <View centerH flex centerV>
         <Image style={{height: 200, width: 300}} source={logoFull} />
         <Text text40 color={Colors.secondary} subtitle>{t.do('homeOffline.subtitle')}</Text>
@@ -85,7 +60,7 @@ export const HomeOffline: React.FC = observer(({}) => {
             style={{marginBottom: ButtonSpace, height: 45}}
             onPress={() => nav.push('Register')}
           />
-          {/* <Button 
+          <Button 
             backgroundColor="#FB3C62"
             color="#FFFFFF"
             labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
@@ -93,13 +68,20 @@ export const HomeOffline: React.FC = observer(({}) => {
             borderRadius={7}
             style={{height: 45, marginBottom: ButtonSpace}}
             onPress={() => nav.push('FeedIndex')}
-          /> */
-          
-          /*
-          </View>
-          <View centerH>
-            <Text>{t.do('homeOffline.footer.subtitle')}</Text>
-          </View>
-        </View>
-        
-*/
+          />
+          <Button 
+            backgroundColor="#FB3C62"
+            color="#FFFFFF"
+            labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
+            label="Allez au profile"
+            borderRadius={7}
+            style={{height: 45, marginBottom: ButtonSpace}}
+            onPress={() => nav.push('UserProfile')}
+          />
+      </View>
+      <View centerH>
+        <Text>{t.do('homeOffline.footer.subtitle')}</Text>
+      </View>
+    </View>
+  );
+});
