@@ -24,7 +24,7 @@ const TeamItem: React.FC<TeamItemProps> = ({team, onPress}: TeamItemProps) => {
 
   return (
     <Container>
-        <View style={{borderColor: team.color || 'blue', ...styles.circle}}>
+        <View style={StyleSheet.flatten([styles.circle, {borderColor: team.color || 'blue', ...styles.circle}])}>
             <Text style={styles.text}>{team.name}</Text>
             <Text style={styles.text}>{team.members}</Text>
         </View>
@@ -34,7 +34,7 @@ const TeamItem: React.FC<TeamItemProps> = ({team, onPress}: TeamItemProps) => {
 
 export default TeamItem;
 
-const styles = {
+const styles = StyleSheet.create({
     circle:{
         width: 70,
         height: 70,    
@@ -47,4 +47,4 @@ const styles = {
     text: {
         textAlign: 'center',
     }
-};
+});
