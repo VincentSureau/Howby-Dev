@@ -3,6 +3,34 @@ import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { Text, TouchableOpacity, View } from 'react-native-ui-lib';
 import { useServices } from '../../services';
+import TeamItem from '../team/team-item';
+
+const teams = [
+  {
+    id: 1,
+    color: 'blue',
+    name: 'Famille',
+    members: 12
+  },
+  {
+    id: 2,
+    color: 'brown',
+    name: 'Amis Proche',
+    members: 4
+  },
+  {
+    id: 3,
+    color: 'green',
+    name: 'Amis',
+    members: 16
+  },
+  {
+    id: 4,
+    color: 'red',
+    name: 'Collègues',
+    members: 26
+  }
+];
 
 const TeamProfileComponent = () => {
   const {nav, t, api} = useServices();
@@ -31,38 +59,7 @@ const TeamProfileComponent = () => {
       </View>
 
       <View flex row style={{justifyContent: 'space-around'}}>
-        <TouchableOpacity
-          onPress={goToTeamsSettings}
-        >
-          <View style = {styles.circle_blue}>
-            <Text>Famille</Text>
-            <Text style = {{textAlign: "center"}}>12</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={goToTeamsSettings}
-        >
-          <View style = {styles.circle_brown}>
-            <Text >Amis Proche</Text>
-            <Text style = {{textAlign: "center"}}>4</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={goToTeamsSettings}
-        >
-          <View style = {styles.circle_green}>
-            <Text>Amis</Text>
-            <Text style = {{textAlign: "center"}}>16</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={goToTeamsSettings}
-        >
-          <View style = {styles.circle_red} >
-            <Text>Collègue</Text>
-            <Text style = {{textAlign: "center"}}>26</Text>
-          </View>
-        </TouchableOpacity>
+        { teams.map(team => <TeamItem key={team.id} team={team} onPress={goToTeamsSettings} /> )}
       </View>
     </View>
   );
@@ -77,48 +74,6 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 20,
   },
-
-  circle_red:{
-    width: 70,
-    height: 70,    
-    borderWidth: 7,
-    borderRadius: 50,
-    fontSize: 50,
-    borderColor: "red",
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  circle_green:{
-    width: 70,
-    height: 70,
-    borderWidth: 7,
-    borderRadius: 50,
-    borderColor: "green",
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  circle_brown:{
-    width: 70,
-    height: 70,
-    borderWidth: 7,
-    borderRadius: 50,
-    fontSize: 50,
-    borderColor: "brown",
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  circle_blue:{
-    width: 70,
-    height: 70,
-    borderWidth: 7,
-    borderRadius: 50,
-    fontSize: 29,
-    borderColor: "blue",
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-
-  
 });
 
 export default TeamProfileComponent;
