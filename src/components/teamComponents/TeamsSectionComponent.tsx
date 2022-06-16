@@ -5,7 +5,7 @@ import CircleComponent from '../CircleComponent'
 const TeamsSectionComponent = () => {
   return (
     <View>
-        <CircleComponent />
+        
     </View>
   )
 }

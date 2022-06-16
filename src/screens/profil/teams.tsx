@@ -12,6 +12,7 @@ import {Section} from '../../components/section';
 import { BButton } from '../../components/button';
 import ReturnForwardComponent from '../../components/teamComponents/ReturnForwardComponent';
 import CircleComponent from '../../components/CircleComponent';
+import SearchByName from '../../components/SearchByName';
 
 const ButtonSpace = 20;
 
@@ -36,6 +37,7 @@ export const Teams: React.FC = observer(({}) => {
     <View flex bg-bgColor2>
       <ReturnForwardComponent />
       <CircleComponent />
+      <SearchByName />
     </View>
   );
 });

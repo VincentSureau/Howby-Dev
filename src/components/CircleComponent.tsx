@@ -31,13 +31,28 @@ const CircleComponent = ({}) => {
       color: 'red',
       name: 'Collègues',
       members: 26
+    },
+    {
+      id: 5,
+      color: 'red',
+      name: 'Conaissance',
+      members: 12
+    },
+    {
+      id: 6,
+      color: 'Yellow',
+      name: 'Clients',
+      members: 4
     }
   ];
 
   return (
-    <View flex row style = {{justifyContent: 'space-around'}}>
+    <>
+    <View flex row style = {{justifyContent: 'space-around', flexWrap: 'wrap', alignContent: "flex-start", marginLeft: 10, marginRight: 10, marginTop: 10}}>
       { teams.map(team => <TeamItem key={team.id} team={{...team, color: 'grey'}} />)}
     </View>
+
+    </>
   )
 }
 
