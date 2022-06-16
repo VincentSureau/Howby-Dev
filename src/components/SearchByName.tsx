@@ -22,10 +22,10 @@ const SearchByName = () => {
             </View>
         )
     }
-    const searchName = (input: string) => {
+    const searchName = (input) => {
         const data  = dataFromState;
         const searchData = data.filter((item) => {
-            return item.name;
+            return item.name.toLowerCase();
         });
         setData(searchData)
     }
