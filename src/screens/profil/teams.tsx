@@ -37,7 +37,7 @@ export const Teams: React.FC = observer(({}) => {
     <View flex bg-bgColor2>
       <ReturnForwardComponent />
       <CircleComponent />
-      <SearchByName />
+      <SearchByName contacts={[]} />
     </View>
   );
 });

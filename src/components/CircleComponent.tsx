@@ -48,7 +48,7 @@ const CircleComponent = ({}) => {
 
   return (
     <>
-    <View flex row style = {{justifyContent: 'space-around', flexWrap: 'wrap', alignContent: "flex-start", marginLeft: 10, marginRight: 10, marginTop: 10}}>
+    <View row style = {{justifyContent: 'space-around', flexWrap: 'wrap', alignContent: "flex-start", marginLeft: 10, marginRight: 10, marginTop: 10}}>
       { teams.map(team => <TeamItem key={team.id} team={{...team, color: 'grey'}} />)}
     </View>
 
