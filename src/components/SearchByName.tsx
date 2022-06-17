@@ -59,7 +59,7 @@ const SearchByName = ({contacts}: SearchByNameProps) => {
     return (
       <View style ={{marginBottom: 10}}>
         <Text style={{fontSize: 16,marginLeft: 10 }}>{item.name}</Text>
-        <Image>{item.icon}</Image>
+        <Image style = {{width: 20, height: 20}}>{item.icon}</Image>
       </View>
     );
   };
