@@ -70,19 +70,21 @@ const SearchByName = ({contacts}: SearchByNameProps) => {
 
     }
 
-    
+    const [focus, setFocus] = useState(false);
+    const customStyle = focus ? styles.TextInputFocus : styles.textInput;
   return (
-    <View>
+    <View style ={{padding: 10}}>
         <Text>Tout le monde </Text>
-        <View style = {styles.TextInput}>
+        <View style ={{marginBottom: 20}}>
             
             <TextInput 
                 placeholder = "Search Name"
                 onChangeText={(input)=>{
                     searchName(input)
                 }} 
-                underlineColorAndroid="transparent"
-                placeholderTextColor="gray"
+                onFocus={() => setFocus(true)}
+                style = {customStyle}
+                
                 
                 
                 
@@ -100,9 +102,24 @@ const SearchByName = ({contacts}: SearchByNameProps) => {
 }
 
 const styles = StyleSheet.create({
-    TextInput:{
-        padding: 10
-    }
+        TextInputFocus:{
+            backgroundColor: 'Transparent',
+            padding: 10,
+            borderColor: 'none',
+            borderBottomColor: 'gray',
+            borderBottomWidth: 1,
+            outlineStyle: 'none'
+            
+        },
+
+        textInput: {
+            backgroundColor: 'Transparent',
+            padding: 10,
+            borderBottomColor: 'gray',
+            borderBottomWidth: 1, 
+            
+        }
+
 })
 export default SearchByName
 
