@@ -105,16 +105,16 @@ const SearchByName = ({contacts}: SearchByNameProps) => {
 
 const styles = StyleSheet.create({
   TextInputFocus: {
-    backgroundColor: 'Transparent',
+    //backgroundColor: 'Transparent',
     padding: 10,
-    borderColor: 'none',
+    //borderColor: 'none',
     borderBottomColor: 'gray',
     borderBottomWidth: 1,
-    outlineStyle: 'none',
+    //outlineStyle: 'none',
   },
 
   textInput: {
-    backgroundColor: 'Transparent',
+    //backgroundColor: 'Transparent',
     padding: 10,
     borderBottomColor: 'gray',
     borderBottomWidth: 1,

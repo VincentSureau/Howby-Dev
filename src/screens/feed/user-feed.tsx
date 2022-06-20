@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {StyleSheet, Image, ScrollView, FlatList, ActivityIndicator} from 'react-native';
-import {View, Text, GridList} from 'react-native-ui-lib';
+import {View, Text,} from 'react-native-ui-lib';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {useServices} from '../../services';
 
@@ -11,6 +11,7 @@ import HeaderComponent from '../../components/userFeedComponents/HeaderComponent
 import MessageSectionComponent from '../../components/userFeedComponents/MessageSectionComponent';
 import PostSectionComponent from '../../components/userFeedComponents/PostSectionComponent';
 import BottomSectionComponent from '../../components/userFeedComponents/BottomSectionComponent';
+import Slider from '../../components/userFeedComponents/Slider'
 import { If } from '@kanzitelli/if-component';
 
 type UserFeedProps = {
@@ -189,6 +190,7 @@ export const UserFeed: React.FC<UserFeedProps> = ({company}: UserFeedProps) => {
   return (
     <View style={styles.container} paddingH-s2>
         <HeaderComponent />
+        <Slider />
         <View flex bg-bgColor paddingV-s2>
         <If
           _={loading}
