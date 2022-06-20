@@ -32,7 +32,27 @@ const Slider = () => {
             </View>
             <View style = {styles.Card}>
               <Image source = {{uri: "https://images.unsplash.com/photo-1655649681470-55de5aee913d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"}} style = {styles.ImageStory} />
+              <Image source = {{uri: "https://m.media-amazon.com/images/I/51Q0n2hJUiL._SX450_.jpg"}} style = {styles.ImageUser} />
+              <View style = {styles.CardFooter}>
+                  <Text style = {styles.TextFooter}>Clémentine</Text>
+                </View>
             </View>
+            <View style = {styles.Card}>
+              <Image source = {{uri: "https://images.unsplash.com/photo-1655649681470-55de5aee913d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"}} style = {styles.ImageStory} />
+              <Image source = {{uri: "https://m.media-amazon.com/images/I/51Q0n2hJUiL._SX450_.jpg"}} style = {styles.ImageUser} />
+              <View style = {styles.CardFooter}>
+                  <Text style = {styles.TextFooter}>Clémentine</Text>
+                </View>
+            </View>
+
+            <View style = {styles.Card}>
+              <Image source = {{uri: "https://images.unsplash.com/photo-1655705273978-3c5aae296870?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80"}} style = {styles.ImageStory} />
+              <Image source = {{uri: "https://www.bedetheque.com/media/Photos/Photo_97.jpg"}} style = {styles.ImageUser} />
+              <View style = {styles.CardFooter}>
+                  <Text style = {styles.TextFooter}>Arthur</Text>
+                </View>
+            </View>
+
           </ScrollView>
       </View>
     </>
