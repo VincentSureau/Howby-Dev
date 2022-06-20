@@ -9,146 +9,80 @@ import Animated from 'react-native-reanimated';
 import { Icon } from 'react-native-ui-lib';
 
 
-// dummy data
-const data = [...Array(20)].fill(0).map((_, index) => ({id: `item-${index}`}));
 
-// configs
-const ITEM_WIDTH = 90;
-const ITEM_HEIGHT = 150;
-const STICKY_ITEM_WIDTH = 24;
-const STICKY_ITEM_HEIGHT = 24;
-const STICKY_ITEM_BACKGROUNDS = ['#222', '#000'];
-const SEPARATOR_SIZE = 8;
-const BORDER_RADIUS = 10;
-
-const StickyItemView = ({
-  x,
-  threshold,
-  itemWidth,
-  itemHeight,
-  stickyItemWidth,
-  stickyItemHeight,
-  separatorSize,
-  isRTL,
-}) => {
-  const amazingAnimation = {
-
-    
-  };
-
-  return <Animated.View style={amazingAnimation} />;
-};
 
 const Slider = () => {
-  // methods
-  const handleStickyItemPress = () => Alert.alert('Sticky Item Pressed');
 
-  // render
-  const renderItem = ({item, index}) => (
-    <View
-      key={`item-${index}`}
-      style={{
-        backgroundColor: 'red',
-        width: ITEM_WIDTH,
-        height: ITEM_HEIGHT,
-      }}
-    />
-  );
   return (
     <>
-    <View>
-          <Animated.View style = {[styles.personal_card_container,{
-    
-          }]}
+      <View style = {styles.container}>
+          <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style = {{paddingLeft: 10 }}
           >
-            <Animated.View style = {[styles.image_container,{
-
-            }]}
-            >
-              <Image source = {{uri: "https://img.icons8.com/fluency/48/undefined/facebook-new.png"}}  style = {styles.image} />
-            </Animated.View>
-            <Animated.View style = {[styles.cta_container,{
-
-            }]}
-            >
-              <Animated.Text style = {[styles.text,{
-
-              }]}
-              >
-                Create {"\n"} story
-              </Animated.Text>
-              <Animated.View  style = {[styles.icon_contaier,]}
-              >
-                <Icon source ={{uri: "https://img.icons8.com/fluency/48/undefined/facebook-new.png"}} size= {18} color = {"#ffffff"}/>
-              </Animated.View>
-            </Animated.View>
-          </Animated.View>
-          
+            <View style = {styles.Card}>
+                <Image source = {{uri: "https://images.unsplash.com/photo-1605406575497-015ab0d21b9b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80"}} style = {styles.ImageStory} />
+                <View style = {styles.ImageUser}>
+                  <Icon source = {{uri: "https://img.icons8.com/ios/50/undefined/plus--v1.png"}} size = {30} tintColor = 'blue' />
+                </View>
+                <View style = {styles.CardFooter}>
+                  <Text style = {styles.TextFooter}>Ajouter {"\n"} une {"\n"} story</Text>
+                </View>
+            </View>
+            <View style = {styles.Card}>
+              <Image source = {{uri: "https://images.unsplash.com/photo-1655649681470-55de5aee913d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyN3x8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=60"}} style = {styles.ImageStory} />
+            </View>
+          </ScrollView>
       </View>
-      <StickyItemFlatList
-        itemWidth={ITEM_WIDTH}
-        itemHeight={ITEM_HEIGHT}
-        separatorSize={SEPARATOR_SIZE}
-        borderRadius={BORDER_RADIUS}
-        stickyItemWidth={STICKY_ITEM_WIDTH}
-        stickyItemHeight={STICKY_ITEM_HEIGHT}
-        stickyItemBackgroundColors={STICKY_ITEM_BACKGROUNDS}
-        stickyItemContent={StickyItemView}
-        onStickyItemPress={handleStickyItemPress}
-        data={data}
-        renderItem={renderItem}
-      />
-      
     </>
-  );
-};
+  )
+}
 
-const styles = StyleSheet.create({
-  personal_card_container: {
-    backgroundColor: '#fff',
-    position: 'absolute',
-    zIndex: 10,
-    elevation: 10,
-    borderTopRightRadius: 16,
-    borderBottomRightRadius: 16,
-    overflow: 'hidden',
-    borderWidth: 1,
-    borderColor: '#cccccc',
-  },
-
-  image_container:{
-    position: 'relative',
-    overflow: 'hidden'
-  },
-
-  image: {
-    flex: 1,
-    width: 0,
-    height: 0,
-  },
-
-  cta_container: {
-    position: 'relative',
-
-  },
-
-  text: {
-    textAlign: 'center',
-    fontSize: 14,
-    fontWeight: 'bold'
-  },
-  icon_contaier: {
-    width: 32,
-    height: 32,
-    borderRadius: 32,
-    backgroundColor: '#3578e5',
-    position: 'absolute',
-    borderWidth: 3,
-    borderColor: '#FFF',
+const styles = StyleSheet.create ({
+  container : {
+    width: '100%',
+    height: 190,
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'center'
-  }
-});
+  },
+  Card: {
+    width: 100,
+    height: 170,
+    position: 'relative',
+    marginRight: 8
+  },
+  ImageStory: {
+    width: '100%',
+    height: 170,
+    borderRadius: 10
+  },
+  ImageUser: {
+    position: 'absolute',
+    top: 8,
+    left: 9,
+    backgroundColor: '#ffffff',
+    borderRadius: 20,
+    width: 30,
+    height: 30,
+    alignItems: 'center',
+    justifyContent:'center',
+},
 
+CardFooter:{
+    width: '100%',
+    position: "absolute",
+    bottom: 10,
+    left: 10
+
+},
+
+  TextFooter: {
+    fontSize: 13,
+    fontWeight: 'bold',
+    color: '#fff',
+     
+}
+
+})
 export default Slider;
