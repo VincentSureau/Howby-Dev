@@ -54,6 +54,10 @@ export class Nav implements IService {
     this.navigate(name, passProps);
   };
 
+  goToTab = <T extends keyof ScreenProps>(name: T, passProps?: ScreenProps[T]): void => {
+    this.navigate(name, passProps);
+  };
+
   private navigate = <T extends keyof ScreenProps>(name: T, passProps?: ScreenProps[T]): void => {
     this.n.current?.dispatch(
       CommonActions.navigate({
