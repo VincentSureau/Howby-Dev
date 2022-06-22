@@ -1,11 +1,11 @@
 import {View, Text, ScrollView, Image, StyleSheet, Alert} from 'react-native';
 import React from 'react';
-import {IMAGES} from '../../data/Images';
+
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import StickyItemFlatList from '@gorhom/sticky-item';
-import Animated from 'react-native-reanimated';
+//import StickyItemFlatList from '@gorhom/sticky-item';
+//import Animated from 'react-native-reanimated';
 import { Icon } from 'react-native-ui-lib';
 
 
