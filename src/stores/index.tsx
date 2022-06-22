@@ -5,12 +5,14 @@ import {UIStore} from './ui';
 import {CounterStore} from './counter';
 import {CompanyStore} from './company';
 import { CompanySingleStore } from './company-single';
+import { RecordStore } from './record';
 
 export const stores = {
   ui: new UIStore(),
   counter: new CounterStore(),
   company: new CompanyStore(),
   companySingle: new CompanySingleStore(),
+  record: new RecordStore(),
 };
 type ContextStores = typeof stores;
 

@@ -18,11 +18,12 @@ import { HomeOffline } from './security/home-offline';
 import { UserProfile } from './feed/user-profile';
 import { UserFeed } from './feed/user-feed';
 import { Teams } from './profil/teams';
+import { SaveStory } from './story/save-story';
 
 // Describe your screens here
-export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'Story' | 'Notification';
+export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'StoryNavigator' | 'Notification';
 export type Modal = 'ExampleModal';
-export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile' | 'Teams';
+export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'SaveStory' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile' | 'Teams' ;
 
 export type ModalProps = {
   ExampleModal: undefined;
@@ -37,6 +38,10 @@ export type ScreenProps = {
   Chat: undefined;
   Search: undefined;
   Story: undefined;
+  NewStory: undefined;
+  SaveStory: {
+    record: string;
+  };
   Notification: undefined;
   FeedDetails: {
     companyId: string;
@@ -113,7 +118,17 @@ const loggedScreen = {
     options: () => ({
       title: 'Story',
       ...screenDefaultOptions(),
+      headerShown: false,
     }),
+  },
+  SaveStory: {
+    name: 'SaveStory',
+    component: SaveStory,
+    options: () => ({
+      title: 'Save Story',
+      ...screenDefaultOptions(),
+      headerShown: false,
+    })
   },
   Notification: {
     name: 'Notification',
@@ -184,10 +199,10 @@ const screens: ScreenLayouts = {
 
 const SettingsStack = () => genStackNavigator([screens.Settings, screens.Teams]);
 const ExampleModalStack = () => genStackNavigator([screens.Example]);
-const FeedStack = () => genStackNavigator([screens.HomeOffline, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails, screens.UserProfile, screens.UserFeed, screens.Teams]);
+const FeedStack = () => genStackNavigator([screens.HomeOffline, screens.Story, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails, screens.UserProfile, screens.UserFeed, screens.Teams]);
 const ChatStack = () => genStackNavigator([screens.ChatHome]);
 const SearchStack = () => genStackNavigator([screens.Search]);
-const StoryStack = () => genStackNavigator([screens.NewStory]);
+const StoryStack = () => genStackNavigator([screens.NewStory, screens.SaveStory, screens.FeedIndex]);
 const NotificationStack = () => genStackNavigator([screens.Notification, screens.Example]);
 
 // Tabs
@@ -216,12 +231,13 @@ const tabs: TabScreenLayouts = {
       ...tabBarDefaultOptions('SearchNavigator'),
     }),
   },
-  Story: {
+  StoryNavigator: {
     name: 'StoryNavigator',
     component: StoryStack,
     options: () => ({
       title: 'Story',
       ...tabBarDefaultOptions('StoryNavigator'),
+      headerShown: false,
     }),
   },
   Notification: {
@@ -242,7 +258,7 @@ const tabs: TabScreenLayouts = {
   },
 };
 
-const TabNavigator = () => genTabNavigator([tabs.Feed, tabs.Chat, tabs.Search, tabs.Story, tabs.Notification, tabs.Settings]);
+const TabNavigator = () => genTabNavigator([tabs.Feed, tabs.Chat, tabs.Search, tabs.StoryNavigator, tabs.Notification, tabs.Settings]);
 
 // Modals
 const modals: ModalScreenLayouts = {

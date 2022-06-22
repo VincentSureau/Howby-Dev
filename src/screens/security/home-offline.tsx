@@ -78,7 +78,7 @@ export const HomeOffline: React.FC = observer(({}) => {
             style={{height: 45, marginBottom: ButtonSpace}}
             onPress={() => nav.push('UserProfile')}
           />
-                    <Button 
+          <Button 
             backgroundColor="#FB3C62"
             color="#FFFFFF"
             labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
@@ -86,6 +86,15 @@ export const HomeOffline: React.FC = observer(({}) => {
             borderRadius={7}
             style={{height: 45, marginBottom: ButtonSpace}}
             onPress={() => nav.push('UserFeed')}
+          />
+          <Button 
+            backgroundColor="#FB3C62"
+            color="#FFFFFF"
+            labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
+            label="Allez a story"
+            borderRadius={7}
+            style={{height: 45, marginBottom: ButtonSpace}}
+            onPress={() => nav.push('Story')}
           />
       </View>
       <View centerH>
