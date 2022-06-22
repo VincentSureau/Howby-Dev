@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import Ionicons from "react-native-vector-icons/Ionicons";
 
 import { MESSAGES } from "../../data/Messages";
-import { USERS } from "../../data/Users";
 
 
 

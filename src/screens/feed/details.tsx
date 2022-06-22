@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from 'react';
-import {ScrollView, Alert, ActivityIndicator, StyleSheet, StatusBar, FlatList} from 'react-native';
-import {View, Text} from 'react-native-ui-lib';
+import {Alert, ActivityIndicator, StyleSheet, StatusBar} from 'react-native';
+import {View} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
 import axios, { CancelTokenSource } from 'axios';

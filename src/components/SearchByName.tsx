@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 import {TextInput, Alert, FlatList, StyleSheet, SafeAreaView} from 'react-native';
-import {useCallback, useEffect, useRef, useState} from 'react';
-import {isNotEmptyArray} from '@formiz/validations';
+import {useCallback, useEffect, useState} from 'react';
 import {Image, Text, View} from 'react-native-ui-lib';
 
 

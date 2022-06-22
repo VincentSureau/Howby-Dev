@@ -1,12 +1,54 @@
 import React from 'react';
-import { StyleSheet, StatusBar, Image, Pressable } from 'react-native';
-import { View, Text, TouchableOpacity } from 'react-native-ui-lib';
+import { StyleSheet, Image, Pressable } from 'react-native';
+import { View, Text } from 'react-native-ui-lib';
 import { useServices } from '../../services';
 import { Icon } from './../icon';
+
 
 type CompanyDetailsProps = {
   company: any;
 };
+
+const users = [
+  {
+      id: 1,
+      name: 'Matthieu B',
+      image: '../../assets/icons/person-circle.svg',
+      
+
+  },
+  {
+      id: 2,
+      name: 'le Bla Bar',
+      image: '../../assets/icons/person-circle.svg'
+  },
+  {
+      id: 3,
+      name: 'david Hawkins',
+      image: '../../assets/icons/person-circle.svg'
+  },
+  {
+      id: 4,
+      name: 'Clémentine',
+      image: 'https://m.media-amazon.com/images/I/51Q0n2hJUiL._SX450_.jpg'
+  },
+  {
+      id: 5,
+      name: 'Arthur C',
+      image: 'https://www.programme-tv.net/imgre/fit/~2~providerPerson~c29dbd11e624b01a.jpeg/300x300/quality/80/arthur.jpeg'
+  },
+  {
+      id: 6,
+      name: 'Léo',
+      image: 'https://www.bedetheque.com/media/Photos/Photo_97.jpg'
+  },
+  {
+      id: 7,
+      name: 'dams',
+      image: '../../assets/icons/person-circle.svg'
+  }
+]
+
 
 export const CompanyDetails: React.FC<CompanyDetailsProps> = ({company}: CompanyDetailsProps) => {
   const {nav, t, api} = useServices();
@@ -15,8 +57,13 @@ export const CompanyDetails: React.FC<CompanyDetailsProps> = ({company}: Company
     <View style={styles.container}>
       <View style={styles.inline}>
         <Icon name="person-circle" size={30} />
-        <Text style={{ marginLeft: 10 }}>Prénom et nom</Text>
+        <Text></Text>
+        
       </View>
+
+
+
+
       <View style={styles.inline}>
         <View>
           <Image

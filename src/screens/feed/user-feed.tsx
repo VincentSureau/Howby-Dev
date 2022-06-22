@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import {StyleSheet, Image, ScrollView, FlatList, ActivityIndicator} from 'react-native';
-import {View, Text} from 'react-native-ui-lib';
-import Icon from 'react-native-vector-icons/Ionicons';
+import {StyleSheet, ScrollView, FlatList, ActivityIndicator} from 'react-native';
+import {View} from 'react-native-ui-lib';
 import {useServices} from '../../services';
 
 import PostCard, { PostType } from '../../components/post/post-card';
 
 // User Feed components
 import HeaderComponent from '../../components/userFeedComponents/HeaderComponent';
-import MessageSectionComponent from '../../components/userFeedComponents/MessageSectionComponent';
-import PostSectionComponent from '../../components/userFeedComponents/PostSectionComponent';
-import BottomSectionComponent from '../../components/userFeedComponents/BottomSectionComponent';
 import StoriesSlider from '../../components/userFeedComponents/StoriesSlider'
 import { If } from '@kanzitelli/if-component';
 

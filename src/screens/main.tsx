@@ -57,7 +57,7 @@ export const Main: React.FC = observer(({}) => {
           <Section title="MobX">
             <View centerV>
               <Text marginB-s2 text60R textColor>
-                App launches: {ui.appLaunches}
+                hoyApp launchesWtf: {ui.appLaunches}
               </Text>
               <Text marginB-s2 text60R textColor>
                 Counter:{' '}
@@ -78,7 +78,7 @@ export const Main: React.FC = observer(({}) => {
           </Section>
 
           <Text textColor center>
-            localized with i18n-js
+            yououlocalized with i18n-js
           </Text>
         </View>
       </ScrollView>
