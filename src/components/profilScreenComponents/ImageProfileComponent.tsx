@@ -1,4 +1,4 @@
-import { View, StyleSheet, Platform,Text } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import React from 'react'
 import { Image, } from 'react-native-ui-lib'
 import { LinearGradient } from 'expo-linear-gradient';

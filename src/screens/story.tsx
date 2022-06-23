@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from 'react';
-import {ScrollView, Alert, ActivityIndicator, StyleSheet} from 'react-native';
-import {View, Text} from 'react-native-ui-lib';
+import {ScrollView, Alert, ActivityIndicator, StyleSheet, Image} from 'react-native';
+import {View, Text, Icon} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
 
@@ -13,7 +13,7 @@ import {randomNum} from '../utils/help';
 import {BButton} from '../components/button';
 
 //import icons
-import {Icons} from '../data/Icons';
+import Icons from '../data/Icons';
 
 export const Story: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -31,44 +31,155 @@ export const Story: React.FC = observer(({}) => {
     start();
   }, []);
 
-  const Header = () => {
+  const HeaderSection = () => {
     return (
       <>
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <Text style={{color: '#E6AB78', fontWeight: 'bold', fontSize: 18}}>Prénom Nom </Text>
           <Text style={{fontWeight: 'bold', fontSize: 18}}>Age</Text>
         </View>
-        <View style = {{justifyContent: 'center', flexDirection: "row", marginTop: 20}}>
+        <View style={{justifyContent: 'center', flexDirection: 'row', marginTop: 20}}>
           <Text>Conseiller commercial automobile</Text>
+          <Text></Text>
+        </View>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Image
+              source={require('../../assets/icons/redheart.png')}
+              style={{
+                width: 50,
+                height: 50,
+                backgroundColor: '#000',
+                padding: 10,
+                borderRadius: 50,
+                borderWidth: 1,
+                borderColor: '#000',
+                marginRight: 10,
+              }}
+            />
+            <Image
+              source={require('../../assets/icons/house.png')}
+              style={{
+                width: 50,
+                height: 50,
+                backgroundColor: '#000',
+                padding: 10,
+                borderRadius: 50,
+                borderWidth: 1,
+                borderColor: '#000',
+                marginRight: 10,
+              }}
+            />
+            <Text>location</Text>
+          </View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Text>1/06/1997</Text>
+            <Image
+              source={require('../../assets/icons/cake.png')}
+              style={{
+                width: 50,
+                height: 50,
+                backgroundColor: '#000',
+                padding: 10,
+                borderRadius: 50,
+                borderWidth: 1,
+                borderColor: '#000',
+                marginLeft: 10,
+              }}
+            />
+          </View>
+        </View>
+      </>
+    );
+  };
+
+  const InterestSection = () => {
+    return (
+      <>
+        <View style={{borderTopColor: '#000', borderTopWidth: 1, marginTop: 10, paddingTop: 10}}>
+          <Text style={{color: 'red', fontWeight: 'bold', fontSize: 16}}>Centre d'intérêts</Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            justifyContent: 'flex-start',
+            marginTop: 10,
+            marginBottom: 10,
+          }}
+        >
+          {Icons.map((img, index) => (
+            <View key={index} style={{marginRight: 10, marginBottom: 15}}>
+              <Image source={{uri: img.img}} style={styles.icons} />
+              <Text style={{fontSize: 12, textAlign: 'center'}}>{img.name}</Text>
+            </View>
+          ))}
+        </View>
+      </>
+    );
+  };
+
+  const Equipment = () => {
+    return (
+      <>
+        <View style ={{ borderBottomColor: '#000',borderBottomWidth: 1, marginBottom: 10, paddingBottom: 10}}>
+          <View>
+            <Text
+              style={{
+                color: 'red',
+                fontWeight: 'bold',
+                fontSize: 16,
+
+                marginTop: 10,
+                paddingTop: 10,
+              }}
+            >
+              Equipements sportif
+            </Text>
+          </View>
+          <View
+            style={{
+              flexDirection: 'row',
+              flexWrap: 'wrap',
+              justifyContent: 'flex-start',
+              marginTop: 10,
+            }}
+          >
+            {Icons.map((img, index) => (
+              <View key={index} style={{marginRight: 5}}>
+                <Image source={{uri: img.img}} style={styles.icons} />
+                <Text style={{fontSize: 12, textAlign: 'center'}}>{img.name}</Text>
+              </View>
+            ))}
+          </View>
         </View>
       </>
     );
   };
 
   return (
-    <View style={style.container}>
-      <ScrollView>
-        <Header />
-        <View>
-          <Text>Profession</Text>
-        </View>
-        <View>
-          <View>
-            <Text>IconHeart</Text>
-            <Text>IconHouse</Text>
-          </View>
-          <View>
-            <Text>DOB</Text>
-          </View>
-        </View>
-      </ScrollView>
-    </View>
+    <>
+      <View style={styles.container}>
+        <ScrollView>
+          <HeaderSection />
+          <InterestSection />
+          <Equipment />
+        </ScrollView>
+      </View>
+    </>
   );
 });
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     margin: 10,
+  },
+  icons: {
+    width: 50,
+    height: 50,
+    borderRadius: 50,
+    borderColor: '#000',
+    borderWidth: 1,
   },
 });
 /*  <View flex bg-bgColor>
