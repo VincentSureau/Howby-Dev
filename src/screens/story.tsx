@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect} from 'react';
-import {ScrollView, Alert, ActivityIndicator} from 'react-native';
+import {ScrollView, Alert, ActivityIndicator, StyleSheet} from 'react-native';
 import {View, Text} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
@@ -11,6 +11,9 @@ import {Section} from '../components/section';
 import {Reanimated2} from '../components/reanimated2';
 import {randomNum} from '../utils/help';
 import {BButton} from '../components/button';
+
+//import icons
+import {Icons} from '../data/Icons';
 
 export const Story: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -28,60 +31,99 @@ export const Story: React.FC = observer(({}) => {
     start();
   }, []);
 
+  const Header = () => {
+    return (
+      <>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+          <Text style={{color: '#E6AB78', fontWeight: 'bold', fontSize: 18}}>Prénom Nom </Text>
+          <Text style={{fontWeight: 'bold', fontSize: 18}}>Age</Text>
+        </View>
+        <View style = {{justifyContent: 'center', flexDirection: "row", marginTop: 20}}>
+          <Text>Conseiller commercial automobile</Text>
+        </View>
+      </>
+    );
+  };
+
   return (
-    <View flex bg-bgColor>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <View padding-s4>
-          <Section title={t.do('section.navigation.title')}>
-            <BButton
-              marginV-s1
-              label={t.do('section.navigation.button.push')}
-              onPress={() => nav.push('Example', {value: randomNum()})}
-            />
-            <BButton
-              marginV-s1
-              label={t.do('section.navigation.button.show')}
-              onPress={() => nav.show('ExampleModal')}
-            />
-            <BButton
-              marginV-s1
-              label={t.do('section.navigation.button.sharedTransition')}
-              onPress={() => Alert.alert('future feature: shared transition')}
-            />
-          </Section>
-
-          <Section title="Reanimated 2">
-            <Reanimated2 stID="reanimated2" />
-          </Section>
-
-          <Section title="MobX">
-            <View centerV>
-              <Text marginB-s2 text60R textColor>
-                App launches: {ui.appLaunches}
-              </Text>
-              <Text marginB-s2 text60R textColor>
-                Counter:{' '}
-                <If
-                  _={counter.loading}
-                  _then={() => <ActivityIndicator />}
-                  _else={<Text>{counter.value}</Text>}
-                />
-              </Text>
-              <BButton margin-s1 label="-" onPress={counter.dec} />
-              <BButton margin-s1 label="+" onPress={counter.inc} />
-              <BButton margin-s1 label="reset" onPress={counter.reset} />
-            </View>
-          </Section>
-
-          <Section title="API">
-            <BButton margin-s1 label="Update counter value from API" onPress={api.counter.get} />
-          </Section>
-
-          <Text textColor center>
-            localized with i18n-js
-          </Text>
+    <View style={style.container}>
+      <ScrollView>
+        <Header />
+        <View>
+          <Text>Profession</Text>
+        </View>
+        <View>
+          <View>
+            <Text>IconHeart</Text>
+            <Text>IconHouse</Text>
+          </View>
+          <View>
+            <Text>DOB</Text>
+          </View>
         </View>
       </ScrollView>
     </View>
   );
 });
+
+const style = StyleSheet.create({
+  container: {
+    margin: 10,
+  },
+});
+/*  <View flex bg-bgColor>
+<ScrollView contentInsetAdjustmentBehavior="automatic">
+<View padding-s4>
+  <Section title={t.do('section.navigation.title')}>
+    <BButton
+      marginV-s1
+      label={t.do('section.navigation.button.push')}
+      onPress={() => nav.push('Example', {value: randomNum()})}
+    />
+    <BButton
+      marginV-s1
+      label={t.do('section.navigation.button.show')}
+      onPress={() => nav.show('ExampleModal')}
+    />
+    <BButton
+      marginV-s1
+      label={t.do('section.navigation.button.sharedTransition')}
+      onPress={() => Alert.alert('future feature: shared transition')}
+    />
+  </Section>
+
+  <Section title="Reanimated 2">
+    <Reanimated2 stID="reanimated2" />
+  </Section>
+
+  <Section title="MobX">
+    <View centerV>
+      <Text marginB-s2 text60R textColor>
+        App laujfdhfjdnches: {ui.appLaunches}
+      </Text>
+      <Text marginB-s2 text60R textColor>
+        Counter:{' '}
+        <If
+          _={counter.loading}
+          _then={() => <ActivityIndicator />}
+          _else={<Text>{counter.value}</Text>}
+        />
+      </Text>
+      <BButton margin-s1 label="-" onPress={counter.dec} />
+      <BButton margin-s1 label="+" onPress={counter.inc} />
+      <BButton margin-s1 label="reset" onPress={counter.reset} />
+    </View>
+  </Section>
+
+  <Section title="API">
+    <BButton margin-s1 label="Update counter value from API" onPress={api.counter.get} />
+  </Section>
+
+  <Text textColor center>
+    localized with i18n-js
+  </Text>
+</View>
+</ScrollView>
+</View>
+
+*/
