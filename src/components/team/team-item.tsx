@@ -1,8 +1,6 @@
-import te from 'date-fns/esm/locale/te/index.js';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { View, Text, TouchableOpacity } from 'react-native-ui-lib';
-import { useServices } from '../../services';
 
 export type TeamType = {
   id: number;
