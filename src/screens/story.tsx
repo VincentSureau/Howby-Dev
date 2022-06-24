@@ -172,74 +172,129 @@ export const Story: React.FC = observer(({}) => {
   const Review = () => {
     return (
       <View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/inside.png')}
-            style={{width: 40, height: 40,  marginRight: 10}}
+            style={{
+              width: 40,
+              height: 40,
+              marginRight: 10,
+              padding: 10,
+              borderRadius: 50,
+              borderWidth: 1,
+              borderColor: '#000'
+            }}
           />
           <View>
             <Text> Nombre d'activités effectuées en intérieur</Text>
-            <Text>17</Text>
+            <Text  style = {{fontWeight: 'bold', fontSize: 16}}>17</Text>
           </View>
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/outside.png')}
-            style={{width: 40, height: 40,  marginRight: 10}}
+            style={{
+              width: 40,
+              height: 40,
+              marginRight: 10,
+              padding: 10,
+              borderRadius: 50,
+              borderWidth: 1,
+              borderColor: '#000'
+            }}
           />
           <View>
             <Text> Nombre d'activités effectuées en extérieur</Text>
-            <Text>17</Text>
+            <Text  style = {{fontWeight: 'bold', fontSize: 16}}>17</Text>
           </View>
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/outside2.png')}
-            style={{width: 40, height: 40,  marginRight: 10}}
+            style={{
+              width: 40,
+              height: 40,
+              marginRight: 10,
+              padding: 10,
+              borderRadius: 50,
+              borderWidth: 1,
+              borderColor: '#000'
+            }}
           />
           <View>
             <Text> Nombre de sorties</Text>
-            <Text>47</Text>
+            <Text  style = {{fontWeight: 'bold', fontSize: 16}}>47</Text>
           </View>
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/home.png')}
-            style={{width: 40, height: 40,  marginRight: 10}}
+            style={{
+              width: 40,
+              height: 40,
+              marginRight: 10,
+              padding: 10,
+              borderRadius: 50,
+              borderWidth: 1,
+              borderColor: '#000'
+            }}
           />
           <View>
             <Text> Nombre d'activités effectuées à domicile</Text>
-            <Text>21</Text>
+            <Text  style = {{fontWeight: 'bold', fontSize: 16}}>21</Text>
           </View>
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/companies.png')}
-            style={{width: 40, height: 40,  marginRight: 10}}
+            style={{
+              width: 40,
+              height: 40,
+              marginRight: 10,
+              padding: 10,
+              borderRadius: 50,
+              borderWidth: 1,
+              borderColor: '#000'
+            }}
           />
           <View>
             <Text> Nombre d'entreprises auxquelles vous avez fait appel</Text>
-            <Text>70</Text>
+            <Text  style = {{fontWeight: 'bold', fontSize: 16}}>70</Text>
           </View>
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/organisations.png')}
-            style={{width: 40, height: 40,  marginRight: 10}}
+            style={{
+              width: 40,
+              height: 40,
+              marginRight: 10,
+              padding: 10,
+              borderRadius: 50,
+              borderWidth: 1,
+              borderColor: '#000'
+            }}
           />
           <View>
             <Text> Nombre d'organisations effectuées</Text>
-            <Text>45</Text>
+            <Text  style = {{fontWeight: 'bold', fontSize: 16}}>45</Text>
           </View>
         </View>
-        <View style={{flexDirection: 'row'}}>
+        <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/reward.png')}
-            style={{width: 40, height: 40, marginRight: 10}}
+            style={{
+              width: 40,
+              height: 40,
+              marginRight: 10,
+              borderRadius: 50,
+              borderWidth: 1,
+              borderColor: '#000'
+            }}
           />
           <View>
             <Text> Nombre de récompenses obtenues</Text>
-            <Text>3</Text>
+            <Text style = {{fontWeight: 'bold', fontSize: 16}}>3</Text>
           </View>
         </View>
       </View>
