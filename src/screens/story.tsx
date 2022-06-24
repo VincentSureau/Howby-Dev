@@ -31,6 +31,8 @@ export const Story: React.FC = observer(({}) => {
     start();
   }, []);
 
+  // section Header
+
   const HeaderSection = () => {
     return (
       <>
@@ -92,6 +94,7 @@ export const Story: React.FC = observer(({}) => {
       </>
     );
   };
+  // section Centre d'intérêt
 
   const InterestSection = () => {
     return (
@@ -119,17 +122,24 @@ export const Story: React.FC = observer(({}) => {
     );
   };
 
+  // Section Equipement sportif
   const Equipment = () => {
     return (
       <>
-        <View style ={{ borderBottomColor: '#000',borderBottomWidth: 1, marginBottom: 10, paddingBottom: 10}}>
+        <View
+          style={{
+            borderBottomColor: '#000',
+            borderBottomWidth: 1,
+            marginBottom: 10,
+            paddingBottom: 10,
+          }}
+        >
           <View>
             <Text
               style={{
                 color: 'red',
                 fontWeight: 'bold',
                 fontSize: 16,
-
                 marginTop: 10,
                 paddingTop: 10,
               }}
@@ -141,7 +151,7 @@ export const Story: React.FC = observer(({}) => {
             style={{
               flexDirection: 'row',
               flexWrap: 'wrap',
-              justifyContent: 'flex-start',
+              justifyContent: 'space-between',
               marginTop: 10,
             }}
           >
@@ -157,6 +167,85 @@ export const Story: React.FC = observer(({}) => {
     );
   };
 
+  // section review
+
+  const Review = () => {
+    return (
+      <View>
+        <View style={{flexDirection: 'row'}}>
+          <Image
+            source={require('../../assets/icons/icones/inside.png')}
+            style={{width: 40, height: 40,  marginRight: 10}}
+          />
+          <View>
+            <Text> Nombre d'activités effectuées en intérieur</Text>
+            <Text>17</Text>
+          </View>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Image
+            source={require('../../assets/icons/icones/outside.png')}
+            style={{width: 40, height: 40,  marginRight: 10}}
+          />
+          <View>
+            <Text> Nombre d'activités effectuées en extérieur</Text>
+            <Text>17</Text>
+          </View>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Image
+            source={require('../../assets/icons/icones/outside2.png')}
+            style={{width: 40, height: 40,  marginRight: 10}}
+          />
+          <View>
+            <Text> Nombre de sorties</Text>
+            <Text>47</Text>
+          </View>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Image
+            source={require('../../assets/icons/icones/home.png')}
+            style={{width: 40, height: 40,  marginRight: 10}}
+          />
+          <View>
+            <Text> Nombre d'activités effectuées à domicile</Text>
+            <Text>21</Text>
+          </View>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Image
+            source={require('../../assets/icons/icones/companies.png')}
+            style={{width: 40, height: 40,  marginRight: 10}}
+          />
+          <View>
+            <Text> Nombre d'entreprises auxquelles vous avez fait appel</Text>
+            <Text>70</Text>
+          </View>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Image
+            source={require('../../assets/icons/icones/organisations.png')}
+            style={{width: 40, height: 40,  marginRight: 10}}
+          />
+          <View>
+            <Text> Nombre d'organisations effectuées</Text>
+            <Text>45</Text>
+          </View>
+        </View>
+        <View style={{flexDirection: 'row'}}>
+          <Image
+            source={require('../../assets/icons/icones/reward.png')}
+            style={{width: 40, height: 40, marginRight: 10}}
+          />
+          <View>
+            <Text> Nombre de récompenses obtenues</Text>
+            <Text>3</Text>
+          </View>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -164,6 +253,7 @@ export const Story: React.FC = observer(({}) => {
           <HeaderSection />
           <InterestSection />
           <Equipment />
+          <Review />
         </ScrollView>
       </View>
     </>
