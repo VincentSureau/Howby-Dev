@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect} from 'react';
 import {ScrollView, Alert, StyleSheet, Image, TextInput, SafeAreaView} from 'react-native';
-import {View, Text} from 'react-native-ui-lib';
+import {View, Text, GridView} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 
 import {useServices} from '../services';
@@ -9,7 +9,7 @@ import {useStores} from '../stores';
 //import icons
 import Icons from '../data/Icons';
 import {Ionicons} from '@expo/vector-icons';
-import { FlatList } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export const Story: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -232,30 +232,7 @@ export const Story: React.FC = observer(({}) => {
     );
   };
 
-  const DATA = [
-    {
-      id: '3',
-      img: 'https://img.icons8.com/ios-glyphs/30/000000/mountain.png',
-    },
-    {
-      id: '2',
-      img: 'https://img.icons8.com/ios-glyphs/30/000000/mountain.png',
-    },
-    {
-      id: '1',
-      img: 'https://img.icons8.com/ios-glyphs/30/000000/mountain.png',
-    },
-  ];
-  const Item = ({ img }) => (
-    <View style={styles.icons}>
-      <Text style={styles.title}>{img}</Text>
-    </View>
-  );
-
   const Search = () => {
-    const renderItem = ({ item }) => (
-      <Item img ={item.img} />
-    )
     return (
       <>
         <View>
@@ -271,16 +248,18 @@ export const Story: React.FC = observer(({}) => {
             Centres d'intérêts
           </Text>
         </View>
-    
-        
-        <Ionicons name ="search-outline" size={30} />
-        <TextInput />
-        <FlatList 
-                 data = {DATA}
-                 renderItem = {renderItem}
-                 keyExtractor={item => item.id}
-                 />
-        
+        <View>
+          <Ionicons name="search-outline" size={30} />
+          <TextInput />
+
+          {Icons.map((img, index) => (
+            <View key={index}>
+              <TouchableOpacity>
+                <Image source={{uri: img.img}} style={styles.icons} />
+              </TouchableOpacity>
+            </View>
+          ))}
+        </View>
       </>
     );
   };
@@ -293,13 +272,9 @@ export const Story: React.FC = observer(({}) => {
           <InterestSection />
           <Equipment />
           <Review />
-          
+          <Search />
         </ScrollView>
-        <Search />
       </View>
-      
-      
-      
     </>
   );
 });
