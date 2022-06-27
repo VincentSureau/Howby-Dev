@@ -1,16 +1,18 @@
 import React, {useCallback, useEffect} from 'react';
-import {ScrollView, Alert, ActivityIndicator, StyleSheet, Image} from 'react-native';
-import {View, Text, Icon} from 'react-native-ui-lib';
+import {
+  ScrollView,
+  Alert,
+  StyleSheet,
+  Image,
+  TextInput,
+  SafeAreaView,
+} from 'react-native';
+import {View, Text} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
-import {If} from '@kanzitelli/if-component';
 
 import {useServices} from '../services';
 import {useStores} from '../stores';
 
-import {Section} from '../components/section';
-import {Reanimated2} from '../components/reanimated2';
-import {randomNum} from '../utils/help';
-import {BButton} from '../components/button';
 
 //import icons
 import Icons from '../data/Icons';
@@ -100,7 +102,7 @@ export const Story: React.FC = observer(({}) => {
     return (
       <>
         <View style={{borderTopColor: '#000', borderTopWidth: 1, marginTop: 10, paddingTop: 10}}>
-          <Text style={{color: 'red', fontWeight: 'bold', fontSize: 16}}>Centre d'intérêts</Text>
+          <Text style={styles.title}>Centre d'intérêts</Text>
         </View>
         <View
           style={{
@@ -136,13 +138,7 @@ export const Story: React.FC = observer(({}) => {
         >
           <View>
             <Text
-              style={{
-                color: 'red',
-                fontWeight: 'bold',
-                fontSize: 16,
-                marginTop: 10,
-                paddingTop: 10,
-              }}
+              style={styles.title}
             >
               Equipements sportif
             </Text>
@@ -175,129 +171,99 @@ export const Story: React.FC = observer(({}) => {
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/inside.png')}
-            style={{
-              width: 40,
-              height: 40,
-              marginRight: 10,
-              padding: 10,
-              borderRadius: 50,
-              borderWidth: 1,
-              borderColor: '#000'
-            }}
+            style={styles.reviewSectionIcons}
           />
           <View>
             <Text> Nombre d'activités effectuées en intérieur</Text>
-            <Text  style = {{fontWeight: 'bold', fontSize: 16}}>17</Text>
+            <Text style={styles.reviewSectionNumbers}>17</Text>
           </View>
         </View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/outside.png')}
-            style={{
-              width: 40,
-              height: 40,
-              marginRight: 10,
-              padding: 10,
-              borderRadius: 50,
-              borderWidth: 1,
-              borderColor: '#000'
-            }}
+            style={styles.reviewSectionIcons}
           />
           <View>
             <Text> Nombre d'activités effectuées en extérieur</Text>
-            <Text  style = {{fontWeight: 'bold', fontSize: 16}}>17</Text>
+            <Text style={styles.reviewSectionNumbers}>17</Text>
           </View>
         </View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/outside2.png')}
-            style={{
-              width: 40,
-              height: 40,
-              marginRight: 10,
-              padding: 10,
-              borderRadius: 50,
-              borderWidth: 1,
-              borderColor: '#000'
-            }}
+            style={styles.reviewSectionIcons}
           />
           <View>
             <Text> Nombre de sorties</Text>
-            <Text  style = {{fontWeight: 'bold', fontSize: 16}}>47</Text>
+            <Text style={styles.reviewSectionNumbers}>47</Text>
           </View>
         </View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/home.png')}
-            style={{
-              width: 40,
-              height: 40,
-              marginRight: 10,
-              padding: 10,
-              borderRadius: 50,
-              borderWidth: 1,
-              borderColor: '#000'
-            }}
+            style={styles.reviewSectionIcons}
           />
           <View>
             <Text> Nombre d'activités effectuées à domicile</Text>
-            <Text  style = {{fontWeight: 'bold', fontSize: 16}}>21</Text>
+            <Text style={styles.reviewSectionNumbers}>21</Text>
           </View>
         </View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/companies.png')}
-            style={{
-              width: 40,
-              height: 40,
-              marginRight: 10,
-              padding: 10,
-              borderRadius: 50,
-              borderWidth: 1,
-              borderColor: '#000'
-            }}
+            style={styles.reviewSectionIcons}
           />
           <View>
             <Text> Nombre d'entreprises auxquelles vous avez fait appel</Text>
-            <Text  style = {{fontWeight: 'bold', fontSize: 16}}>70</Text>
+            <Text style={styles.reviewSectionNumbers}>70</Text>
           </View>
         </View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/organisations.png')}
-            style={{
-              width: 40,
-              height: 40,
-              marginRight: 10,
-              padding: 10,
-              borderRadius: 50,
-              borderWidth: 1,
-              borderColor: '#000'
-            }}
+            style={styles.reviewSectionIcons}
           />
           <View>
             <Text> Nombre d'organisations effectuées</Text>
-            <Text  style = {{fontWeight: 'bold', fontSize: 16}}>45</Text>
+            <Text style={styles.reviewSectionNumbers}>45</Text>
           </View>
         </View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
             source={require('../../assets/icons/icones/reward.png')}
-            style={{
-              width: 40,
-              height: 40,
-              marginRight: 10,
-              borderRadius: 50,
-              borderWidth: 1,
-              borderColor: '#000'
-            }}
+            style={styles.reviewSectionIcons}
           />
           <View>
             <Text> Nombre de récompenses obtenues</Text>
-            <Text style = {{fontWeight: 'bold', fontSize: 16}}>3</Text>
+            <Text style={styles.reviewSectionNumbers}>3</Text>
           </View>
         </View>
       </View>
+    );
+  };
+
+  const Search = () => {
+    return (
+      <>
+        <View>
+          <Text
+            style={{
+              color: 'red',
+              fontWeight: 'bold',
+              fontSize: 16,
+              marginTop: 10,
+              paddingTop: 10,
+            }}
+          >
+            Centres d'intérêts
+          </Text>
+        </View>
+        <View style={{marginBottom: 20}}>
+          <TextInput
+          />
+        </View>
+        <SafeAreaView></SafeAreaView>
+      </>
     );
   };
 
@@ -309,6 +275,7 @@ export const Story: React.FC = observer(({}) => {
           <InterestSection />
           <Equipment />
           <Review />
+          <Search />
         </ScrollView>
       </View>
     </>
@@ -326,7 +293,29 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderWidth: 1,
   },
+  title:{
+    color: 'red',
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginTop: 10,
+    paddingTop: 10,
+  },
+  reviewSectionIcons:{
+    width: 40,
+    height: 40,
+    marginRight: 10,
+    padding: 10,
+    borderRadius: 50,
+    borderWidth: 1,
+    borderColor: '#000'
+  },
+  reviewSectionNumbers:{
+    fontWeight: 'bold', 
+    fontSize: 16
+  }
 });
+
+
 /*  <View flex bg-bgColor>
 <ScrollView contentInsetAdjustmentBehavior="automatic">
 <View padding-s4>
