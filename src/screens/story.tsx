@@ -1,21 +1,15 @@
 import React, {useCallback, useEffect} from 'react';
-import {
-  ScrollView,
-  Alert,
-  StyleSheet,
-  Image,
-  TextInput,
-  SafeAreaView,
-} from 'react-native';
+import {ScrollView, Alert, StyleSheet, Image, TextInput, SafeAreaView} from 'react-native';
 import {View, Text} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 
 import {useServices} from '../services';
 import {useStores} from '../stores';
 
-
 //import icons
 import Icons from '../data/Icons';
+import {Ionicons} from '@expo/vector-icons';
+import { FlatList } from 'react-native-gesture-handler';
 
 export const Story: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -137,11 +131,7 @@ export const Story: React.FC = observer(({}) => {
           }}
         >
           <View>
-            <Text
-              style={styles.title}
-            >
-              Equipements sportif
-            </Text>
+            <Text style={styles.title}>Equipements sportif</Text>
           </View>
           <View
             style={{
@@ -242,7 +232,30 @@ export const Story: React.FC = observer(({}) => {
     );
   };
 
+  const DATA = [
+    {
+      id: '3',
+      img: 'https://img.icons8.com/ios-glyphs/30/000000/mountain.png',
+    },
+    {
+      id: '2',
+      img: 'https://img.icons8.com/ios-glyphs/30/000000/mountain.png',
+    },
+    {
+      id: '1',
+      img: 'https://img.icons8.com/ios-glyphs/30/000000/mountain.png',
+    },
+  ];
+  const Item = ({ img }) => (
+    <View style={styles.icons}>
+      <Text style={styles.title}>{img}</Text>
+    </View>
+  );
+
   const Search = () => {
+    const renderItem = ({ item }) => (
+      <Item img ={item.img} />
+    )
     return (
       <>
         <View>
@@ -258,11 +271,16 @@ export const Story: React.FC = observer(({}) => {
             Centres d'intérêts
           </Text>
         </View>
-        <View style={{marginBottom: 20}}>
-          <TextInput
-          />
-        </View>
-        <SafeAreaView></SafeAreaView>
+    
+        
+        <Ionicons name ="search-outline" size={30} />
+        <TextInput />
+        <FlatList 
+                 data = {DATA}
+                 renderItem = {renderItem}
+                 keyExtractor={item => item.id}
+                 />
+        
       </>
     );
   };
@@ -275,9 +293,13 @@ export const Story: React.FC = observer(({}) => {
           <InterestSection />
           <Equipment />
           <Review />
-          <Search />
+          
         </ScrollView>
+        <Search />
       </View>
+      
+      
+      
     </>
   );
 });
@@ -293,28 +315,27 @@ const styles = StyleSheet.create({
     borderColor: '#000',
     borderWidth: 1,
   },
-  title:{
+  title: {
     color: 'red',
     fontWeight: 'bold',
     fontSize: 16,
     marginTop: 10,
     paddingTop: 10,
   },
-  reviewSectionIcons:{
+  reviewSectionIcons: {
     width: 40,
     height: 40,
     marginRight: 10,
     padding: 10,
     borderRadius: 50,
     borderWidth: 1,
-    borderColor: '#000'
+    borderColor: '#000',
   },
-  reviewSectionNumbers:{
-    fontWeight: 'bold', 
-    fontSize: 16
-  }
+  reviewSectionNumbers: {
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
 });
-
 
 /*  <View flex bg-bgColor>
 <ScrollView contentInsetAdjustmentBehavior="automatic">
