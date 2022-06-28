@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {ScrollView, Alert, StyleSheet, Image, TextInput, SafeAreaView} from 'react-native';
 import {View, Text, GridView} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
@@ -233,33 +233,37 @@ export const Story: React.FC = observer(({}) => {
   };
 
   const Search = () => {
+    const [focus, setFocus] = useState(false);
+    const customStyle = focus ? styles.TextInputFocus : styles.textInput;
     return (
+      
       <>
-        <View>
+        <View style={{borderTopColor: '#000', borderTopWidth: 1, marginTop: 10, paddingTop: 10}}>
           <Text
-            style={{
-              color: 'red',
-              fontWeight: 'bold',
-              fontSize: 16,
-              marginTop: 10,
-              paddingTop: 10,
-            }}
+            style={styles.title}
           >
             Centres d'intérêts
           </Text>
         </View>
-        <View>
+        <View >
+          <View style = {{flexDirection: 'row', alignItems: 'center'}}>
           <Ionicons name="search-outline" size={30} />
-          <TextInput />
+          <TextInput 
+           placeholder="Rechercher"
+          style={customStyle}
+          />
+          </View>
 
           {Icons.map((img, index) => (
-            <View key={index}>
+            <View key={index} style = {{flexDirection: 'row', alignItems: 'center' }}>
               <TouchableOpacity>
-                <Image source={{uri: img.img}} style={styles.icons} />
+                <Image source={{uri: img.img}} style={[styles.icons, {marginBottom: 10}]} />
               </TouchableOpacity>
+              <Text style = {{marginLeft: 10}}>{img.name}</Text>
             </View>
           ))}
         </View>
+       
       </>
     );
   };
@@ -289,6 +293,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderColor: '#000',
     borderWidth: 1,
+    
   },
   title: {
     color: 'red',
@@ -309,6 +314,21 @@ const styles = StyleSheet.create({
   reviewSectionNumbers: {
     fontWeight: 'bold',
     fontSize: 16,
+  },
+
+  textInput:{
+    
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
+    marginLeft: 10
+  },
+  TextInputFocus: {
+    //backgroundColor: 'Transparent',
+    padding: 10,
+    //borderColor: 'none',
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
+    //outlineStyle: 'none',
   },
 });
 
