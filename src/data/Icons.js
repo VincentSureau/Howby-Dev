@@ -69,30 +69,6 @@ const Icons = [
   },
 ];
 
-const Icons2 = [
-    {
-        id: 1,
-        img: '../../assets/icons/voitures.png',
-        name: 'voitures',
-      },
-      {              
-        id: 2,
-        img: '../../assets/icons/icones/curling.png',
-        name: 'Curling',
-      },
-      {
-        id: 3,
-        img: 'https://img.icons8.com/ios-glyphs/60/000000/cross-country-skiing.png',
-        
-        name: 'Biathlon',
-      },
-      {
-        id: 3,
-        img: 'https://img.icons8.com/ios-glyphs/60/000000/cross-country-skiing.png',
-        
-        name: 'Ski de fond',
-      },
 
-]
 
 export default Icons;

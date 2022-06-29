@@ -3,15 +3,15 @@ import {ScrollView, Alert, StyleSheet, Image, TextInput, SafeAreaView} from 'rea
 import {View, Text, GridView, ListItem} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 
-import {useServices} from '../services';
-import {useStores} from '../stores';
+import {useServices} from '../../services';
+import {useStores} from '../../stores';
 
 //import icons
-import Icons from '../data/Icons';
+import Icons from '../../data/Icons';
 import {Ionicons} from '@expo/vector-icons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export const Story: React.FC = observer(({}) => {
+export const innerProfile: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
   const {counter, ui} = useStores();
 
@@ -43,7 +43,7 @@ export const Story: React.FC = observer(({}) => {
         <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Image
-              source={require('../../assets/icons/redheart.png')}
+              source={require('../../../assets/icons/redheart.png')}
               style={{
                 width: 50,
                 height: 50,
@@ -56,7 +56,7 @@ export const Story: React.FC = observer(({}) => {
               }}
             />
             <Image
-              source={require('../../assets/icons/house.png')}
+              source={require('../../../assets/icons/house.png')}
               style={{
                 width: 50,
                 height: 50,
@@ -73,7 +73,7 @@ export const Story: React.FC = observer(({}) => {
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text>1/06/1997</Text>
             <Image
-              source={require('../../assets/icons/cake.png')}
+              source={require('../../../assets/icons/cake.png')}
               style={{
                 width: 50,
                 height: 50,
@@ -160,7 +160,7 @@ export const Story: React.FC = observer(({}) => {
       <View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
-            source={require('../../assets/icons/icones/inside.png')}
+            source={require('../../../assets/icons/icones/inside.png')}
             style={styles.reviewSectionIcons}
           />
           <View>
@@ -170,7 +170,7 @@ export const Story: React.FC = observer(({}) => {
         </View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
-            source={require('../../assets/icons/icones/outside.png')}
+            source={require('../../../assets/icons/icones/outside.png')}
             style={styles.reviewSectionIcons}
           />
           <View>
@@ -180,7 +180,7 @@ export const Story: React.FC = observer(({}) => {
         </View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
-            source={require('../../assets/icons/icones/outside2.png')}
+            source={require('../../../assets/icons/icones/outside2.png')}
             style={styles.reviewSectionIcons}
           />
           <View>
@@ -190,7 +190,7 @@ export const Story: React.FC = observer(({}) => {
         </View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
-            source={require('../../assets/icons/icones/home.png')}
+            source={require('../../../assets/icons/icones/home.png')}
             style={styles.reviewSectionIcons}
           />
           <View>
@@ -200,7 +200,7 @@ export const Story: React.FC = observer(({}) => {
         </View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
-            source={require('../../assets/icons/icones/companies.png')}
+            source={require('../../../assets/icons/icones/companies.png')}
             style={styles.reviewSectionIcons}
           />
           <View>
@@ -210,7 +210,7 @@ export const Story: React.FC = observer(({}) => {
         </View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
-            source={require('../../assets/icons/icones/organisations.png')}
+            source={require('../../../assets/icons/icones/organisations.png')}
             style={styles.reviewSectionIcons}
           />
           <View>
@@ -220,7 +220,7 @@ export const Story: React.FC = observer(({}) => {
         </View>
         <View style={{flexDirection: 'row', marginBottom: 10}}>
           <Image
-            source={require('../../assets/icons/icones/reward.png')}
+            source={require('../../../assets/icons/icones/reward.png')}
             style={styles.reviewSectionIcons}
           />
           <View>
@@ -320,60 +320,3 @@ const styles = StyleSheet.create({
     //outlineStyle: 'none',
   },
 });
-
-/*  <View flex bg-bgColor>
-<ScrollView contentInsetAdjustmentBehavior="automatic">
-<View padding-s4>
-  <Section title={t.do('section.navigation.title')}>
-    <BButton
-      marginV-s1
-      label={t.do('section.navigation.button.push')}
-      onPress={() => nav.push('Example', {value: randomNum()})}
-    />
-    <BButton
-      marginV-s1
-      label={t.do('section.navigation.button.show')}
-      onPress={() => nav.show('ExampleModal')}
-    />
-    <BButton
-      marginV-s1
-      label={t.do('section.navigation.button.sharedTransition')}
-      onPress={() => Alert.alert('future feature: shared transition')}
-    />
-  </Section>
-
-  <Section title="Reanimated 2">
-    <Reanimated2 stID="reanimated2" />
-  </Section>
-
-  <Section title="MobX">
-    <View centerV>
-      <Text marginB-s2 text60R textColor>
-        App laujfdhfjdnches: {ui.appLaunches}
-      </Text>
-      <Text marginB-s2 text60R textColor>
-        Counter:{' '}
-        <If
-          _={counter.loading}
-          _then={() => <ActivityIndicator />}
-          _else={<Text>{counter.value}</Text>}
-        />
-      </Text>
-      <BButton margin-s1 label="-" onPress={counter.dec} />
-      <BButton margin-s1 label="+" onPress={counter.inc} />
-      <BButton margin-s1 label="reset" onPress={counter.reset} />
-    </View>
-  </Section>
-
-  <Section title="API">
-    <BButton margin-s1 label="Update counter value from API" onPress={api.counter.get} />
-  </Section>
-
-  <Text textColor center>
-    localized with i18n-js
-  </Text>
-</View>
-</ScrollView>
-</View>
-
-*/

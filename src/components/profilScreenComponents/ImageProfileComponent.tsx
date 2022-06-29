@@ -2,10 +2,12 @@ import { View, StyleSheet, Text } from 'react-native'
 import React from 'react'
 import { Image, } from 'react-native-ui-lib'
 import { LinearGradient } from 'expo-linear-gradient';
+import { useServices } from '../../services';
 
 const img = {uri: "https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg"};
 
 const ImageProfileComponent = () => {
+  const {nav, t, api} = useServices();
   return (
     <View style={{height: 300}}>
         <Image 
@@ -20,6 +22,7 @@ const ImageProfileComponent = () => {
                 end={{x: 1, y: 1}}
                 locations={[0.5, 0.6, 1]}
                 style={styles.linearGradient}
+                onPress={() => nav.push('InnerProfile')}
               >
                 <Text>Julien</Text>
                 <Text>Pizzo</Text>

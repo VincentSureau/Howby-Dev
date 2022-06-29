@@ -19,11 +19,12 @@ import { UserProfile } from './feed/user-profile';
 import { UserFeed } from './feed/user-feed';
 import { Teams } from './profil/teams';
 import { SaveStory } from './story/save-story';
+import { innerProfile } from './profil/innerProfile';
 
 // Describe your screens here
 export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'StoryNavigator' | 'Notification';
 export type Modal = 'ExampleModal';
-export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'SaveStory' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile' | 'Teams' ;
+export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'SaveStory' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile' | 'Teams' | 'InnerProfile' ;
 
 export type ModalProps = {
   ExampleModal: undefined;
@@ -159,6 +160,14 @@ const loggedScreen = {
     component: Teams,
     options: () => ({
       title: 'User Teams',
+      ...screenDefaultOptions(),
+    }),
+  },
+  InnerProfile: {
+    name: 'InnerProfile',
+    component: innerProfile,
+    options: () => ({
+      title: 'Inner Profile',
       ...screenDefaultOptions(),
     }),
   },
