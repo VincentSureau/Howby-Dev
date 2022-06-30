@@ -11,7 +11,7 @@ import Icons from '../../data/Icons';
 import {Ionicons} from '@expo/vector-icons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 
-export const innerProfile: React.FC = observer(({}) => {
+export const InnerProfile: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
   const {counter, ui} = useStores();
 
