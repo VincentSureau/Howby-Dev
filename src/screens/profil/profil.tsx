@@ -8,7 +8,8 @@ const Profile = () => {
   return (
     <View flex bg-bgColor2>
       <HeaderProfileComponent />
-      <ImageProfileComponent />
+      <ImageProfileComponent 
+      />
     </View>    
   )
 }

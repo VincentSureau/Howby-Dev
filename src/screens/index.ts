@@ -19,11 +19,12 @@ import { UserProfile } from './feed/user-profile';
 import { UserFeed } from './feed/user-feed';
 import { Teams } from './profil/teams';
 import { SaveStory } from './story/save-story';
+import { InnerProfile } from './profil/innerProfile';
 
 // Describe your screens here
 export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'StoryNavigator' | 'Notification';
 export type Modal = 'ExampleModal';
-export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'SaveStory' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile' | 'Teams' ;
+export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'SaveStory' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile' | 'Teams' | 'InnerProfile' ;
 
 export type ModalProps = {
   ExampleModal: undefined;
@@ -52,6 +53,7 @@ export type ScreenProps = {
   UserProfile: undefined;
   UserFeed: undefined;
   Teams: undefined;
+  InnerProfile: undefined;
 } & ModalProps;
 
 // Screens
@@ -162,6 +164,14 @@ const loggedScreen = {
       ...screenDefaultOptions(),
     }),
   },
+  InnerProfile: {
+    name: 'InnerProfile',
+    component: InnerProfile,
+    options: () => ({
+      title: 'Inner Profile',
+      ...screenDefaultOptions(),
+    }),
+  },
 };
 
 const offlineScreens = {
@@ -199,11 +209,12 @@ const screens: ScreenLayouts = {
 
 const SettingsStack = () => genStackNavigator([screens.Settings, screens.Teams]);
 const ExampleModalStack = () => genStackNavigator([screens.Example]);
-const FeedStack = () => genStackNavigator([screens.HomeOffline, screens.Story, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails, screens.UserProfile, screens.UserFeed, screens.Teams]);
+const FeedStack = () => genStackNavigator([screens.HomeOffline, screens.Story, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails, screens.UserProfile, screens.UserFeed, screens.Teams, screens.InnerProfile]);
 const ChatStack = () => genStackNavigator([screens.ChatHome]);
 const SearchStack = () => genStackNavigator([screens.Search]);
 const StoryStack = () => genStackNavigator([screens.NewStory, screens.SaveStory, screens.FeedIndex]);
 const NotificationStack = () => genStackNavigator([screens.Notification, screens.Example]);
+
 
 // Tabs
 const tabs: TabScreenLayouts = {
