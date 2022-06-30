@@ -154,11 +154,24 @@ const publicationImages = [
   },
 ];
 
-const PublicationCard = ({item}: {item: any}) => {
+interface  PublicationCardPropsType {
+  item: any;
+  setShowDialog: (boolean: boolean) => void;
+  setDialogUrl: (source : {uri: string}) => void;
+}
+
+const PublicationCard = ({item, setShowDialog, setDialogUrl}: PublicationCardPropsType) => {
   const randomBool = useMemo(() => Math.random() < 0.5, []);
 
   return (
-    <View key={item.id} style={{marginTop: 2, marginLeft: 2, marginRight: 2, flex: 1}}>
+    <TouchableOpacity 
+      key={item.id}
+      style={{marginTop: 2, marginLeft: 2, marginRight: 2, flex: 1}}      // onPress={() => props.navigation.navigate('FullScreenPublicationComponent',{url: img.imageUrl})}
+      onPress={() => {
+        setShowDialog(true);
+        setDialogUrl({uri: item.imgURL});
+      }}
+    >
       <Image
         source={{uri: item.imgURL}}
         style={{
@@ -168,7 +181,7 @@ const PublicationCard = ({item}: {item: any}) => {
         }}
         resizeMode="cover"
       />
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -184,31 +197,13 @@ const PublicationProfileComponent = ({setShowDialog, setDialogUrl} : Publication
   return (
     <View>
       <Text style = {{marginTop: 10, borderBottomWidth: 1, borderBottomColor: "gray"}}>VOS PUBLICATIONS</Text>
-      {/* <View style = {{flexDirection: "row", flexWrap: "wrap", marginTop: 10}}>                  
-        {publicationImages.map((img, index) => (
-            <TouchableOpacity 
-              key={index}
-              // onPress={() => props.navigation.navigate('FullScreenPublicationComponent',{url: img.imageUrl})}
-              onPress={() => {
-                setShowDialog(true);
-                setDialogUrl({uri: img.imageUrl});
-              }}
-            >
-              <Image
-                source={{uri: img.imageUrl}}
-                style={{height: imageHeight / 3, width: imageWidth /  3 - 6, margin: 2 }}
-              />
-            </TouchableOpacity>
-          ))
-        }
-      </View> */}
       <View style = {{flexDirection: "row", flexWrap: "wrap", marginTop: 10}}>
         <MasonryList
           data={publicationImages}
           keyExtractor={(item, index): string => item.id}
           numColumns={3}
           showsVerticalScrollIndicator={false}
-          renderItem={({item}) => <PublicationCard item={item} />}
+          renderItem={({item}) => <PublicationCard item={item} setShowDialog={setShowDialog} setDialogUrl={setDialogUrl} />}
           // refreshing={isLoadingNext}
           // onRefresh={() => refetch({first: ITEM_CNT})}
           onEndReachedThreshold={0.1}

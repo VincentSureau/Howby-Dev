@@ -59,13 +59,13 @@ const Icons = [
   {
     id: 10,
     img: 'https://img.icons8.com/ios-filled/50/000000/cottage--v1.png',
-    equipment: '',
+    equipment: 'Marche',
   },
   {
     id: 11,
     img: 'https://img.icons8.com/external-basicons-line-edtgraphics/50/000000/external-fishing-outdoor-activities-edtim-outline-edtim.png',
     equipment: 'https://img.icons8.com/ios-glyphs/60/000000/fishing-pole.png',
-    name: 'péche',
+    name: 'pêche',
   },
 ];
 
