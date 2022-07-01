@@ -20,11 +20,13 @@ import { UserFeed } from './feed/user-feed';
 import { Teams } from './profil/teams';
 import { SaveStory } from './story/save-story';
 import { InnerProfile } from './profil/innerProfile';
+import { Test } from './test/test';
+import { ForgottenPassword } from './security/forgotten-password';
 
 // Describe your screens here
 export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'StoryNavigator' | 'Notification';
 export type Modal = 'ExampleModal';
-export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'SaveStory' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile' | 'Teams' | 'InnerProfile' ;
+export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'SaveStory' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile' | 'Teams' | 'InnerProfile' | 'Test' | 'ForgottenPassword' ;
 
 export type ModalProps = {
   ExampleModal: undefined;
@@ -49,7 +51,9 @@ export type ScreenProps = {
   };
   Login: undefined;
   Register: undefined;
+  ForgottenPassword: undefined;
   HomeOffline: undefined;
+  Test: undefined;
   UserProfile: undefined;
   UserFeed: undefined;
   Teams: undefined;
@@ -172,6 +176,15 @@ const loggedScreen = {
       ...screenDefaultOptions(),
     }),
   },
+  Test: {
+    name: 'Test',
+    component: Test,
+    options: () => ({
+      title: 'Home Offline',
+      ...screenDefaultOptions(),
+      headerShown: false,
+    }),
+  },
 };
 
 const offlineScreens = {
@@ -200,8 +213,17 @@ const offlineScreens = {
       ...screenDefaultOptions(),
       headerShown: false,
     }),
+  },
+  ForgottenPassword: {
+    name: 'ForgottenPassword',
+    component: ForgottenPassword,
+    options: () => ({
+      title: 'Forgotten Password',
+      ...screenDefaultOptions(),
+    }),
   }
 }
+
 const screens: ScreenLayouts = {
   ...loggedScreen,
   ...offlineScreens,
@@ -209,7 +231,7 @@ const screens: ScreenLayouts = {
 
 const SettingsStack = () => genStackNavigator([screens.Settings, screens.Teams]);
 const ExampleModalStack = () => genStackNavigator([screens.Example]);
-const FeedStack = () => genStackNavigator([screens.HomeOffline, screens.Story, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails, screens.UserProfile, screens.UserFeed, screens.Teams, screens.InnerProfile]);
+const FeedStack = () => genStackNavigator([screens.Test, screens.Story, screens.Register, screens.Login, screens.FeedIndex, screens.FeedDetails, screens.UserProfile, screens.UserFeed, screens.Teams, screens.InnerProfile]);
 const ChatStack = () => genStackNavigator([screens.ChatHome]);
 const SearchStack = () => genStackNavigator([screens.Search]);
 const StoryStack = () => genStackNavigator([screens.NewStory, screens.SaveStory, screens.FeedIndex]);
@@ -287,7 +309,7 @@ export const RootNavigator = (): JSX.Element =>
   genRootNavigator(TabNavigator, [modals.ExampleModal]);
 
 
-const AuthStack = () => genStackNavigator([screens.Login, screens.Register, screens.HomeOffline]);
+const AuthStack = () => genStackNavigator([screens.HomeOffline, screens.Login, screens.Register, screens.ForgottenPassword]);
 
 // Auth Navigator
 export const AuthNavigator = (): JSX.Element =>

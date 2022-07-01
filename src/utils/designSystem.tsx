@@ -85,6 +85,7 @@ export const getNavigationTheme = (ca?: CurrentAppearance): Theme => {
     colors: {
       ...DefaultTheme.colors,
       primary: Colors.primary,
+      secondary: Colors.secondary,
       background: Colors.bgColor,
       card: Colors.bgColor,
       text: Colors.textColor,
@@ -98,6 +99,7 @@ export const getNavigationTheme = (ca?: CurrentAppearance): Theme => {
     colors: {
       ...DarkTheme.colors,
       primary: Colors.primary,
+      secondary: Colors.secondary,
       background: Colors.bgColor,
       card: Colors.bgColor,
       text: Colors.textColor,

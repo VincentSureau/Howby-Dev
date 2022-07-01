@@ -2,19 +2,15 @@ import React, {useCallback, useContext, useEffect, useState} from 'react';
 import {ScrollView, Alert, ActivityIndicator, StyleSheet, TextInput} from 'react-native';
 import {View, Text, Button, Incubator} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
-import {If} from '@kanzitelli/if-component';
 
 import {useServices} from '../../services';
 import {useStores} from '../../stores';
 
-import {Section} from '../../components/section';
-import {validateEmail} from '../../utils/help';
 import { Formiz, useForm } from '@formiz/core';
 import { TextField } from '../../components/form/field';
-import { AuthContext } from '../../context/AuthContext';
 import {isEmail} from '@formiz/validations';
 
-export const Login: React.FC = observer(({}) => {
+export const ForgottenPassword: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
   const {counter, ui} = useStores();
 
@@ -25,8 +21,7 @@ export const Login: React.FC = observer(({}) => {
     }
   }, [api.counter]);
 
-  const loginForm = useForm();
-  const {login} = useContext(AuthContext);
+  const forgottenPasswordForm = useForm();
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -36,21 +31,17 @@ export const Login: React.FC = observer(({}) => {
   const handleSubmit = async (values: any) => {
     setError(null);
     console.log(values) // Retrieves values after submit
-    const loginSuccess = await login(values.email, values.password);
-    console.log(loginSuccess);
-    if(!loginSuccess) {
-      setError('Identifiants invalides');
-    }
+    Alert.alert('Mot de passe');
   }
 
   return (
     <View flex bg-bgColor centerV>
-        <View padding-s4 marginB-s10>
-          <View centerH marginB-s4>
-            {error && <Text color="#C60030">{error}</Text>}
+        <View padding-s4>
+          <View centerH>
+            {error && <Text>{error}</Text>}
           </View>
           <Formiz
-            connect={loginForm}
+            connect={forgottenPasswordForm}
             onValidSubmit={handleSubmit}
           >
             <TextField
@@ -58,7 +49,6 @@ export const Login: React.FC = observer(({}) => {
               placeholder="Votre email"
               required={true}
               name="email"
-              keyboardType="email-address"
               validations={[
                 {
                   rule: isEmail(),
@@ -66,33 +56,18 @@ export const Login: React.FC = observer(({}) => {
                 }
               ]}
             />
-            <TextField
-              label="Mot de passe"
-              placeholder="Votre mot de passe"
-              required={true}
-              name="password"
-              secureTextEntry={true}
-            />
-            <Button
-              marginT-s4 
+            <Button 
               backgroundColor="#FB3C62"
               color="#FFFFFF"
               labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-              label="Connexion"
+              label="Réinitialiser mon mot de passe"
               borderRadius={7}
               style={{height: 45, marginBottom: 20}}
-              onPress={() => loginForm.submit()}
-              disabled={!loginForm.isValid && loginForm.isSubmitted}
+              onPress={() => forgottenPasswordForm.submit()}
+              disabled={!forgottenPasswordForm.isValid && forgottenPasswordForm.isSubmitted}
             />
           </Formiz>
         </View>
-        <Button
-          link
-          color="#000000"
-          label="J'ai oublié mon mot de passe"
-          labelStyle={{flexGrow: 1, textAlign: 'center'}}
-          onPress={() => nav.push('ForgottenPassword')}
-        />
     </View>
   );
 });

@@ -15,34 +15,31 @@ const AuthProvider = ({children}) => {
                 "username": email,
                 "password": password
             });
-
             setUserToken(response.data.token);
             await AsyncStorage.setItem('userToken', response.data.token);
-            setIsLoading(false);
         } catch (err) {
-            // console.log(err.response.data.message);
             return false;
         }
-
         return true;
     }
 
     const logout = async () => {
+        setIsLoading(true);
         setUserToken(null);
         await AsyncStorage.removeItem('userToken');
         setIsLoading(false);
     }
 
     const isLoggedIn = async () => {
+        setIsLoading(true);
         try {
-            setIsLoading(true);
-            let userToken = AsyncStorage.getItem('userToken');
-            console.log(userToken);
-            setUserToken(userToken);
-            setIsLoading(false);
+            let userToken = await AsyncStorage.getItem('userToken');
+            if(null != userToken) {
+                setUserToken(userToken);
+            }
         } catch(e) {
-            Alert.alert('An error occured');
         }
+        setIsLoading(false);
     }
 
     useEffect(() => {
