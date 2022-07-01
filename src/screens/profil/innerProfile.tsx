@@ -10,6 +10,8 @@ import {useStores} from '../../stores';
 import Icons from '../../data/Icons';
 import {Ionicons} from '@expo/vector-icons';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import AddNewPost from '../feed/AddNewPost';
+
 
 export const InnerProfile: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -261,18 +263,19 @@ export const InnerProfile: React.FC = observer(({}) => {
 
 
   return (
-    <>
-      <View style={styles.container}>
-        <ScrollView>
+    
+    
+        <ScrollView style={styles.container}>
           <HeaderSection />
           <InterestSection />
           <Equipment />
           <Review />
           <Search />
-          
+          <AddNewPost />
         </ScrollView>
-      </View>
-    </>
+        
+      
+    
   );
 });
 
