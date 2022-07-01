@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 
 import {ScrollView, Alert, ActivityIndicator, Platform} from 'react-native';
 import {View, Text, Button, Colors, Image, Assets, Dialog} from 'react-native-ui-lib';
@@ -12,6 +12,7 @@ import {Section} from '../../components/section';
 import { BButton } from '../../components/button';
 import ReturnForwardComponent from '../../components/teamComponents/ReturnForwardComponent';
 import CircleComponent from '../../components/CircleComponent';
+import { AuthContext } from '../../context/AuthContext';
 
 const ButtonSpace = 20;
 
@@ -34,6 +35,7 @@ export const HomeOffline: React.FC = observer(({}) => {
 
   const logoFull = Platform.OS === 'web' ? {uri: Assets.images.logos.logoFull}: Assets.images.logos.logoFull;
 
+  const {logout} = useContext(AuthContext);
   return (
     <View flex bg-bgColor2 centerV>
       <View centerH flex centerV>
@@ -87,7 +89,7 @@ export const HomeOffline: React.FC = observer(({}) => {
             style={{height: 45, marginBottom: ButtonSpace}}
             onPress={() => nav.push('UserFeed')}
           />
-          <Button 
+          {/* <Button 
             backgroundColor="#FB3C62"
             color="#FFFFFF"
             labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
@@ -95,6 +97,15 @@ export const HomeOffline: React.FC = observer(({}) => {
             borderRadius={7}
             style={{height: 45, marginBottom: ButtonSpace}}
             onPress={() => nav.push('Story')}
+          /> */}
+          <Button 
+            backgroundColor="#FB3C62"
+            color="#FFFFFF"
+            labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
+            label="Logout"
+            borderRadius={7}
+            style={{height: 45, marginBottom: ButtonSpace}}
+            onPress={() => logout()}
           />
       </View>
       <View centerH>

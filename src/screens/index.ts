@@ -285,3 +285,10 @@ const modals: ModalScreenLayouts = {
 // Root Navigator
 export const RootNavigator = (): JSX.Element =>
   genRootNavigator(TabNavigator, [modals.ExampleModal]);
+
+
+const AuthStack = () => genStackNavigator([screens.Login, screens.Register, screens.HomeOffline]);
+
+// Auth Navigator
+export const AuthNavigator = (): JSX.Element =>
+  genRootNavigator(AuthStack, []);

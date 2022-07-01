@@ -9,6 +9,7 @@ import {configureDesignSystem, loadAssets} from './src/utils/designSystem';
 import {hydrateStores, StoresProvider} from './src/stores';
 import {initServices, ServicesProvider} from './src/services';
 import * as Font from 'expo-font';
+import AuthProvider from './src/context/AuthContext';
 
 LogBox.ignoreLogs(['Require']);
 
@@ -42,9 +43,11 @@ export default (): JSX.Element => {
 
   return (
     <GestureHandlerRootView style={{flex: 1}}>
-      <StoresProvider>
-        <ServicesProvider>{ready ? <AppNavigator /> : null}</ServicesProvider>
-      </StoresProvider>
+      <AuthProvider>
+        <StoresProvider>
+          <ServicesProvider>{ready ? <AppNavigator /> : null}</ServicesProvider>
+        </StoresProvider>
+      </AuthProvider>
     </GestureHandlerRootView>
   );
 };

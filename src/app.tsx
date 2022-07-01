@@ -1,18 +1,22 @@
-import React from 'react';
-import {StatusBar, useColorScheme} from 'react-native';
+import React, { useContext } from 'react';
+import {ActivityIndicator, StatusBar, useColorScheme} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 
-import {RootNavigator} from './screens';
+import {AuthNavigator, RootNavigator} from './screens';
 import {
   getNavigationTheme,
   getThemeStatusBarBGColor,
   getThemeStatusBarStyle,
 } from './utils/designSystem';
 import {useServices} from './services';
+import { View } from 'react-native-ui-lib';
+import { AuthContext } from './context/AuthContext';
+import { If } from '@kanzitelli/if-component';
 
 export const AppNavigator = (): JSX.Element => {
   useColorScheme();
   const {nav} = useServices();
+  const {isLoading, userToken} = useContext(AuthContext)
 
   return (
     <>
@@ -23,7 +27,18 @@ export const AppNavigator = (): JSX.Element => {
         onStateChange={nav.onStateChange}
         theme={getNavigationTheme()}
       >
-        <RootNavigator />
+        {isLoading ? (
+            <View flex centerH centerV>
+              <ActivityIndicator />
+            </View>
+          ) : (
+            <If
+            _={userToken !== null}
+            _then={() => <RootNavigator />}
+            _else={<AuthNavigator />}
+          />
+          )
+        }
       </NavigationContainer>
     </>
   );
