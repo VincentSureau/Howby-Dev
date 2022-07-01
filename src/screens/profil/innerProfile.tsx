@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {ScrollView, Alert, StyleSheet, Image, TextInput, SafeAreaView} from 'react-native';
-import {View, Text, GridView, ListItem, TouchableOpacity} from 'react-native-ui-lib';
+import {View, Text, GridView, ListItem} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 
 import {useServices} from '../../services';
@@ -9,26 +9,15 @@ import {useStores} from '../../stores';
 //import icons
 import Icons from '../../data/Icons';
 import {Ionicons} from '@expo/vector-icons';
-import HobbiesModal from '../../components/profil/hobbies_modal';
-import { Icon } from '../../components/icon';
-
-const userHobbyList = [1,5,10];
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 export const InnerProfile: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
   const {counter, ui} = useStores();
-  const [showHobbiesModal, setShowHobbiesModal] = useState(false);
-  const [hobbies, setHobbies] = useState([]);
-  const [userHobbies, setUserHobbies] = useState<Array<number>>([]);
 
   const start = useCallback(async () => {
     try {
       await api.counter.get();
-
-      // je récupère la liste des hobbies
-      setHobbies(Icons);
-      // je récupère la liste des hobbies de l'utilisateur
-      setUserHobbies(userHobbyList);
     } catch (e) {
       Alert.alert('Error', 'There was a problem fetching data :(');
     }
@@ -37,8 +26,6 @@ export const InnerProfile: React.FC = observer(({}) => {
   useEffect(() => {
     start();
   }, []);
-
-  const filteredHobbies = hobbies.filter(item => userHobbies.includes(item.id));
 
   // section Header
 
@@ -120,27 +107,13 @@ export const InnerProfile: React.FC = observer(({}) => {
             marginBottom: 10,
           }}
         >
-          {filteredHobbies.map((img, index) => (
+          {Icons.map((img, index) => (
             <View key={index} style={{marginRight: 10, marginBottom: 15}}>
               <Image source={{uri: img.img}} style={styles.icons} />
               <Text style={{fontSize: 12, textAlign: 'center'}}>{img.name}</Text>
             </View>
           ))}
-          <TouchableOpacity
-            style={{marginRight: 10, marginBottom: 15}}
-            onPress={() => setShowHobbiesModal(true)}
-          >
-            <Icon size={50} name="add-circle-outline" />
-            <Text style={{fontSize: 12, textAlign: 'center'}}>Modifier</Text>
-          </TouchableOpacity>
         </View>
-        <HobbiesModal
-          showModal={showHobbiesModal}
-          setShowModal={setShowHobbiesModal}
-          hobbies={hobbies} 
-          userHobbies={userHobbies}
-          setUserHobbies={setUserHobbies}
-        />
       </>
     );
   };
@@ -259,14 +232,47 @@ export const InnerProfile: React.FC = observer(({}) => {
     );
   };
 
+  const Search = () => {
+    const [focus, setFocus] = useState(false);
+    const customStyle = focus ? styles.TextInputFocus : styles.textInput;
+    return (
+      <>
+        <View style={{borderTopColor: '#000', borderTopWidth: 1, marginTop: 10, paddingTop: 10}}>
+          <Text style={styles.title}>Centres d'intérêts</Text>
+        </View>
+        <View>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Ionicons name="search-outline" size={30} />
+            <TextInput placeholder="Rechercher" style={customStyle} />
+          </View>
+
+          {Icons.map((img, index) => (
+            <View key={index} style={{flexDirection: 'row', alignItems: 'center'}}>
+              <TouchableOpacity>
+                <Image source={{uri: img.img}} style={[styles.icons, {marginBottom: 10}]} />
+              </TouchableOpacity>
+              <Text style={{marginLeft: 10}}>{img.name}</Text>
+            </View>
+          ))}
+        </View>
+      </>
+    );
+  };
+
 
   return (
-      <ScrollView style={styles.container}>
-        <HeaderSection />
-        <InterestSection />
-        <Equipment />
-        <Review />
-      </ScrollView>
+    <>
+      <View style={styles.container}>
+        <ScrollView>
+          <HeaderSection />
+          <InterestSection />
+          <Equipment />
+          <Review />
+          <Search />
+          
+        </ScrollView>
+      </View>
+    </>
   );
 });
 

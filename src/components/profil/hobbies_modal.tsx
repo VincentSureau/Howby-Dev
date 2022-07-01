@@ -74,7 +74,7 @@ const HobbiesModal = ({showModal, setShowModal, hobbies, userHobbies, setUserHob
                     style={{flexDirection: 'row', alignItems: 'center'}}
                     onPress={() => toggleHobby(hobby.id)}
                   >
-                    <Image source={{uri: hobby.img}} style={userHobbies.includes(hobby.id) ? styles.selectedIcons : styles.icons} />
+                    <Image source={{uri: hobby.img,}} style={userHobbies.includes(hobby.id) ? styles.selectedIcons : styles.icons} />
                     <Text style={{marginLeft: 10}}>{hobby.name}</Text>
                   </TouchableOpacity>
                 ))}
