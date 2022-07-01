@@ -6,11 +6,13 @@ import {CounterStore} from './counter';
 import {CompanyStore} from './company';
 import { CompanySingleStore } from './company-single';
 import { RecordStore } from './record';
+import { UserPostStore } from './userpost';
 
 export const stores = {
   ui: new UIStore(),
   counter: new CounterStore(),
   company: new CompanyStore(),
+  userpost: new UserPostStore(),
   companySingle: new CompanySingleStore(),
   record: new RecordStore(),
 };

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import {StyleSheet, ScrollView, FlatList, ActivityIndicator} from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import {StyleSheet, ScrollView, FlatList, ActivityIndicator, Alert} from 'react-native';
 import {View} from 'react-native-ui-lib';
 import {useServices} from '../../services';
 
@@ -9,178 +9,44 @@ import PostCard, { PostType } from '../../components/post/post-card';
 import HeaderComponent from '../../components/userFeedComponents/HeaderComponent';
 import StoriesSlider from '../../components/userFeedComponents/StoriesSlider'
 import { If } from '@kanzitelli/if-component';
+import axios, { CancelTokenSource } from 'axios';
+import { useStores } from '../../stores';
 
 type UserFeedProps = {
-  company: any;
+  user?: any;
 };
-
-const posts = [
-  {
-    id: 1,
-    content: 'lorem ipsum dolor sit amet, consectetur adip',
-    img: {
-      uri: 'https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg',
-    },
-    user: {
-      name: 'Matthieu Blanc',
-      img: {
-        uri: 'https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg',
-      },
-    },
-    tags: [
-      "lorem",
-      "ipsum",
-      "dolor",
-    ],
-    isLiked: false,
-    company: {
-      name: 'Escape Game',
-      city: 'La salle d\'or',
-      img: {
-        uri: 'https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg',
-      },
-    }
-  },
-  {
-    id: 2,
-    content: 'lorem ipsum dolor sit amet, consectetur adip',
-    user: {
-      name: 'David Blondel',
-      img: {
-        uri: 'https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg',
-      },
-    },
-    tags: [
-      "lorem",
-      "ipsum",
-      "dolor",
-    ],
-    isLiked: true,
-    company: {
-      name: 'Escape Game',
-      city: 'La salle d\'or',
-    }
-  },
-  {
-    id: 3,
-    content: 'lorem ipsum dolor sit amet, consectetur adip',
-    user: {
-      name: 'David Blondel',
-    },
-    tags: [
-      "lorem",
-      "ipsum",
-      "dolor",
-    ],
-    isLiked: true,
-  },
-  {
-    id: 4,
-    content: 'lorem ipsum dolor sit amet, consectetur adip',
-    img: {
-      uri: 'https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg',
-    },
-    user: {
-      name: 'Vincent Sureau',
-      img: {
-        uri: 'https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg',
-      },
-    },
-    tags: [
-      "lorem",
-      "ipsum",
-      "dolor",
-    ],
-    isLiked: true,
-  },
-  {
-    id: 5,
-    content: 'lorem ipsum dolor sit amet, consectetur adip',
-    img: {
-      uri: 'https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg',
-    },
-    user: {
-      name: 'Matthieu Blanc',
-      img: {
-        uri: 'https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg',
-      },
-    },
-    tags: [
-      "lorem",
-      "ipsum",
-      "dolor",
-    ],
-    isLiked: false,
-    company: {
-      name: 'Escape Game',
-      city: 'La salle d\'or',
-      img: {
-        uri: 'https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg',
-      },
-    }
-  },
-  {
-    id: 6,
-    content: 'lorem ipsum dolor sit amet, consectetur adip',
-    user: {
-      name: 'David Blondel',
-      img: {
-        uri: 'https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg',
-      },
-    },
-    tags: [
-      "lorem",
-      "ipsum",
-      "dolor",
-    ],
-    isLiked: true,
-    company: {
-      name: 'Escape Game',
-      city: 'La salle d\'or',
-    }
-  },
-  {
-    id: 7,
-    content: 'lorem ipsum dolor sit amet, consectetur adip',
-    user: {
-      name: 'David Blondel',
-    },
-    tags: [
-      "lorem",
-      "ipsum",
-      "dolor",
-    ],
-    isLiked: true,
-  },
-  {
-    id: 8,
-    content: 'lorem ipsum dolor sit amet, consectetur adip',
-    img: {
-      uri: 'https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg',
-    },
-    user: {
-      name: 'Vincent Sureau',
-      img: {
-        uri: 'https://geo.img.pmdstatic.net/fit/https.3A.2F.2Fi.2Epmdstatic.2Enet.2Fgeo.2F2022.2F01.2F06.2Fdc9e1cb3-9288-40dc-ab66-0947f59d9b42.2Ejpeg/1280x720/background-color/ffffff/quality/70/la-montagne-face-au-changement-climatique-ce-que-lon-sait-et-comment-on-sadapte.jpg',
-      },
-    },
-    tags: [
-      "lorem",
-      "ipsum",
-      "dolor",
-    ],
-    isLiked: true,
-  }
-];
 
 const renderPost = ({item}: {item: PostType}) => <PostCard post={item} />;
 
-export const UserFeed: React.FC<UserFeedProps> = ({company}: UserFeedProps) => {
+export const UserFeed: React.FC<UserFeedProps> = () => {
   const {nav, t, api} = useServices();
-  const [loading, setIsLoading] = useState(true);
+
+  const {userpost} = useStores();
+
+  const start = useCallback(() : {cancelTokenSource : CancelTokenSource} => {
+    const cancelTokenSource = axios.CancelToken.source();
+
+    api.userpost
+      .get({cancelToken: cancelTokenSource.token})
+      .catch(error => {
+        if (!axios.isCancel(error)) {
+          Alert.alert('Error', 'There was a problem fetching data :(');
+        }
+      })
+    ;
+
+    return {
+      cancelTokenSource,
+    };
+
+  }, [api.userpost]);
 
   useEffect(() => {
-    setTimeout(() => {setIsLoading(false);}, 2000);
+    const { cancelTokenSource } = start();
+
+    return () => {
+      cancelTokenSource.cancel();
+    }
   }, []);
 
   return (
@@ -190,11 +56,11 @@ export const UserFeed: React.FC<UserFeedProps> = ({company}: UserFeedProps) => {
           <StoriesSlider />
           <View flex bg-bgColor paddingV-s2>
             <If
-              _={loading}
+              _={userpost.loading}
               _then={() => <ActivityIndicator />}
               _else={
                 <FlatList
-                  data={posts}
+                  data={userpost.value}
                   renderItem={renderPost}
                   keyExtractor={item => item.id}
                 />

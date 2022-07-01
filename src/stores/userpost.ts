@@ -1,7 +1,7 @@
 import {makeAutoObservable} from 'mobx';
 import {hydrateStore, makePersistable} from 'mobx-persist-store';
 
-export class CompanyStore implements IStore {
+export class UserPostStore implements IStore {
   value = [];
 
   reset = (): void => {
@@ -12,7 +12,7 @@ export class CompanyStore implements IStore {
   };
 
   loading = false;
-  
+
   setLoading = (v: boolean): void => {
     this.loading = v;
   };
@@ -21,7 +21,7 @@ export class CompanyStore implements IStore {
     makeAutoObservable(this);
 
     makePersistable(this, {
-      name: CompanyStore.name,
+      name: UserPostStore.name,
       properties: ['value'],
     });
   }
