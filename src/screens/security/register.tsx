@@ -68,11 +68,20 @@ export const Register: React.FC = observer(({}) => {
 
     return Math.round((registrationForm.currentStep.index + 1) / registrationForm.steps.length * 100)/100;
   }
+  
+ 
+
 
   return (
+
     <View flex bg-bgColor>
+      
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View padding-s4>
+          <View>
+  
+
+          </View>
           <Section title={t.do('registration.title')}>
             <View marginB-s4>
               <Progress.Bar progress={calculProgress()} color={Colors.secondary} width={null} />
@@ -112,6 +121,8 @@ export const Register: React.FC = observer(({}) => {
                     ]}
                   />
                 </FormizStep>
+
+               
                 <FormizStep as={View} name="step2">
                   <TextField
                     label="Mot de passe"
@@ -293,8 +304,7 @@ export const Register: React.FC = observer(({}) => {
                 )}
               </View>
             </View>
-
-          </Section>
+            </Section>        
         </View>
       </ScrollView>
     </View>
