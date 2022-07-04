@@ -1,6 +1,6 @@
-import React, {useCallback, useEffect, useRef} from 'react';
+import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {ScrollView, Alert, ActivityIndicator, StyleSheet} from 'react-native';
-import {View, Text, Button, Carousel} from 'react-native-ui-lib';
+import {View, Text, Button, Carousel, Colors} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
 
@@ -16,12 +16,13 @@ import { TextField } from '../../components/form/field';
 import { isEmail } from '@formiz/validations'
 import { isRequired } from '@formiz/validations'
 
+import * as Progress from 'react-native-progress';
+
 export const Register: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
   const {counter, ui} = useStores();
 
   const inputName = useRef<typeof TextField>(null);
-
 
   const start = useCallback(async () => {
     try {
@@ -42,11 +43,28 @@ export const Register: React.FC = observer(({}) => {
 
   const carousel = React.createRef<typeof Carousel>();
 
+  const calculProgress = () => {
+    if (!registrationForm.currentStep || !registrationForm.steps) {
+      return 0;
+    }
+
+    return Math.round((registrationForm.currentStep.index + 1) / registrationForm.steps.length * 100)/100;
+  }
+
   return (
     <View flex bg-bgColor>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View padding-s4>
           <Section title={t.do('registration.title')}>
+            <View marginB-s4>
+              <Progress.Bar progress={calculProgress()} color={Colors.secondary} width={null} />
+              <View flex right>
+                <Text>
+                  {registrationForm.currentStep && registrationForm.currentStep.index + 1}{' '}
+                  sur {registrationForm.steps?.length}
+                </Text>
+              </View>
+            </View>
             <Formiz
               connect={registrationForm}
               onValidSubmit={handleSubmit}
@@ -59,45 +77,124 @@ export const Register: React.FC = observer(({}) => {
                 ref={carousel}
               >  
                 <FormizStep as={View} name="step1">
-                  <TextField
-                    label="firstname"
-                    placeholder="Votre prénom"
+                  <TextField 
+                    label="Identifiant de connexion"
+                    placeholder="Adresse email ou numéro de téléphone"
                     required={true}
-                    name="firstname"
-
-                    // validations={[
-                    //   {
-                    //     rule: isEmail(),
-                    //     message: 'This is not a valid email',
-                    //   },
-                    //   {
-                    //     rule: isRequired(),
-                    //     message: 'Please enter your firstname',
-                    //   }
-                    // ]}
-                  />
-                  <TextField
-                    label="lastname"
-                    placeholder="Votre nom"
-                    required={true}
-                    name="lastname"
+                    name="username"
+                    validations={[
+                      {
+                        rule: isRequired(),
+                        message: "Merci d'indiquer votre email"
+                      },
+                      {
+                        rule: isEmail(),
+                        message: "L'adresse email n'est pas valide"
+                      }
+                    ]}
                   />
                 </FormizStep>
                 <FormizStep as={View} name="step2">
+                  <TextField
+                    label="Mot de passe"
+                    placeholder="Votre mot de passe"
+                    required={true}
+                    name="password"
+                    secureTextEntry={true}
+                    validations={[
+                      {
+                        rule: isRequired(),
+                        message: "Veuillez choisir un mot de passe"
+                      },
+                      {
+                        rule: value => {
+                          let strongPassword = new RegExp('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})');
+                          return strongPassword.test(value);
+                        },
+                        message: "Le mot de passe doit contenir au moins une minuscule, une majuscule et un caractère spécial"
+                      }
+                    ]}
+                  />
+                  <TextField
+                    label="Confirmation"
+                    placeholder="Confirmation"
+                    required={true}
+                    name="repeat-password"
+                    secureTextEntry={true}
+                    validations={[
+                      {
+                        rule: isRequired(),
+                        message: "Veuillez confirmer votre mot de passe"
+                      },
+                      {
+                        rule: value => value === registrationForm.values.password,
+                        message: "Les mots de passe ne sont pas identiques"
+                      }
+                    ]}
+                  />
+            
+                </FormizStep>
+                  <TextField
+                      label="Votre prénom"
+                      placeholder="Votre prénom"
+                      required={true}
+                      name="firstname"
+                      validations={[
+                        {
+                          rule: isRequired(),
+                          message: "Merci d'indiquer votre prénom",
+                        }
+                      ]}
+                    />
+                  <TextField
+                      label="Votre nom"
+                      placeholder="Votre nom"
+                      required={true}
+                      name="lastname"
+                      validations={[
+                        {
+                          rule: isRequired(),
+                          message: "Merci d'indiquer votre nom",
+                        }
+                      ]}
+                    />
+                <FormizStep as={View} name="step3">
+                  <TextField
+                        label="Quel âge avez-vous ?"
+                        placeholder="Votre âge"
+                        required={true}
+                        name="birthday"
+                        validations={[
+                          {
+                            rule: isRequired(),
+                            message: "Merci d'indiquer votre âge",
+                          }
+                        ]}
+                    />
+                </FormizStep>
+                <FormizStep as={View} name="step4">
+                </FormizStep>
+                <FormizStep as={View} name="step5">
+                </FormizStep>
+                <FormizStep as={View} name="step6">
                   <TextField
                     label="email"
                     placeholder="Votre email"
                     required={true}
                     name="email"
+                    validations={[
+                      {
+                        rule: isRequired(),
+                        message: "Merci d'indiquer votre email"
+                      },
+                      {
+                        rule: isEmail(),
+                        message: "L'adresse email n'est pas valide"
+                      }
+                    ]}
                   />
                 </FormizStep>
                 <FormizStep as={View} name="step3">
-                  <TextField
-                      label="birthday"
-                      placeholder="Votre date de naissance"
-                      required={true}
-                      name="birthday"
-                  />
                 </FormizStep>
               </Carousel>
 
@@ -107,37 +204,45 @@ export const Register: React.FC = observer(({}) => {
               <View>
                 {!registrationForm.isFirstStep && (
                   <Button
-                    style={style.button}
-                    success
+                    marginT-s4 
+                    backgroundColor={Colors.accent}
+                    color="#FFFFFF"
+                    labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
+                    label="Précédent"
+                    borderRadius={7}
+                    style={{height: 45, marginBottom: 20}}
                     onPress={() => {
                       registrationForm.prevStep();
                       carousel.current?.goToPage(registrationForm.currentStep?.index - 1);
                     }}
-                  >
-                    <Text>Previous</Text>
-                  </Button>
+                  />
                 )}
               </View>
-              <Text>
-                Etape{' '}
-                {registrationForm.currentStep && registrationForm.currentStep.index + 1}{' '}
-                sur {registrationForm.steps?.length}
-              </Text>
               <View>
                 {registrationForm.isLastStep ? (
                   <Button
-                    success
-                    style={style.button}
+                    marginT-s4 
+                    backgroundColor={Colors.secondary}
+                    color="#FFFFFF"
+                    labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
+                    label="Je m'inscris"
+                    borderRadius={7}
+                    style={{height: 45, marginBottom: 20}}
                     onPress={() => registrationForm.submit()}
                     disabled={
                       !registrationForm.isValid && registrationForm.isStepSubmitted
-                    }>
-                    <Text>Submit</Text>
-                  </Button>
+                    }
+                  />
+
                 ) : (
                   <Button
-                    success
-                    style={style.button}
+                    marginT-s4 
+                    backgroundColor={Colors.accent}
+                    color="#FFFFFF"
+                    labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
+                    label="Suivant"
+                    borderRadius={7}
+                    style={{height: 45, marginBottom: 20}}
                     onPress={() => {
                       registrationForm.submitStep();
                       if(registrationForm.isStepValid) {
@@ -147,9 +252,8 @@ export const Register: React.FC = observer(({}) => {
                     }}
                     disabled={
                       !registrationForm.isStepValid && registrationForm.isStepSubmitted
-                    }>
-                    <Text>Next</Text>
-                  </Button>
+                    }
+                  />
                 )}
               </View>
             </View>
@@ -177,5 +281,10 @@ const style = StyleSheet.create({
   },
   button: {
     margin: 15,
+  },
+  windowsPicker: {
+    flex: 1,
+    paddingTop: 10,
+    width: 350,
   },
 });

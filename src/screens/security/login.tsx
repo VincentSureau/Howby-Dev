@@ -12,7 +12,7 @@ import {validateEmail} from '../../utils/help';
 import { Formiz, useForm } from '@formiz/core';
 import { TextField } from '../../components/form/field';
 import { AuthContext } from '../../context/AuthContext';
-import {isEmail} from '@formiz/validations';
+import {isEmail, isRequired} from '@formiz/validations';
 
 export const Login: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -61,6 +61,10 @@ export const Login: React.FC = observer(({}) => {
               keyboardType="email-address"
               validations={[
                 {
+                  rule: isRequired(),
+                  message: "Merci d'indiquer votre email"
+                },
+                {
                   rule: isEmail(),
                   message: "Votre email n'est pas valide"
                 }
@@ -72,6 +76,12 @@ export const Login: React.FC = observer(({}) => {
               required={true}
               name="password"
               secureTextEntry={true}
+              validations={[
+                {
+                  rule: isRequired(),
+                  message: "Merci d'indiquer votre email"
+                }
+              ]}
             />
             <Button
               marginT-s4 

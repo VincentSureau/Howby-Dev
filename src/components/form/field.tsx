@@ -50,7 +50,8 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     textAlign: 'center',
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    marginBottom: 10
   },
   withUnderline: {
     borderBottomWidth: 1,
