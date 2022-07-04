@@ -10,6 +10,7 @@ interface FieldProps {
   required?: boolean;
   placeholder: string;
   name: string;
+  value: any;
 };
 
 export const TextField: React.FC<FieldProps> = (props: FieldProps) => {
@@ -23,7 +24,7 @@ export const TextField: React.FC<FieldProps> = (props: FieldProps) => {
     return (
       <View marginB-s4>
         <Incubator.TextField
-            label={label + (required && ' *')}
+            label={label + ((required && ' *') || '')}
             labelStyle={StyleSheet.flatten([styles.label, {color: Colors.secondary}])}
             fieldStyle={styles.withUnderline}
             value={value || ''}

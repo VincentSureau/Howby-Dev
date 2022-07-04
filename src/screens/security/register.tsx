@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {ScrollView, Alert, ActivityIndicator, StyleSheet} from 'react-native';
-import {View, Text, Button, Carousel, Colors} from 'react-native-ui-lib';
+import {ScrollView, Alert, ActivityIndicator, StyleSheet, Platform} from 'react-native';
+import {View, Text, Button, Carousel, Colors, TouchableOpacity} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
 
@@ -18,12 +18,26 @@ import { isRequired } from '@formiz/validations'
 
 import * as Progress from 'react-native-progress';
 import DateTimePicker from '@react-native-community/datetimepicker';
-
-
+import moment from 'moment';
 
 export const Register: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
   const {counter, ui} = useStores();
+
+  const [date, setDate] = useState(new Date());
+  const [show, setShow] = useState(false);
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate;
+    setShow(false);
+    setDate(currentDate);
+  };
+
+  const showDatepicker = () => {
+    setShow(true);
+  };
+
+  console.log(Platform.OS)
 
   const inputName = useRef<typeof TextField>(null);
 
@@ -89,6 +103,45 @@ export const Register: React.FC = observer(({}) => {
                 ref={carousel}
               >  
                 <FormizStep as={View} name="step1">
+
+                  {Platform.OS === "web" ? (
+                      <TextField 
+                        name="birthday"
+                        placeholder="jj/mm/yyyy"
+                        label="Votre date de naissance"
+                        required={true}
+                        value={moment(date).format('DD/MM/YYYY')}
+                        onChange={onChange}
+                      />
+                  ) : (
+                    <>
+                      <TouchableOpacity onPress={showDatepicker}>
+                        <TextField 
+                          name="birthday"
+                          placeholder="Votre date de naissance"
+                          label="Votre date de naissance"
+                          required={false}
+                          value={moment(date).format('DD/MM/YYYY')}
+                          editable={false}
+                          onChange={onChange}
+                        />
+                      </TouchableOpacity>
+                      {show && (
+                        <DateTimePicker
+                          testID="dateTimePicker"
+                          required={true}
+                          value={date}
+                          mode="date"
+                          is24Hour={true}
+                          onChange={onChange}
+                        />
+                      )}
+                    </>
+                  )
+
+                }
+
+
                   <TextField 
                     label="Identifiant de connexion"
                     placeholder="Adresse email ou numéro de téléphone"
