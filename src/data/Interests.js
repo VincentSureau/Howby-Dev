@@ -32,18 +32,6 @@ export const INTERESTS = [
         value: 8
     },
     {
-        label: 'Restaurant',
-        value: 9
-    },
-    {
-        label: 'Restaurant',
-        value: 8
-    },
-    {
-        label: 'Bar',
-        value: 9
-    },
-    {
         label: 'Boite de nuit',
         value: 10
     },

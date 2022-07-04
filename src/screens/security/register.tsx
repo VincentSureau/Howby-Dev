@@ -19,7 +19,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import { SelectField } from '../../components/form/select_field';
 import { INTERESTS } from '../../data/Interests';
-// import { SelectMultipleField } from '../../components/form/select_multiple_field';
+import { SelectMultipleField } from '../../components/form/select_multiple_field';
 
 export const Register: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -37,8 +37,6 @@ export const Register: React.FC = observer(({}) => {
   const showDatepicker = () => {
     setShow(true);
   };
-
-  console.log(Platform.OS)
 
   const inputName = useRef<typeof TextField>(null);
 
@@ -69,9 +67,6 @@ export const Register: React.FC = observer(({}) => {
     return Math.round((registrationForm.currentStep.index + 1) / registrationForm.steps.length * 100)/100;
   }
   
- 
-
-
   return (
 
     <View flex bg-bgColor>
@@ -100,17 +95,6 @@ export const Register: React.FC = observer(({}) => {
                 ref={carousel}
               >  
                 <FormizStep as={View} name="step1">
-                  {/* <SelectMultipleField
-                      label="Choisissez 5 centres d'intêret ou plus"
-                      name="interests"
-                      validations={[
-                        {
-                          rule: (val) => (val || {}).selectedCount >= 5,
-                          message: "Merci de choisir au moins 5 centres d'intêrets",
-                        },
-                      ]}
-                      options={INTERESTS}
-                  /> */}
                   <TextField 
                     label="Identifiant de connexion"
                     placeholder="Adresse email ou numéro de téléphone"
@@ -244,11 +228,21 @@ export const Register: React.FC = observer(({}) => {
                   }
 
                 </FormizStep>
-                <FormizStep as={View} name="step5">
-
-                </FormizStep>
                 <FormizStep as={View} name="step6">
 
+                </FormizStep>
+                <FormizStep as={View} name="step7">
+                  <SelectMultipleField
+                      label="Choisissez 5 centres d'intêret ou plus"
+                      name="interests"
+                      validations={[
+                        {
+                          rule: (val) => (val || []).length >= 5,
+                          message: "Merci de choisir au moins 5 centres d'intêrets",
+                        },
+                      ]}
+                      options={INTERESTS}
+                    />
                 </FormizStep>
 
               </Carousel>
@@ -301,7 +295,6 @@ export const Register: React.FC = observer(({}) => {
                     onPress={() => {
                       registrationForm.submitStep();
                       if(registrationForm.isStepValid) {
-                        console.log(carousel);
                         carousel?.current?.goToNextPage();
                       }
                     }}

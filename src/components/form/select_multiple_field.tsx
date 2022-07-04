@@ -1,7 +1,7 @@
 import React from 'react';
 import { useField } from '@formiz/core';
 import { If } from '@kanzitelli/if-component';
-import { StyleSheet } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import {View, Text, Colors, Button} from 'react-native-ui-lib';
 
 interface Choice {
@@ -39,67 +39,56 @@ export const SelectMultipleField: React.FC<SelectMultipleFieldProps> = (props: S
       ...rest
     } = otherProps;
   
-    const { selectedImages: selectedImagesDebounced } = valueDebounced || {
-      selectedImages: [],
-    };
+    const selectedValuesDebounced = valueDebounced || [];
 
-    const showError = !isValid && (selectedImagesDebounced.length >= 2 || isSubmitted);
+    const showError = !isValid && (selectedValuesDebounced.length >= 2 || isSubmitted);
 
-    const { selectedImages } = value || { selectedImages: [] };
-
-    const formGroupProps = {
-      errorMessage,
-      helper,
-      id,
-      isRequired: !!required,
-      label,
-      showError,
-      name,
-      ...rest,
-    };
+    const selectedValues = value || [];
   
     const changeValue = (itemValue, itemIndex) => {
-      const nextValues = (selectedImages.find((x) => x.index === itemIndex)
-        ? selectedImages.filter((x) => x.index !== itemIndex)
-        : [
-          selectedImages[1] || selectedImages[0],
-          {
-            value: itemValue,
-            index: itemIndex,
-          },
-        ]
-      ).filter((x) => !!x);
+      const nextValues = selectedValues.find(x => x === itemValue.value)
+        ? selectedValues.filter(x => x !== itemValue.value)
+        : [...selectedValues,itemValue.value]
+      ;
   
-      const isIdentical = !!nextValues[0]
-        && !!nextValues[1]
-        && nextValues[0].value === nextValues[1].value;
-  
-      setValue(
-        nextValues.length
-          ? {
-            isIdentical,
-            value: isIdentical ? nextValues[0].value : null,
-            selectedCount: nextValues.length,
-            selectedImages: nextValues,
-          }
-          : null,
-      );
-    };
-
-    const renderItem = ({item}: {item: any}) => {
-      return (
-        <Button label={item.label} />
-      );
+      setValue(nextValues);
     };
   
-    console.log(options);
     return (
-      <View>
-        {/* <FlatList
-          data={options}
-          renderItem={renderItem}
-          keyExtractor={item => item.value.toString()}
-        /> */}
+      <View marginB-s4>
+        <Text style={StyleSheet.flatten([styles.label, {color: Colors.secondary}])}>
+          {label + ((required && ' *') || '')}
+        </Text>
+        <View flex row style={{flexWrap: 'wrap', justifyContent: 'space-between'}}>
+          {options.map((item, index) => {
+            return <Button
+              key={index}
+              label={item.label}
+              onPress={() => changeValue(item, index)}
+              backgroundColor={
+                selectedValues.find(x => x ===  item.value)
+                ? Colors.accent
+                : '#FFFFFF'
+              }
+              color={
+                selectedValues.find(x => x ===  item.value)
+                ? '#FFFFFF'
+                : Colors.accent
+              }
+              marginT-s1 
+              marginB-s1
+              labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
+              borderRadius={7}
+              borderColor={Colors.accent}
+              outlineColor={Colors.accent}
+              style={{height: 45, width: '48%'}}
+            />
+          })}
+        </View>
+        <If 
+            _={showError && errorMessage != null}
+            _then={() => <Text style={styles.error}>{errorMessage}</Text>} 
+        />
       </View>
     );
 };
@@ -114,14 +103,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 10
-  },
-  withUnderline: {
-    borderBottomWidth: 1,
-    borderColor: "#000000",
-    paddingBottom: 4
-  },
-  hiddentInput: {
-    height: 0,
-    width: 0
   },
 });
