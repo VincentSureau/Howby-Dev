@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {ScrollView, Alert, ActivityIndicator, StyleSheet, Platform} from 'react-native';
-import {View, Text, Button, Carousel, Colors, TouchableOpacity, Incubator} from 'react-native-ui-lib';
+import {View, Text, Button, Colors, TouchableOpacity, Incubator, Carousel} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
 
@@ -20,6 +20,8 @@ import * as Progress from 'react-native-progress';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import { SelectField } from '../../components/form/select_field';
+import { INTERESTS } from '../../data/Interests';
+// import { SelectMultipleField } from '../../components/form/select_multiple_field';
 
 export const Register: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -104,6 +106,11 @@ export const Register: React.FC = observer(({}) => {
                 ref={carousel}
               >  
                 <FormizStep as={View} name="step1">
+                  {/* <SelectMultipleField
+                        label="Vous vous définissez en tant que"
+                        name="gender"
+                        items={INTERESTS}
+                    /> */}
                   <TextField 
                     label="Identifiant de connexion"
                     placeholder="Adresse email ou numéro de téléphone"
@@ -238,11 +245,12 @@ export const Register: React.FC = observer(({}) => {
 
                 </FormizStep>
                 <FormizStep as={View} name="step5">
+
                 </FormizStep>
                 <FormizStep as={View} name="step6">
+
                 </FormizStep>
-                <FormizStep as={View} name="step3">
-                </FormizStep>
+
               </Carousel>
 
             </Formiz>
