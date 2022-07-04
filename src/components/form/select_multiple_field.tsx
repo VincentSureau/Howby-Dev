@@ -1,8 +1,8 @@
+import React from 'react';
 import { useField } from '@formiz/core';
 import { If } from '@kanzitelli/if-component';
-import React from 'react';
-import { StyleSheet, StatusBar, Image, Pressable, TextInput } from 'react-native';
-import {View, Text, TouchableOpacity, Incubator, Colors, Button} from 'react-native-ui-lib';
+import { StyleSheet } from 'react-native';
+import {View, Text, Colors, Button} from 'react-native-ui-lib';
 
 interface Choice {
   label: string;
@@ -18,41 +18,88 @@ interface SelectMultipleFieldProps {
 };
 
 export const SelectMultipleField: React.FC<SelectMultipleFieldProps> = (props: SelectMultipleFieldProps) => {
-    const {errorMessage, isValid, isSubmitted, setValue, value} = useField(props);
+    const {
+      errorMessage,
+      id,
+      isValid,
+      isSubmitted,
+      setValue,
+      value,
+      valueDebounced,
+      otherProps,
+    } = useField(props);
 
-    const {label, required, name, ...otherProps} = props;
+    const { required, name } = props;
+    const {
+      children,
+      label,
+      options,
+      helper,
+      validMessage,
+      ...rest
+    } = otherProps;
   
-    const [isTouched, setIsTouched] = React.useState(false);
-    const showError = !isValid && (isTouched || isSubmitted);
+    const { selectedImages: selectedImagesDebounced } = valueDebounced || {
+      selectedImages: [],
+    };
 
+    const showError = !isValid && (selectedImagesDebounced.length >= 2 || isSubmitted);
+
+    const { selectedImages } = value || { selectedImages: [] };
+
+    const formGroupProps = {
+      errorMessage,
+      helper,
+      id,
+      isRequired: !!required,
+      label,
+      showError,
+      name,
+      ...rest,
+    };
+  
+    const changeValue = (itemValue, itemIndex) => {
+      const nextValues = (selectedImages.find((x) => x.index === itemIndex)
+        ? selectedImages.filter((x) => x.index !== itemIndex)
+        : [
+          selectedImages[1] || selectedImages[0],
+          {
+            value: itemValue,
+            index: itemIndex,
+          },
+        ]
+      ).filter((x) => !!x);
+  
+      const isIdentical = !!nextValues[0]
+        && !!nextValues[1]
+        && nextValues[0].value === nextValues[1].value;
+  
+      setValue(
+        nextValues.length
+          ? {
+            isIdentical,
+            value: isIdentical ? nextValues[0].value : null,
+            selectedCount: nextValues.length,
+            selectedImages: nextValues,
+          }
+          : null,
+      );
+    };
+
+    const renderItem = ({item}: {item: any}) => {
+      return (
+        <Button label={item.label} />
+      );
+    };
+  
+    console.log(options);
     return (
-      <View marginB-s4>
-        <Text style={StyleSheet.flatten([styles.label, {color: Colors.secondary}])}>
-          {label + ((required && ' *') || '')}
-        </Text>
-        {props.items.map((item, index) => (
-          <Button 
-            label={item.label} 
-            marginT-s4 
-            backgroundColor={item.value == value ? Colors.secondary : Colors.accent}
-            color="#FFFFFF"
-            labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-            borderRadius={7}
-            style={{height: 45, marginBottom: 10}}
-            onPress={() => setValue(item.value)}
-          />
-        ))}
-        <TextInput
-            style={styles.hiddentInput}
-            value={value || props.initialValue || ''}
-            onChangeText={setValue}
-            onBlur={() => setIsTouched(true)}
-            {...otherProps}
-        />
-        <If 
-            _={showError && errorMessage != null}
-            _then={() => <Text style={styles.error}>{errorMessage}</Text>} 
-        />
+      <View>
+        {/* <FlatList
+          data={options}
+          renderItem={renderItem}
+          keyExtractor={item => item.value.toString()}
+        /> */}
       </View>
     );
 };

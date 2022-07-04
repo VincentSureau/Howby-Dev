@@ -1,14 +1,12 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {ScrollView, Alert, ActivityIndicator, StyleSheet, Platform} from 'react-native';
-import {View, Text, Button, Colors, TouchableOpacity, Incubator, Carousel} from 'react-native-ui-lib';
+import {View, Text, Button, Colors, TouchableOpacity, Carousel} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
-import {If} from '@kanzitelli/if-component';
 
 import {useServices} from '../../services';
 import {useStores} from '../../stores';
 
 import {Section} from '../../components/section';
-import {validateEmail} from '../../utils/help';
 
 import { Formiz, useForm, FormizStep } from '@formiz/core';
 import { TextField } from '../../components/form/field';
@@ -80,10 +78,6 @@ export const Register: React.FC = observer(({}) => {
       
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View padding-s4>
-          <View>
-  
-
-          </View>
           <Section title={t.do('registration.title')}>
             <View marginB-s4>
               <Progress.Bar progress={calculProgress()} color={Colors.secondary} width={null} />
@@ -107,10 +101,16 @@ export const Register: React.FC = observer(({}) => {
               >  
                 <FormizStep as={View} name="step1">
                   {/* <SelectMultipleField
-                        label="Vous vous définissez en tant que"
-                        name="gender"
-                        items={INTERESTS}
-                    /> */}
+                      label="Choisissez 5 centres d'intêret ou plus"
+                      name="interests"
+                      validations={[
+                        {
+                          rule: (val) => (val || {}).selectedCount >= 5,
+                          message: "Merci de choisir au moins 5 centres d'intêrets",
+                        },
+                      ]}
+                      options={INTERESTS}
+                  /> */}
                   <TextField 
                     label="Identifiant de connexion"
                     placeholder="Adresse email ou numéro de téléphone"

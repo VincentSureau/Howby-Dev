@@ -3,7 +3,6 @@ import { If } from '@kanzitelli/if-component';
 import React from 'react';
 import { StyleSheet, StatusBar, Image, Pressable, TextInput } from 'react-native';
 import {View, Text, TouchableOpacity, Incubator, Colors, Button} from 'react-native-ui-lib';
-import { TextFieldProps } from 'react-native-ui-lib/generatedTypes/src/incubator';
 
 interface Choice {
   label: string;
@@ -33,6 +32,7 @@ export const SelectField: React.FC<SelectFieldProps> = (props: SelectFieldProps)
         </Text>
         {props.items.map((item, index) => (
           <Button 
+            key={index}
             label={item.label} 
             marginT-s4 
             backgroundColor={item.value == value ? Colors.secondary : Colors.accent}
