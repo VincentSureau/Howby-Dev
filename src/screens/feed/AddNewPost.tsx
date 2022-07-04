@@ -36,7 +36,7 @@ const AddNewPost = () => {
 
           <TextInput
           style={{color: 'black', fontSize: 20}}
-            onChange={e => setUrl(e.nativeEvent.text)}
+            onChange={(e) => setUrl(e.nativeEvent.text)}
             placeholder="Entrez l'url d'une image"
             onChangeText={handleChange('imageUrl')}
           />
@@ -46,6 +46,7 @@ const AddNewPost = () => {
     </Formik>
   );
 };
+
 
 export default AddNewPost;
 function usestate(arg0: boolean): [any, any] {
