@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {ScrollView, Alert, ActivityIndicator, StyleSheet, Platform} from 'react-native';
-import {View, Text, Button, Carousel, Colors, TouchableOpacity} from 'react-native-ui-lib';
+import {View, Text, Button, Carousel, Colors, TouchableOpacity, Incubator} from 'react-native-ui-lib';
 import {observer} from 'mobx-react';
 import {If} from '@kanzitelli/if-component';
 
@@ -19,6 +19,7 @@ import { isRequired } from '@formiz/validations'
 import * as Progress from 'react-native-progress';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
+import { SelectField } from '../../components/form/select_field';
 
 export const Register: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -94,45 +95,6 @@ export const Register: React.FC = observer(({}) => {
                 ref={carousel}
               >  
                 <FormizStep as={View} name="step1">
-
-                  {Platform.OS === "web" ? (
-                      <TextField 
-                        name="birthday"
-                        placeholder="jj/mm/yyyy"
-                        label="Votre date de naissance"
-                        required={true}
-                        value={moment(date).format('DD/MM/YYYY')}
-                        onChange={onChange}
-                      />
-                  ) : (
-                    <>
-                      <TouchableOpacity onPress={showDatepicker}>
-                        <TextField 
-                          name="birthday"
-                          placeholder="Votre date de naissance"
-                          label="Votre date de naissance"
-                          required={false}
-                          value={moment(date).format('DD/MM/YYYY')}
-                          editable={false}
-                          onChange={onChange}
-                        />
-                      </TouchableOpacity>
-                      {show && (
-                        <DateTimePicker
-                          testID="dateTimePicker"
-                          required={true}
-                          value={date}
-                          mode="date"
-                          is24Hour={true}
-                          onChange={onChange}
-                        />
-                      )}
-                    </>
-                  )
-
-                }
-
-
                   <TextField 
                     label="Identifiant de connexion"
                     placeholder="Adresse email ou numéro de téléphone"
@@ -190,65 +152,83 @@ export const Register: React.FC = observer(({}) => {
                   />
             
                 </FormizStep>
-                  <TextField
-                      label="Votre prénom"
-                      placeholder="Votre prénom"
-                      required={true}
-                      name="firstname"
-                      validations={[
-                        {
-                          rule: isRequired(),
-                          message: "Merci d'indiquer votre prénom",
-                        }
-                      ]}
-                    />
-                  <TextField
-                      label="Votre nom"
-                      placeholder="Votre nom"
-                      required={true}
-                      name="lastname"
-                      validations={[
-                        {
-                          rule: isRequired(),
-                          message: "Merci d'indiquer votre nom",
-                        }
-                      ]}
-                    />
                 <FormizStep as={View} name="step3">
-                  <TextField
-                        label="Quel âge avez-vous ?"
-                        placeholder="Votre âge"
-                        required={true}
-                        name="birthday"
-                        validations={[
-                          {
-                            rule: isRequired(),
-                            message: "Merci d'indiquer votre âge",
-                          }
-                        ]}
+                  <SelectField
+                      label="Vous vous définissez en tant que"
+                      name="gender"
+                      items={[{label: 'Femme', value: 'female'}, {label: 'Homme', value: 'male'}, {label: 'Autre', value: 'other'}]}
+                      initialValue={'female'}
                     />
                 </FormizStep>
                 <FormizStep as={View} name="step4">
+                  <TextField
+                        label="Votre prénom"
+                        placeholder="Votre prénom"
+                        required={true}
+                        name="firstname"
+                        validations={[
+                          {
+                            rule: isRequired(),
+                            message: "Merci d'indiquer votre prénom",
+                          }
+                        ]}
+                      />
+                    <TextField
+                        label="Votre nom"
+                        placeholder="Votre nom"
+                        required={true}
+                        name="lastname"
+                        validations={[
+                          {
+                            rule: isRequired(),
+                            message: "Merci d'indiquer votre nom",
+                          }
+                        ]}
+                      />
+
+                </FormizStep>
+                <FormizStep as={View} name="step5">
+                  {Platform.OS === "web" ? (
+                        <TextField 
+                          name="birthday"
+                          placeholder="jj/mm/yyyy"
+                          label="Votre date de naissance"
+                          required={true}
+                          value={moment(date).format('DD/MM/YYYY')}
+                          onChange={onChange}
+                        />
+                    ) : (
+                      <>
+                        <TouchableOpacity onPress={showDatepicker}>
+                          <TextField 
+                            name="birthday"
+                            placeholder="Votre date de naissance"
+                            label="Votre date de naissance"
+                            required={false}
+                            value={moment(date).format('DD/MM/YYYY')}
+                            editable={false}
+                            onChange={onChange}
+                          />
+                        </TouchableOpacity>
+                        {show && (
+                          <DateTimePicker
+                            testID="dateTimePicker"
+                            required={true}
+                            value={date}
+                            mode="date"
+                            is24Hour={true}
+                            onChange={onChange}
+                          />
+                        )}
+                      </>
+                    )
+
+                  }
+
                 </FormizStep>
                 <FormizStep as={View} name="step5">
                 </FormizStep>
                 <FormizStep as={View} name="step6">
-                  <TextField
-                    label="email"
-                    placeholder="Votre email"
-                    required={true}
-                    name="email"
-                    validations={[
-                      {
-                        rule: isRequired(),
-                        message: "Merci d'indiquer votre email"
-                      },
-                      {
-                        rule: isEmail(),
-                        message: "L'adresse email n'est pas valide"
-                      }
-                    ]}
-                  />
                 </FormizStep>
                 <FormizStep as={View} name="step3">
                 </FormizStep>
