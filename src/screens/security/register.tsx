@@ -28,25 +28,19 @@ export const Register: React.FC = observer(({ }) => {
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  const [text, setText] = useState('Empty');
+  const [birthdayDateText, setBirthdayDateText] = useState(moment(new Date()).format('DD/MM/YYYY'));
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
-    setShow(Platform.OS === 'android');
+    setShow(false);
     setDate(currentDate);
 
-    let tempDate = new Date(currentDate);
-    let formatedDate =
-      tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
-    let formatedTime = 'Hours:' + tempDate.getHours() + ' | Minutes:' + tempDate.getMinutes();
-    setText(formatedDate + '\n' + formatedTime);
-
-    console.log(formatedDate + formatedTime);
-  };
-
-  const showMode = currentMode => {
-    setShow(true);
-    setMode(currentMode);
+    // let tempDate = new Date(currentDate);
+    // let formatedDate =
+    //   tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
+    // let formatedTime = 'Hours:' + tempDate.getHours() + ' | Minutes:' + tempDate.getMinutes();
+    // setText(formatedDate + '\n' + formatedTime);
+    setBirthdayDateText(moment(currentDate).format('DD/MM/YYYY'));
   };
 
   const inputName = useRef<typeof TextField>(null);
@@ -117,22 +111,6 @@ export const Register: React.FC = observer(({ }) => {
                       },
                     ]}
                   />
-                  <View style={{ margin: 20 }}>
-                    <Button label='DatePicker' onPress={() => showMode('date')} />
-                  </View>
-                  <View style={{ margin: 20 }}>
-                    <Button label='TimePicker' onPress={() => showMode('time')} />
-                  </View>
-                  {show && (
-                    <DateTimePicker
-                      testID="dateTimePicker"
-                      value={date}
-                      mode={mode}
-                      is24Hour={true}
-                      display="default"
-                      onChange={onChange}
-                    />
-                  )}
                 </FormizStep>
 
                 <FormizStep as={View} name="step2">
@@ -216,7 +194,6 @@ export const Register: React.FC = observer(({ }) => {
                   />
                 </FormizStep>
                 <FormizStep as={View} name="step5">
-                </FormizStep>
                 
                   {Platform.OS === 'web' ? (
                     <TextField
@@ -227,63 +204,51 @@ export const Register: React.FC = observer(({ }) => {
                       value={moment(date).format('DD/MM/YYYY')}
                     />
                   ) : (
-                    
-                      
-                        <TextField
-                          name="birthday"
-                          placeholder="Votre date de naissance"
-                          label="Votre date de naissance"
-                          required={false}
-                          value={moment(date).format('DD/MM/YYYY')}
-                          editable={true}
-                        />
-
-                        ) : (
                         <>
-                          <TouchableOpacity>
+                          <TouchableOpacity
+                            onPress={() => setShow(true)}
+                          >
                             <TextField
                               name="birthday"
                               placeholder="Votre date de naissance"
                               label="Votre date de naissance"
                               required={false}
-                              value={moment(date).format('DD/MM/YYYY')}
-                              editable={false}
-
+                              value={birthdayDateText}
+                              editable={true}
+                              onPressIn={() => setShow(true)}
                             />
                           </TouchableOpacity>
                           {show && (
                             <DateTimePicker
+                              locale='fr-FR'
                               testID="dateTimePicker"
-                              required={true}
                               value={date}
                               mode="date"
-                              is24Hour={true}
-
+                              onChange={onChange}
                             />
                           )}
-                        
-                        )
-                        
-
+                        </>
+                      )
                   }
 
-                      
-                      <FormizStep as={View} name="step6">
+                </FormizStep>
 
-                      </FormizStep>
-                      <FormizStep as={View} name="step7">
-                        <SelectMultipleField
-                          label="Choisissez 5 centres d'intêret ou plus"
-                          name="interests"
-                          validations={[
-                            {
-                              rule: (val) => (val || []).length >= 5,
-                              message: "Merci de choisir au moins 5 centres d'intêrets",
-                            },
-                          ]}
-                          options={INTERESTS}
-                        />
-                      </FormizStep>
+                <FormizStep as={View} name="step6">
+
+                </FormizStep>
+                <FormizStep as={View} name="step7">
+                  <SelectMultipleField
+                    label="Choisissez 5 centres d'intêret ou plus"
+                    name="interests"
+                    validations={[
+                      {
+                        rule: (val) => (val || []).length >= 5,
+                        message: "Merci de choisir au moins 5 centres d'intêrets",
+                      },
+                    ]}
+                    options={INTERESTS}
+                  />
+                </FormizStep>
 
               </Carousel>
             </Formiz>
@@ -342,11 +307,10 @@ export const Register: React.FC = observer(({ }) => {
                 </View>
 
               </Section>
-            
+            </View>
           </ScrollView>
 
         </View>
-    </View
   );
 });
 
