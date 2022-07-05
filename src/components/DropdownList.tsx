@@ -1,9 +1,7 @@
-import { View, Text } from 'react-native'
 import React from 'react'
+import { View, Text } from 'react-native'
 import SelectList from 'react-native-dropdown-select-list'
 import { Departements } from '../data/Departements'
-
-const [selected, setSelected] = React.useState("");
 
 const data = [
     {
@@ -33,11 +31,13 @@ const data = [
 ]
 
 const DropdownList = () => {
-  return (
-    <View style = {{paddingHorizontal: 20, paddingVertical: 50, flex: 1}}>
-      <SelectList data ={data} setSelected={setSelected} />
-    </View>
-  )
+    const [selected, setSelected] = React.useState(null);
+
+    return (
+        <View style = {{paddingHorizontal: 20, paddingVertical: 50, flex: 1}}>
+        <SelectList data={data} setSelected={setSelected} />
+        </View>
+    )
 }
 
 export default DropdownList
