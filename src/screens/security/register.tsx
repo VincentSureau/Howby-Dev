@@ -20,6 +20,7 @@ import moment from 'moment';
 import { SelectField } from '../../components/form/select_field';
 import { INTERESTS } from '../../data/Interests';
 import { SelectMultipleField } from '../../components/form/select_multiple_field';
+import DropdownList from '../../components/DropdownList';
 
 export const Register: React.FC = observer(({ }) => {
   const { nav, t, api } = useServices();
@@ -237,7 +238,7 @@ export const Register: React.FC = observer(({ }) => {
                 </FormizStep>
 
                 <FormizStep as={View} name="step6">
-
+                    <DropdownList />
                 </FormizStep>
                 <FormizStep as={View} name="step7">
                   <SelectMultipleField
