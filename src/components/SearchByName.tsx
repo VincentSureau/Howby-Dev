@@ -94,8 +94,6 @@ const SearchByName = ({contacts}: SearchByNameProps) => {
         data={filteredUsers}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
-        
-        
       />
       </SafeAreaView>
     </View>

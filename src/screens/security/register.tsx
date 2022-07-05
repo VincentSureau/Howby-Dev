@@ -1,39 +1,29 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {ScrollView, Alert, ActivityIndicator, StyleSheet, Platform} from 'react-native';
-import {
-  View,
-  Text,
-  Button,
-  Carousel,
-  Colors,
-  TouchableOpacity,
-  Incubator,
-} from 'react-native-ui-lib';
-import {observer} from 'mobx-react';
-import {If} from '@kanzitelli/if-component';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { ScrollView, Alert, ActivityIndicator, StyleSheet, Platform } from 'react-native';
+import { View, Text, Button, Colors, TouchableOpacity, Carousel } from 'react-native-ui-lib';
+import { observer } from 'mobx-react';
 
-import {useServices} from '../../services';
-import {useStores} from '../../stores';
+import { useServices } from '../../services';
+import { useStores } from '../../stores';
 
-import {Section} from '../../components/section';
-import {validateEmail} from '../../utils/help';
+import { Section } from '../../components/section';
 
-import {Formiz, useForm, FormizStep} from '@formiz/core';
-import {TextField} from '../../components/form/field';
+import { Formiz, useForm, FormizStep } from '@formiz/core';
+import { TextField } from '../../components/form/field';
 
-import {isEmail} from '@formiz/validations';
-import {isRequired} from '@formiz/validations';
+import { isEmail } from '@formiz/validations';
+import { isRequired } from '@formiz/validations';
 
 import * as Progress from 'react-native-progress';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
-import {SelectField} from '../../components/form/select_field';
+import { SelectField } from '../../components/form/select_field';
+import { INTERESTS } from '../../data/Interests';
+import { SelectMultipleField } from '../../components/form/select_multiple_field';
 
-import {Departements} from '../../data/Departements';
-
-export const Register: React.FC = observer(({}) => {
-  const {nav, t, api} = useServices();
-  const {counter, ui} = useStores();
+export const Register: React.FC = observer(({ }) => {
+  const { nav, t, api } = useServices();
+  const { counter, ui } = useStores();
 
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
@@ -51,15 +41,13 @@ export const Register: React.FC = observer(({}) => {
     let formatedTime = 'Hours:' + tempDate.getHours() + ' | Minutes:' + tempDate.getMinutes();
     setText(formatedDate + '\n' + formatedTime);
 
-    console.log(formatedDate + ' (' + formatedTime + ')');
+    console.log(formatedDate + formatedTime);
   };
 
   const showMode = currentMode => {
     setShow(true);
     setMode(currentMode);
   };
-
-  console.log(Platform.OS);
 
   const inputName = useRef<typeof TextField>(null);
 
@@ -87,17 +75,13 @@ export const Register: React.FC = observer(({}) => {
       return 0;
     }
 
-    return (
-      Math.round(((registrationForm.currentStep.index + 1) / registrationForm.steps.length) * 100) /
-      100
-    );
-  };
+    return Math.round((registrationForm.currentStep.index + 1) / registrationForm.steps.length * 100) / 100;
+  }
 
   return (
     <View flex bg-bgColor>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <View padding-s4>
-          <View></View>
           <Section title={t.do('registration.title')}>
             <View marginB-s4>
               <Progress.Bar progress={calculProgress()} color={Colors.secondary} width={null} />
@@ -133,12 +117,12 @@ export const Register: React.FC = observer(({}) => {
                       },
                     ]}
                   />
-                    <View style = {{margin: 20}}>
-                      <Button label = 'DatePicker' onPress={() => showMode('date')} />
-                    </View>
-                    <View style = {{margin: 20}}>
-                      <Button label = 'TimePicker' onPress={() => showMode('time')} />
-                    </View>
+                  <View style={{ margin: 20 }}>
+                    <Button label='DatePicker' onPress={() => showMode('date')} />
+                  </View>
+                  <View style={{ margin: 20 }}>
+                    <Button label='TimePicker' onPress={() => showMode('time')} />
+                  </View>
                   {show && (
                     <DateTimePicker
                       testID="dateTimePicker"
@@ -164,7 +148,7 @@ export const Register: React.FC = observer(({}) => {
                         message: 'Veuillez choisir un mot de passe',
                       },
                       {
-                        rule: value => {
+                        rule: (value: string) => {
                           let strongPassword = new RegExp(
                             '(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})',
                           );
@@ -198,9 +182,9 @@ export const Register: React.FC = observer(({}) => {
                     label="Vous vous définissez en tant que"
                     name="gender"
                     items={[
-                      {label: 'Femme', value: 'female'},
-                      {label: 'Homme', value: 'male'},
-                      {label: 'Autre', value: 'other'},
+                      { label: 'Femme', value: 'female' },
+                      { label: 'Homme', value: 'male' },
+                      { label: 'Autre', value: 'other' },
                     ]}
                     initialValue={'female'}
                   />
@@ -232,6 +216,8 @@ export const Register: React.FC = observer(({}) => {
                   />
                 </FormizStep>
                 <FormizStep as={View} name="step5">
+                </FormizStep>
+                
                   {Platform.OS === 'web' ? (
                     <TextField
                       name="birthday"
@@ -241,8 +227,8 @@ export const Register: React.FC = observer(({}) => {
                       value={moment(date).format('DD/MM/YYYY')}
                     />
                   ) : (
-                    <>
-                      <TouchableOpacity>
+                    
+                      
                         <TextField
                           name="birthday"
                           placeholder="Votre date de naissance"
@@ -251,84 +237,116 @@ export const Register: React.FC = observer(({}) => {
                           value={moment(date).format('DD/MM/YYYY')}
                           editable={true}
                         />
-                      </TouchableOpacity>
-                    </>
-                  )}
-                </FormizStep>
-                <FormizStep as={View} name="step6">
-                  <SelectField
-                    label="Choisissez votre Département"
-                    name="Departement"
-                    items={[
-                      {label: 'Femme', value: 'female'},
-                      {label: 'Homme', value: 'male'},
-                      {label: 'Autre', value: 'other'},
-                    ]}
-                    initialValue={'Gard'}
-                  />
-                  <ScrollView></ScrollView>
-                </FormizStep>
-                <FormizStep as={View} name="step7"></FormizStep>
-                <FormizStep as={View} name="step8"></FormizStep>
+
+                        ) : (
+                        <>
+                          <TouchableOpacity>
+                            <TextField
+                              name="birthday"
+                              placeholder="Votre date de naissance"
+                              label="Votre date de naissance"
+                              required={false}
+                              value={moment(date).format('DD/MM/YYYY')}
+                              editable={false}
+
+                            />
+                          </TouchableOpacity>
+                          {show && (
+                            <DateTimePicker
+                              testID="dateTimePicker"
+                              required={true}
+                              value={date}
+                              mode="date"
+                              is24Hour={true}
+
+                            />
+                          )}
+                        
+                        )
+                        
+
+                  }
+
+                      
+                      <FormizStep as={View} name="step6">
+
+                      </FormizStep>
+                      <FormizStep as={View} name="step7">
+                        <SelectMultipleField
+                          label="Choisissez 5 centres d'intêret ou plus"
+                          name="interests"
+                          validations={[
+                            {
+                              rule: (val) => (val || []).length >= 5,
+                              message: "Merci de choisir au moins 5 centres d'intêrets",
+                            },
+                          ]}
+                          options={INTERESTS}
+                        />
+                      </FormizStep>
+
               </Carousel>
             </Formiz>
+            
 
-            <View style={style.buttons}>
-              <View>
-                {!registrationForm.isFirstStep && (
-                  <Button
-                    marginT-s4
-                    backgroundColor={Colors.accent}
-                    color="#FFFFFF"
-                    labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-                    label="Précédent"
-                    borderRadius={7}
-                    style={{height: 45, marginBottom: 20}}
-                    onPress={() => {
-                      registrationForm.prevStep();
-                      carousel.current?.goToPage(registrationForm.currentStep?.index - 1);
-                    }}
-                  />
-                )}
-              </View>
-              <View>
-                {registrationForm.isLastStep ? (
-                  <Button
-                    marginT-s4
-                    backgroundColor={Colors.secondary}
-                    color="#FFFFFF"
-                    labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-                    label="Je m'inscris"
-                    borderRadius={7}
-                    style={{height: 45, marginBottom: 20}}
-                    onPress={() => registrationForm.submit()}
-                    disabled={!registrationForm.isValid && registrationForm.isStepSubmitted}
-                  />
-                ) : (
-                  <Button
-                    marginT-s4
-                    backgroundColor={Colors.accent}
-                    color="#FFFFFF"
-                    labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
-                    label="Suivant"
-                    borderRadius={7}
-                    style={{height: 45, marginBottom: 20}}
-                    onPress={() => {
-                      registrationForm.submitStep();
-                      if (registrationForm.isStepValid) {
-                        console.log(carousel);
-                        carousel?.current?.goToNextPage();
-                      }
-                    }}
-                    disabled={!registrationForm.isStepValid && registrationForm.isStepSubmitted}
-                  />
-                )}
-              </View>
-            </View>
-          </Section>
+                <View style={style.buttons}>
+                  <View>
+                    {!registrationForm.isFirstStep && (
+                      <Button
+                        marginT-s4
+                        backgroundColor={Colors.accent}
+                        color="#FFFFFF"
+                        labelStyle={{ flexGrow: 1, textAlign: 'center', fontWeight: 'bold' }}
+                        label="Précédent"
+                        borderRadius={7}
+                        style={{ height: 45, marginBottom: 20 }}
+                        onPress={() => {
+                          registrationForm.prevStep();
+                          carousel.current?.goToPage(registrationForm.currentStep?.index - 1);
+                        }}
+                      />
+                    )}
+                  </View>
+                  <View>
+                    {registrationForm.isLastStep ? (
+                      <Button
+                        marginT-s4
+                        backgroundColor={Colors.secondary}
+                        color="#FFFFFF"
+                        labelStyle={{ flexGrow: 1, textAlign: 'center', fontWeight: 'bold' }}
+                        label="Je m'inscris"
+                        borderRadius={7}
+                        style={{ height: 45, marginBottom: 20 }}
+                        onPress={() => registrationForm.submit()}
+                        disabled={!registrationForm.isValid && registrationForm.isStepSubmitted}
+                      />
+                    ) : (
+                      <Button
+                        marginT-s4
+                        backgroundColor={Colors.accent}
+                        color="#FFFFFF"
+                        labelStyle={{ flexGrow: 1, textAlign: 'center', fontWeight: 'bold' }}
+                        label="Suivant"
+                        borderRadius={7}
+                        style={{ height: 45, marginBottom: 20 }}
+                        onPress={() => {
+                          registrationForm.submitStep();
+                          if (registrationForm.isStepValid) {
+                            carousel?.current?.goToNextPage();
+                          }
+                        }}
+                        disabled={!registrationForm.isStepValid && registrationForm.isStepSubmitted}
+                      />
+                    )}
+                  </View>
+                </View>
+
+              </Section>
+            
+          </ScrollView>
+
         </View>
-      </ScrollView>
-    </View>
+    </View
   );
 });
 
