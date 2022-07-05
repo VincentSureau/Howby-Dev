@@ -25,10 +25,11 @@ export const Register: React.FC = observer(({ }) => {
   const { nav, t, api } = useServices();
   const { counter, ui } = useStores();
 
-  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState('date');
   const [show, setShow] = useState(false);
-  const [birthdayDateText, setBirthdayDateText] = useState(moment(new Date()).format('DD/MM/YYYY'));
+  const [date, setDate] = useState(moment(new Date()).subtract(18, 'years').toDate());
+  // const [date, setDate] = useState(new Date());
+  const [birthdayDateText, setBirthdayDateText] = useState(moment(new Date()).subtract(18, 'years').format('DD/MM/YYYY'));
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
@@ -225,6 +226,8 @@ export const Register: React.FC = observer(({ }) => {
                               value={date}
                               mode="date"
                               onChange={onChange}
+                              maximumDate={moment(new Date()).subtract(18, 'years').toDate()} 
+                              minimumDate={moment(new Date()).subtract(99, 'years').toDate()} 
                             />
                           )}
                         </>
