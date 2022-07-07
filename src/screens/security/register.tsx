@@ -17,37 +17,16 @@ import {isEmail} from '@formiz/validations';
 import {isRequired} from '@formiz/validations';
 
 import * as Progress from 'react-native-progress';
-import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
 import {SelectField} from '../../components/form/select_field';
 import {INTERESTS} from '../../data/Interests';
 import {SelectMultipleField} from '../../components/form/select_multiple_field';
 import DepartementField from '../../components/form/departement_field.tsx';
+import DateField from '../../components/form/date_field';
 
 export const Register: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
   const {counter, ui} = useStores();
-
-  const [mode, setMode] = useState('date');
-  const [show, setShow] = useState(false);
-  const [date, setDate] = useState(moment(new Date()).subtract(18, 'years').toDate());
-  // const [date, setDate] = useState(new Date());
-  const [birthdayDateText, setBirthdayDateText] = useState(
-    moment(new Date()).subtract(18, 'years').format('DD/MM/YYYY'),
-  );
-
-  const onChange = (event, selectedDate) => {
-    const currentDate = selectedDate || date;
-    setShow(false);
-    setDate(currentDate);
-
-    // let tempDate = new Date(currentDate);
-    // let formatedDate =
-    //   tempDate.getDate() + '/' + (tempDate.getMonth() + 1) + '/' + tempDate.getFullYear();
-    // let formatedTime = 'Hours:' + tempDate.getHours() + ' | Minutes:' + tempDate.getMinutes();
-    // setText(formatedDate + '\n' + formatedTime);
-    setBirthdayDateText(moment(currentDate).format('DD/MM/YYYY'));
-  };
 
   const inputName = useRef<typeof TextField>(null);
 
@@ -104,18 +83,6 @@ export const Register: React.FC = observer(({}) => {
                 ref={carousel}
               >
                 <FormizStep as={View} name="step1">
-                  <DepartementField
-                    label="Choisissez votre département"
-                    placeholder="Votre département"
-                    required={true}
-                    name="departement"
-                    validations={[
-                      {
-                        rule: isRequired(),
-                        message: "Veuillez choisir un département",
-                      }
-                    ]}
-                  />
                   <TextField
                     label="Identifiant de connexion"
                     placeholder="Adresse email ou numéro de téléphone"
@@ -215,44 +182,19 @@ export const Register: React.FC = observer(({}) => {
                   />
                 </FormizStep>
                 <FormizStep as={View} name="step5">
-                  {Platform.OS === 'web' ? (
-                    <TextField
-                      name="birthday"
-                      placeholder="jj/mm/yyyy"
-                      label="Votre date de naissance"
-                      required={true}
-                      value={moment(date).format('DD/MM/YYYY')}
-                    />
-                  ) : (
-                    <>
-                      <TouchableOpacity onPress={() => setShow(true)}>
-                        <TextField
-                          name="birthday"
-                          placeholder="Votre date de naissance"
-                          label="Votre date de naissance"
-                          required={false}
-                          value={birthdayDateText}
-                          editable={true}
-                          onPressIn={() => setShow(true)}
-                        />
-                      </TouchableOpacity>
-                      {show && (
-                        <DateTimePicker
-                          locale="fr-FR"
-                          testID="dateTimePicker"
-                          value={date}
-                          mode="date"
-                          onChange={onChange}
-                          maximumDate={moment(new Date()).subtract(18, 'years').toDate()}
-                          minimumDate={moment(new Date()).subtract(99, 'years').toDate()}
-                        />
-                      )}
-                    </>
-                  )}
+                  <DateField
+                    name="birthday"
+                    placeholder="jj/mm/yyyy"
+                    label="Votre date de naissance"
+                    required={true}
+                    mode="date"
+                    initialValue={moment(new Date()).subtract(18, 'years').toDate()}
+                    maximumDate={moment(new Date()).subtract(18, 'years').toDate()}
+                    minimumDate={moment(new Date()).subtract(99, 'years').toDate()}
+                  />
                 </FormizStep>
-
                 <FormizStep as={View} name="step6">
-                  {/* <DepartementField
+                  <DepartementField
                       label="Choisissez votre département"
                       placeholder="Votre département"
                       required={true}
@@ -260,10 +202,10 @@ export const Register: React.FC = observer(({}) => {
                       validations={[
                         {
                           rule: isRequired(),
-                          message: "Merci d'indiquer votre email",
+                          message: "Veuillez choisir un département",
                         }
                       ]}
-                    /> */}
+                    />
                 </FormizStep>
                 <FormizStep as={View} name="step7">
                   <SelectMultipleField
