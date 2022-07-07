@@ -22,7 +22,7 @@ import moment from 'moment';
 import {SelectField} from '../../components/form/select_field';
 import {INTERESTS} from '../../data/Interests';
 import {SelectMultipleField} from '../../components/form/select_multiple_field';
-import Dropdown from '../../components/Dropdown';
+import DepartementField from '../../components/form/departement_field.tsx';
 
 export const Register: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -104,7 +104,18 @@ export const Register: React.FC = observer(({}) => {
                 ref={carousel}
               >
                 <FormizStep as={View} name="step1">
-                  <Dropdown />
+                  <DepartementField
+                    label="Choisissez votre département"
+                    placeholder="Votre département"
+                    required={true}
+                    name="departement"
+                    validations={[
+                      {
+                        rule: isRequired(),
+                        message: "Veuillez choisir un département",
+                      }
+                    ]}
+                  />
                   <TextField
                     label="Identifiant de connexion"
                     placeholder="Adresse email ou numéro de téléphone"
@@ -241,9 +252,18 @@ export const Register: React.FC = observer(({}) => {
                 </FormizStep>
 
                 <FormizStep as={View} name="step6">
-                        <Dropdown />
-
-
+                  {/* <DepartementField
+                      label="Choisissez votre département"
+                      placeholder="Votre département"
+                      required={true}
+                      name="departement"
+                      validations={[
+                        {
+                          rule: isRequired(),
+                          message: "Merci d'indiquer votre email",
+                        }
+                      ]}
+                    /> */}
                 </FormizStep>
                 <FormizStep as={View} name="step7">
                   <SelectMultipleField
