@@ -292,7 +292,7 @@ export const Register: React.FC = observer(({}) => {
                     labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
                     label="Précédent"
                     borderRadius={7}
-                    style={{height: 45, marginBottom: 20}}
+                    style={style.button}
                     onPress={() => {
                       registrationForm.prevStep();
                       carousel.current?.goToPage(registrationForm.currentStep?.index - 1);
@@ -320,12 +320,12 @@ export const Register: React.FC = observer(({}) => {
                     marginT-s4
                     backgroundColor={Colors.accent}
                     color="#FFFFFF"
-                    // eslint-disable-next-line react-native/no-inline-styles
+                    
                     labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
                     label="Suivant"
                     borderRadius={7}
-                    // eslint-disable-next-line react-native/no-inline-styles
-                    style={{height: 45, marginBottom: 20}}
+                    
+                    style={style.button}
                     onPress={() => {
                       registrationForm.submitStep();
                       if (registrationForm.isStepValid) {
@@ -359,7 +359,10 @@ const style = StyleSheet.create({
     marginTop: 50,
   },
   button: {
-    margin: 15,
+    width: 150,
+    height: 45,
+     padding: 10,
+    margin: 10,
   },
   windowsPicker: {
     flex: 1,
