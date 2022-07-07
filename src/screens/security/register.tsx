@@ -246,14 +246,14 @@ export const Register: React.FC = observer(({}) => {
                 {registrationForm.isLastStep ? (
                   <Button
                     marginT-s4
-                    backgroundColor={Colors.secondary}
+                    
                     color="#FFFFFF"
-                    // eslint-disable-next-line react-native/no-inline-styles
+                    style={[style.button, Colors.secondary]}
                     labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
                     label="Je m'inscris"
                     borderRadius={7}
-                    // eslint-disable-next-line react-native/no-inline-styles
-                    style={{height: 45, marginBottom: 20}}
+                    
+                    
                     onPress={() => registrationForm.submit()}
                     disabled={!registrationForm.isValid && registrationForm.isStepSubmitted}
                   />
@@ -306,6 +306,7 @@ const style = StyleSheet.create({
      padding: 10,
     margin: 10,
   },
+
   windowsPicker: {
     flex: 1,
     paddingTop: 10,
