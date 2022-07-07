@@ -104,6 +104,7 @@ export const Register: React.FC = observer(({}) => {
                 ref={carousel}
               >
                 <FormizStep as={View} name="step1">
+                  <Dropdown />
                   <TextField
                     label="Identifiant de connexion"
                     placeholder="Adresse email ou numéro de téléphone"

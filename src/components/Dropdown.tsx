@@ -3,20 +3,18 @@ import React from 'react';
 import SelectDropdown from 'react-native-select-dropdown';
 import {Departements} from '../data/Departements';
 
-const DEPT = {Departements.dept_name};
-
 const Dropdown = () => {
   return (
     <SelectDropdown
-      data={DEPT}
+      data={Departements}
       onSelect={(selectedItem, index) => {
         console.log(selectedItem, index);
       }}
       buttonTextAfterSelection={(selectedItem, index) => {
-        return selectedItem;
+        return selectedItem.dep_name;
       }}
       rowTextForSelection={(item, index) => {
-        return item;
+        return `${item.num_dep} - ${item.dep_name}`;
       }}
     />
   );
