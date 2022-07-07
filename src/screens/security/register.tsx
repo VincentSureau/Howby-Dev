@@ -1,3 +1,5 @@
+/* eslint-disable react/self-closing-comp */
+/* eslint-disable prettier/prettier */
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {ScrollView, Alert, StyleSheet, Platform} from 'react-native';
 import {View, Text, Button, Colors, TouchableOpacity, Carousel} from 'react-native-ui-lib';
@@ -20,6 +22,7 @@ import moment from 'moment';
 import {SelectField} from '../../components/form/select_field';
 import {INTERESTS} from '../../data/Interests';
 import {SelectMultipleField} from '../../components/form/select_multiple_field';
+import Dropdown from '../../components/Dropdown';
 
 export const Register: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -236,7 +239,11 @@ export const Register: React.FC = observer(({}) => {
                   )}
                 </FormizStep>
 
-                <FormizStep as={View} name="step6" />
+                <FormizStep as={View} name="step6">
+                        <Dropdown />
+
+
+                </FormizStep>
                 <FormizStep as={View} name="step7">
                   <SelectMultipleField
                     label="Choisissez 5 centres d'intêret ou plus"
