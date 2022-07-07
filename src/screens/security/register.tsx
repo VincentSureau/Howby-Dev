@@ -246,9 +246,9 @@ export const Register: React.FC = observer(({}) => {
                 {registrationForm.isLastStep ? (
                   <Button
                     marginT-s4
-                    
+                    backgroundColor={Colors.secondary}
                     color="#FFFFFF"
-                    style={[style.button, Colors.secondary]}
+                    style={style.button}
                     labelStyle={{flexGrow: 1, textAlign: 'center', fontWeight: 'bold'}}
                     label="Je m'inscris"
                     borderRadius={7}
