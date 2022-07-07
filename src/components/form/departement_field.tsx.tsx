@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   dropdown2BtnStyle: {
-    width: '80%',
+    width: '100%',
     height: 50,
     backgroundColor: '#444',
     borderRadius: 8,
