@@ -22,11 +22,12 @@ import { SaveStory } from './story/save-story';
 import { InnerProfile } from './profil/innerProfile';
 import { Test } from './test/test';
 import { ForgottenPassword } from './security/forgotten-password';
+import { UserCreated } from './security/user_created';
 
 // Describe your screens here
 export type Tabs = 'Settings' | 'Feed' | 'Chat' | 'Search' | 'StoryNavigator' | 'Notification';
 export type Modal = 'ExampleModal';
-export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'SaveStory' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile' | 'Teams' | 'InnerProfile' | 'Test' | 'ForgottenPassword' ;
+export type Screen = 'Example' | 'Settings' | 'UserFeed' | 'FeedIndex' | 'FeedDetails' | 'ChatHome' | 'Search' | 'Story' | 'NewStory' | 'SaveStory' | 'NewStory' | 'Notification' | 'Login' | 'Register' | 'HomeOffline' | 'UserProfile' | 'Teams' | 'InnerProfile' | 'Test' | 'ForgottenPassword' | "UserCreated" ;
 
 export type ModalProps = {
   ExampleModal: undefined;
@@ -58,6 +59,9 @@ export type ScreenProps = {
   UserFeed: undefined;
   Teams: undefined;
   InnerProfile: undefined;
+  UserCreated: {
+    firstname: string;
+  }
 } & ModalProps;
 
 // Screens
@@ -221,7 +225,15 @@ const offlineScreens = {
       title: 'Forgotten Password',
       ...screenDefaultOptions(),
     }),
-  }
+  },
+  UserCreated: {
+    name: 'UserCreated',
+    component: UserCreated,
+    options: () => ({
+      title: 'User Created',
+      ...screenDefaultOptions(),
+    }),
+  },
 }
 
 const screens: ScreenLayouts = {
@@ -309,7 +321,7 @@ export const RootNavigator = (): JSX.Element =>
   genRootNavigator(TabNavigator, [modals.ExampleModal]);
 
 
-const AuthStack = () => genStackNavigator([screens.HomeOffline, screens.Login, screens.Register, screens.ForgottenPassword]);
+const AuthStack = () => genStackNavigator([screens.HomeOffline, screens.Login, screens.Register, screens.ForgottenPassword, screens.UserCreated]);
 
 // Auth Navigator
 export const AuthNavigator = (): JSX.Element =>

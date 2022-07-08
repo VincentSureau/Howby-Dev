@@ -11,7 +11,11 @@ const AuthProvider = ({children}) => {
 
     const login = async (email, password) => {
         try {
-            const response = await axios.post(`http://127.0.0.1:8000/api/login_check`, {
+            // const response = await axios.post(`http://127.0.0.1:8000/api/login_check`, {
+            //     "username": email,
+            //     "password": password
+            // });
+            const response = await axios.post(`https://api2.howby.fr/api/login_check`, {
                 "username": email,
                 "password": password
             });

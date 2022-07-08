@@ -23,6 +23,7 @@ import {INTERESTS} from '../../data/Interests';
 import {SelectMultipleField} from '../../components/form/select_multiple_field';
 import DepartementField from '../../components/form/departement_field.tsx';
 import DateField from '../../components/form/date_field';
+import axios from 'axios';
 
 export const Register: React.FC = observer(({}) => {
   const {nav, t, api} = useServices();
@@ -43,8 +44,23 @@ export const Register: React.FC = observer(({}) => {
     start();
   }, []);
 
-  const handleSubmit = (values: any) => {
-    console.log(values); // Retrieves values after submit
+  const handleSubmit = async (values: any) => {
+    // console.log(values); // Retrieves values after submit
+    const user = {
+      "firstname": values.firstname,
+      "lastname": values.lastname,
+      "email": values.username,
+      "gender": values.gender,
+      "password": values.password,
+      "birthdate": moment(values.birthay).format('YYYY-MM-DD'),
+      "departement": values.departement.num_dep
+      // "interests": values.interests,
+    };
+
+    const response = await api.user.create(user);
+    if (response.status === 201) {
+      nav.push("UserCreated", { firstname: user.firstname });
+    }
   };
 
   const carousel = React.createRef<typeof Carousel>();
