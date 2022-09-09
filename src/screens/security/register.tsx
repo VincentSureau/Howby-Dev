@@ -60,6 +60,8 @@ export const Register: React.FC = observer(({}) => {
     const response = await api.user.create(user);
     if (response.status === 201) {
       nav.push("UserCreated", { firstname: user.firstname });
+    } else {
+      console.log(response);
     }
   };
 

@@ -23,8 +23,7 @@ export class UserApi {
         method: 'get',
         url: `${baseUrl}/api/user_posts`,
         cancelToken: cancelToken,
-      });
-
+      }).then(response => console.log(response));
       userpost.set(resp.data["hydra:member"]);
     } catch (e) {
       console.log(e);
@@ -38,8 +37,7 @@ export class UserApi {
           const response = await axios.post(`https://api2.howby.fr/api/users`, user);
           return response;
       } catch (err) {
-          console.log('error : ',err);
-          return err;
+          return err.response.data || {};
       }
   };
 }
